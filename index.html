@@ -1,0 +1,546 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Yojun Moon</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Newsreader:opsz,wght@6..72,300;6..72,400;6..72,500&display=swap">
+<style>
+/* ── tokens ─────────────────────────────────────────────
+   Dark is the committed default; light is a full re-spec. */
+:root{
+  --ink:#0A0D13;
+  --surface:#10141C;
+  --surface-2:#151A24;
+  --line:#1E2430;
+  --line-soft:#181D27;
+  --fg:#DCE0E8;
+  --fg-dim:#A6AEBF;
+  --muted:#79839A;
+  --accent:#C9A227;
+  --accent-dim:#8C7220;
+  --live:#4E9E7E;
+  --shadow:0 20px 44px -28px rgba(0,0,0,.95);
+
+  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  --serif:"Newsreader",Georgia,"Times New Roman",serif;
+
+  --wrap:1080px;
+  --step-0:1rem;
+  --step-1:1.1875rem;
+  --step-2:1.5rem;
+  --step-3:2.125rem;
+  --step-4:clamp(2.75rem,7vw,4.25rem);
+}
+@media (prefers-color-scheme: light){
+  :root:not([data-theme="dark"]){
+    --ink:#F7F6F2;
+    --surface:#FFFFFF;
+    --surface-2:#F1EEE7;
+    --line:#DFDACE;
+    --line-soft:#EAE6DC;
+    --fg:#161A21;
+    --fg-dim:#3E4551;
+    --muted:#6E7686;
+    --accent:#87680E;
+    --accent-dim:#A98A2C;
+    --live:#2F7358;
+    --shadow:0 20px 40px -30px rgba(30,26,10,.35);
+  }
+}
+:root[data-theme="light"]{
+  --ink:#F7F6F2;
+  --surface:#FFFFFF;
+  --surface-2:#F1EEE7;
+  --line:#DFDACE;
+  --line-soft:#EAE6DC;
+  --fg:#161A21;
+  --fg-dim:#3E4551;
+  --muted:#6E7686;
+  --accent:#87680E;
+  --accent-dim:#A98A2C;
+  --live:#2F7358;
+  --shadow:0 20px 40px -30px rgba(30,26,10,.35);
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--ink);
+  color:var(--fg);
+  font-family:var(--serif);
+  font-size:var(--step-0);
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit}
+img{display:block;max-width:100%}
+
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 24px}
+
+/* ── nav ─────────────────────────────────────────────── */
+.topbar{
+  position:sticky;top:0;z-index:20;
+  background:color-mix(in srgb,var(--ink) 88%,transparent);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line-soft);
+}
+.topbar .wrap{
+  display:flex;align-items:center;gap:24px;
+  min-height:60px;flex-wrap:wrap;
+}
+.brand{
+  font-family:var(--mono);font-size:.8125rem;letter-spacing:.02em;
+  color:var(--fg);text-decoration:none;white-space:nowrap;
+}
+.brand .dot{color:var(--accent)}
+.nav{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
+.nav a{
+  font-family:var(--mono);font-size:.75rem;letter-spacing:.04em;
+  color:var(--muted);text-decoration:none;
+  padding:6px 10px;border-radius:4px;
+  transition:color .15s ease,background .15s ease;
+}
+.nav a:hover{color:var(--fg);background:var(--surface)}
+.nav a[aria-current="page"]{color:var(--accent);background:var(--surface)}
+:where(a,button):focus-visible{
+  outline:2px solid var(--accent);outline-offset:3px;border-radius:3px;
+}
+
+/* ── view transitions ────────────────────────────────── */
+main{display:block;padding:0 0 96px}
+.view{padding-top:64px;animation:rise .34s cubic-bezier(.2,.7,.3,1) both}
+@keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){
+  .view{animation:none}
+}
+
+/* ── landing ─────────────────────────────────────────── */
+.hero{padding-top:clamp(48px,12vh,120px)}
+.hero h1{
+  font-family:var(--serif);font-weight:300;
+  font-size:var(--step-4);line-height:1.02;letter-spacing:-.02em;
+  margin:0;text-wrap:balance;
+}
+.hero .ko{
+  display:block;font-size:.34em;color:var(--muted);
+  letter-spacing:.06em;margin-top:.7em;font-weight:400;
+}
+.hero p{
+  max-width:34em;margin:32px 0 0;
+  font-size:var(--step-1);line-height:1.6;color:var(--fg-dim);font-weight:300;
+}
+.meta{
+  font-family:var(--mono);font-size:.75rem;letter-spacing:.05em;
+  color:var(--muted);margin-top:28px;
+  display:flex;gap:10px;flex-wrap:wrap;align-items:center;
+}
+.meta .sep{color:var(--line)}
+
+.links{
+  list-style:none;padding:0;margin:44px 0 0;
+  display:grid;gap:1px;background:var(--line-soft);
+  border-block:1px solid var(--line-soft);
+  max-width:720px;
+}
+.links li{background:var(--ink)}
+.links a{
+  display:flex;align-items:baseline;gap:16px;
+  padding:16px 4px;text-decoration:none;
+  transition:background .15s ease,padding-left .18s ease;
+}
+.links a:hover{background:var(--surface);padding-left:12px}
+.links .label{
+  font-family:var(--mono);font-size:.75rem;letter-spacing:.08em;
+  color:var(--muted);min-width:92px;text-transform:uppercase;
+}
+.links .val{font-size:var(--step-1);font-weight:300}
+.links a:hover .val{color:var(--accent)}
+.links .arrow{margin-left:auto;color:var(--line);font-family:var(--mono)}
+.links a:hover .arrow{color:var(--accent)}
+
+/* ── section furniture ───────────────────────────────── */
+.eyebrow{
+  font-family:var(--mono);font-size:.6875rem;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--accent);
+  display:flex;align-items:center;gap:12px;margin:0 0 8px;
+}
+.eyebrow::after{content:"";flex:1;height:1px;background:var(--line)}
+h2.title{
+  font-family:var(--serif);font-weight:300;font-size:var(--step-3);
+  letter-spacing:-.015em;margin:0 0 40px;text-wrap:balance;
+}
+
+/* ── timeline ────────────────────────────────────────── */
+.tl{display:grid;gap:1px;background:var(--line-soft);border-top:1px solid var(--line-soft)}
+.entry{background:var(--ink);padding:28px 0;display:grid;grid-template-columns:132px 1fr;gap:28px}
+.entry .when{
+  font-family:var(--mono);font-size:.75rem;letter-spacing:.03em;
+  color:var(--muted);padding-top:.5em;font-variant-numeric:tabular-nums;
+}
+.entry h3{margin:0;font-size:var(--step-2);font-weight:400;letter-spacing:-.01em}
+.entry .role{
+  font-family:var(--mono);font-size:.75rem;letter-spacing:.04em;
+  color:var(--accent);margin-top:6px;
+}
+.entry p{margin:12px 0 0;color:var(--fg-dim);font-weight:300;max-width:46em}
+.sub{list-style:none;padding:0;margin:18px 0 0;display:grid;gap:14px}
+.sub li{border-left:1px solid var(--line);padding-left:16px}
+.sub b{font-weight:500;font-size:var(--step-0)}
+.sub p{margin:4px 0 0;font-size:.9375rem}
+.figs{
+  display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;
+  font-family:var(--mono);font-size:.6875rem;letter-spacing:.03em;
+}
+.figs span{
+  border:1px solid var(--line);border-radius:3px;padding:3px 8px;
+  color:var(--fg-dim);font-variant-numeric:tabular-nums;
+}
+.figs b{color:var(--accent);font-weight:500}
+
+/* ── service cards ───────────────────────────────────── */
+.grid{display:grid;gap:24px;grid-template-columns:repeat(auto-fill,minmax(300px,1fr))}
+.card{
+  background:var(--surface);border:1px solid var(--line);border-radius:8px;
+  overflow:hidden;display:flex;flex-direction:column;
+  text-decoration:none;color:inherit;
+  transition:border-color .18s ease,transform .18s ease,box-shadow .18s ease;
+}
+.card:hover{border-color:var(--accent-dim);transform:translateY(-3px);box-shadow:var(--shadow)}
+
+/* The frame owns the ratio; the image is contained inside it, never cropped. */
+.frame{
+  aspect-ratio:4/3;width:100%;flex:none;
+  background:var(--surface-2);border-bottom:1px solid var(--line);
+  display:flex;align-items:center;justify-content:center;
+  overflow:hidden;
+}
+.frame img{width:100%;height:100%;object-fit:contain}
+.frame--none{
+  font-family:var(--mono);color:var(--line);font-size:2rem;
+}
+
+.card .body{padding:18px 20px 20px;display:flex;flex-direction:column;gap:9px;flex:1}
+.owner{
+  font-family:var(--mono);font-size:.625rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--muted);
+}
+.card h3{
+  margin:0;font-family:var(--mono);font-size:.8125rem;font-weight:500;
+  letter-spacing:.08em;text-transform:uppercase;
+}
+.host{
+  font-family:var(--mono);font-size:.71rem;color:var(--muted);
+  display:flex;align-items:center;gap:7px;word-break:break-all;
+}
+.pip{width:5px;height:5px;border-radius:50%;background:var(--live);flex:none}
+.card p{margin:0;font-size:.9375rem;color:var(--fg-dim);font-weight:300;line-height:1.55}
+.note{
+  margin-top:auto;padding-top:12px;
+  font-family:var(--mono);font-size:.6875rem;letter-spacing:.03em;color:var(--accent);
+}
+
+/* ── stack ───────────────────────────────────────────── */
+.stack{margin-top:56px;display:grid;gap:1px;background:var(--line-soft);border-block:1px solid var(--line-soft)}
+.stack div{background:var(--ink);padding:14px 4px;display:grid;grid-template-columns:150px 1fr;gap:20px;align-items:baseline}
+.stack dt{font-family:var(--mono);font-size:.6875rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.stack dd{margin:0;font-family:var(--mono);font-size:.8125rem;color:var(--fg-dim)}
+
+footer{
+  border-top:1px solid var(--line-soft);margin-top:80px;padding:28px 0 0;
+  font-family:var(--mono);font-size:.71rem;letter-spacing:.04em;color:var(--muted);
+  display:flex;gap:16px;flex-wrap:wrap;
+}
+footer a{color:var(--muted);text-decoration:none}
+footer a:hover{color:var(--accent)}
+
+@media (max-width:640px){
+  .entry{grid-template-columns:1fr;gap:10px}
+  .entry .when{padding-top:0}
+  .stack div{grid-template-columns:1fr;gap:4px}
+  .links .label{min-width:76px}
+}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap">
+    <a class="brand" href="#/index">yojun<span class="dot">.</span>moon</a>
+    <nav class="nav" aria-label="Sections">
+      <a href="#/index"    data-nav="index">index</a>
+      <a href="#/work"     data-nav="work">work</a>
+      <a href="#/projects" data-nav="projects">projects</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main" tabindex="-1">
+
+  <!-- ══ index ══════════════════════════════════════ -->
+  <section class="view hero" data-view="index">
+    <div class="wrap">
+      <h1>Yojun Moon<span class="ko">문요준</span></h1>
+      <p>I build systems that run in production — collection and analysis pipelines, and the interfaces people actually use.</p>
+      <div class="meta">
+        <span>POSTECH CSE</span><span class="sep">/</span>
+        <span>Backend &amp; AI Systems</span><span class="sep">/</span>
+        <span>Pohang, KR</span>
+      </div>
+
+      <ul class="links">
+        <li><a href="https://github.com/yojun313">
+          <span class="label">GitHub</span><span class="val">github.com/yojun313</span><span class="arrow">↗</span></a></li>
+        <li><a href="https://www.linkedin.com/in/yojun-moon/">
+          <span class="label">LinkedIn</span><span class="val">linkedin.com/in/yojun-moon</span><span class="arrow">↗</span></a></li>
+        <li><a href="mailto:yojun313@postech.ac.kr">
+          <span class="label">Email</span><span class="val">yojun313@postech.ac.kr</span><span class="arrow">↗</span></a></li>
+        <li><a href="CV.pdf">
+          <span class="label">CV</span><span class="val">CV.pdf</span><span class="arrow">↗</span></a></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ══ work ═══════════════════════════════════════ -->
+  <section class="view" data-view="work" hidden>
+    <div class="wrap">
+      <p class="eyebrow">Work</p>
+      <h2 class="title">Experience</h2>
+
+      <div class="tl">
+        <article class="entry">
+          <div class="when">Jul 2026<br>— Aug 2026</div>
+          <div>
+            <h3>Samsung Fire &amp; Marine Insurance</h3>
+            <div class="role">AI Development Part · Internship</div>
+            <p>Built two computer vision modules for insurance claim data, each delivered as an end-to-end pipeline with a web service.</p>
+            <ul class="sub">
+              <li>
+                <b>Automatic license plate masking for dashcam video</b>
+                <p>Finds and masks every vehicle license plate in a video, so footage collected for training can be de-identified before use.</p>
+                <div class="figs">
+                  <span>recall <b>99.0%</b></span><span>F1 <b>0.98</b></span><span>throughput <b>27+ fps</b></span>
+                </div>
+              </li>
+              <li>
+                <b>Detection of generative-AI document forgery</b>
+                <p>Reads the noise fingerprint left in a photograph to locate tampering and score the document. Built the Korean insurance-form forgery dataset it trains on, since no public one existed.</p>
+                <div class="figs">
+                  <span>dataset <b>6,000</b></span><span>localization F1 <b>0.97</b></span><span>accuracy <b>93%</b></span>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="entry">
+          <div class="when">Jan 2026<br>— Feb 2026</div>
+          <div>
+            <h3>POSTECH HAiV Lab</h3>
+            <div class="role">Undergraduate Researcher</div>
+            <p>ACCIDENTOR — a multi-VLM framework that estimates traffic accident fault ratios from dashcam video.</p>
+          </div>
+        </article>
+
+        <article class="entry">
+          <div class="when">Feb 2025<br>— Jul 2025</div>
+          <div>
+            <h3>Startup Team</h3>
+            <div class="role">Backend Intern</div>
+            <p>Developed the backend of a social networking service with NestJS, and built the crawlers and analysis that backed product decisions. Completed the 2025 I-Corps program, including three weeks of entrepreneurship training at UC Berkeley.</p>
+          </div>
+        </article>
+
+        <article class="entry">
+          <div class="when">Nov 2023<br>— Present</div>
+          <div>
+            <h3>Korean National Police University — FPEI</h3>
+            <div class="role">Research System Developer</div>
+            <p>Building and operating the institute's research platform from scratch. Eight services now run at <code>*.knpu.re.kr</code>. In April 2024 the LLM-based legal complaint drafting service earned a Letter of Appreciation from the university.</p>
+            <p style="margin-top:14px"><a href="#/projects" style="font-family:var(--mono);font-size:.75rem;color:var(--accent);text-decoration:none">→ See the services</a></p>
+          </div>
+        </article>
+
+        <article class="entry">
+          <div class="when">Mar 2023<br>— Present</div>
+          <div>
+            <h3>POSTECH</h3>
+            <div class="role">B.S. Computer Science and Engineering</div>
+          </div>
+        </article>
+      </div>
+
+      <dl class="stack">
+        <div><dt>Languages</dt><dd>Python · TypeScript · C · C++</dd></div>
+        <div><dt>Backend</dt><dd>FastAPI · NestJS · MongoDB · PyQt</dd></div>
+        <div><dt>AI / ML</dt><dd>PyTorch · Ultralytics YOLO · OpenCV · vLLM</dd></div>
+        <div><dt>Infra</dt><dd>Docker · PM2 · Nginx · Linux</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <!-- ══ projects ═══════════════════════════════════ -->
+  <section class="view" data-view="projects" hidden>
+    <div class="wrap">
+      <p class="eyebrow">Projects</p>
+      <h2 class="title">Services in production</h2>
+
+      <div class="grid">
+
+        <a class="card" href="https://manager.knpu.re.kr">
+          <div class="frame"><img src="assets/systems/manager.webp" alt="Manager desktop client showing the collection job table" loading="lazy"></div>
+          <div class="body">
+            <div class="owner">KNPU · FPEI</div>
+            <h3>Manager</h3>
+            <div class="host"><span class="pip"></span>manager.knpu.re.kr</div>
+            <p>Integrated platform for managing research resources and running big-data analysis.</p>
+            <div class="note">PyQt desktop client</div>
+          </div>
+        </a>
+
+        <a class="card" href="https://crawler.knpu.re.kr">
+          <div class="frame"><img src="assets/systems/crawler.webp" alt="Crawler job queue screen" loading="lazy"></div>
+          <div class="body">
+            <div class="owner">KNPU · FPEI</div>
+            <h3>Crawler</h3>
+            <div class="host"><span class="pip"></span>crawler.knpu.re.kr</div>
+            <p>Builds datasets through large-scale data collection across news, blogs, forums and video platforms.</p>
+            <div class="note">1,500 articles · 60,000 comments per hour</div>
+          </div>
+        </a>
+
+        <a class="card" href="https://network.knpu.re.kr">
+          <div class="frame"><img src="assets/systems/network.webp" alt="Network view rendering a word co-occurrence graph" loading="lazy"></div>
+          <div class="body">
+            <div class="owner">KNPU · FPEI</div>
+            <h3>Network</h3>
+            <div class="host"><span class="pip"></span>network.knpu.re.kr</div>
+            <p>Analyzes and visualizes the social networks embedded in natural language.</p>
+            <div class="note">300 nodes · 44,850 edges</div>
+          </div>
+        </a>
+
+        <a class="card" href="https://statistics.knpu.re.kr">
+          <div class="frame"><img src="assets/systems/statistics.webp" alt="Statistics view with a bar chart and data table" loading="lazy"></div>
+          <div class="body">
+            <div class="owner">KNPU · FPEI</div>
+            <h3>Statistics</h3>
+            <div class="host"><span class="pip"></span>statistics.knpu.re.kr</div>
+            <p>Runs statistical analysis over large datasets and visualizes the result.</p>
+          </div>
+        </a>
+
+        <a class="card" href="https://kemkim.knpu.re.kr">
+          <div class="frame"><img src="assets/systems/kemkim.webp" alt="KemKim future-signal prediction visualization" loading="lazy"></div>
+          <div class="body">
+            <div class="owner">KNPU · FPEI</div>
+            <h3>KemKim</h3>
+            <div class="host"><span class="pip"></span>kemkim.knpu.re.kr</div>
+            <p>Visualizes future-signal prediction (KEM / KIM) over collected corpora.</p>
+          </div>
+        </a>
+
+        <a class="card" href="https://llm.knpu.re.kr">
+          <div class="frame"><img src="assets/systems/labllm.webp" alt="Lab LLM chat interface" loading="lazy"></div>
+          <div class="body">
+            <div class="owner">KNPU · FPEI</div>
+            <h3>Lab LLM</h3>
+            <div class="host"><span class="pip"></span>llm.knpu.re.kr</div>
+            <p>Serves large language models on the lab's own GPU resources.</p>
+            <div class="note">vLLM</div>
+          </div>
+        </a>
+
+        <a class="card" href="https://complaint.knpu.re.kr">
+          <div class="frame"><img src="assets/systems/complaint.webp" alt="AI legal complaint drafting service landing screen" loading="lazy"></div>
+          <div class="body">
+            <div class="owner">KNPU · FPEI</div>
+            <h3>Legal AI</h3>
+            <div class="host"><span class="pip"></span>complaint.knpu.re.kr</div>
+            <p>Drafts legal complaints that meet statutory requirements, guiding the user through the police intake form step by step.</p>
+            <div class="note">Letter of Appreciation, Apr 2024</div>
+          </div>
+        </a>
+
+        <a class="card" href="https://lec.knpu.re.kr">
+          <div class="frame"><img src="assets/systems/lecai.webp" alt="LecAI lecture material analysis screen" loading="lazy"></div>
+          <div class="body">
+            <div class="owner">KNPU · FPEI</div>
+            <h3>LecAI</h3>
+            <div class="host"><span class="pip"></span>lec.knpu.re.kr</div>
+            <p>Analyzes lecture material with AI — slide parsing, speech transcription and generated study reports.</p>
+            <div class="note">Faster-Whisper · PDF pipeline</div>
+          </div>
+        </a>
+
+        <a class="card" href="https://pcss.postech.ac.kr/">
+          <div class="frame"><img src="assets/systems/pcss.webp" alt="PCSS search screen with conference selection by research area" loading="lazy"></div>
+          <div class="body">
+            <div class="owner">POSTECH CSE</div>
+            <h3>PCSS</h3>
+            <div class="host"><span class="pip"></span>pcss.postech.ac.kr</div>
+            <p>Finds Korean authors of top-venue papers within a chosen year and conference range. Parses DBLP XML dumps into MongoDB and identifies Korean names with an LLM API.</p>
+            <div class="note">Hours of manual search down to seconds</div>
+          </div>
+        </a>
+
+        <a class="card" href="https://commeet.postech.ac.kr">
+          <div class="frame"><img src="assets/systems/commeet.webp" alt="Commeet landing screen for the POSTECH CSE time scheduler" loading="lazy"></div>
+          <div class="body">
+            <div class="owner">POSTECH CSE</div>
+            <h3>Commeet</h3>
+            <div class="host"><span class="pip"></span>commeet.postech.ac.kr</div>
+            <p>Collects everyone's availability and assigns the meeting times automatically. Professors also get consultation records and student guidance fee settlement.</p>
+            <div class="note">min-cost max-flow assignment · encrypted records</div>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <footer>
+      <span>© 2026 Yojun Moon</span>
+      <a href="https://github.com/yojun313">GitHub</a>
+      <a href="https://www.linkedin.com/in/yojun-moon/">LinkedIn</a>
+      <a href="mailto:yojun313@postech.ac.kr">Email</a>
+    </footer>
+  </div>
+
+</main>
+
+<script>
+(function () {
+  var views = Array.prototype.slice.call(document.querySelectorAll('[data-view]'));
+  var links = Array.prototype.slice.call(document.querySelectorAll('[data-nav]'));
+  var names = views.map(function (v) { return v.getAttribute('data-view'); });
+  var first = true;
+
+  function route() {
+    var id = (location.hash || '').replace(/^#\/?/, '') || 'index';
+    if (names.indexOf(id) === -1) id = 'index';
+
+    views.forEach(function (v) { v.hidden = v.getAttribute('data-view') !== id; });
+    links.forEach(function (a) {
+      if (a.getAttribute('data-nav') === id) a.setAttribute('aria-current', 'page');
+      else a.removeAttribute('aria-current');
+    });
+
+    if (!first) {
+      window.scrollTo(0, 0);
+      var main = document.getElementById('main');
+      if (main) main.focus({ preventScroll: true });
+    }
+    first = false;
+  }
+
+  window.addEventListener('hashchange', route);
+  route();
+})();
+</script>
+
+</body>
+</html>
