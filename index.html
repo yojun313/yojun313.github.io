@@ -4,6 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Yojun Moon</title>
+<script>
+/* Restore saved theme before first paint to avoid a flash of the wrong theme. */
+try{
+  var t=localStorage.getItem('theme');
+  if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);
+}catch(e){}
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Newsreader:opsz,wght@6..72,300;6..72,400;6..72,500&display=swap">
@@ -105,6 +112,13 @@ img{display:block;max-width:100%}
 }
 .nav a:hover{color:var(--fg);background:var(--surface)}
 .nav a[aria-current="page"]{color:var(--accent);background:var(--surface)}
+.theme-toggle{
+  font-family:var(--mono);font-size:.85rem;line-height:1;
+  color:var(--muted);background:none;border:1px solid var(--line);
+  border-radius:4px;padding:6px 9px;cursor:pointer;
+  transition:color .15s ease,border-color .15s ease,background .15s ease;
+}
+.theme-toggle:hover{color:var(--fg);border-color:var(--accent-dim);background:var(--surface)}
 :where(a,button):focus-visible{
   outline:2px solid var(--accent);outline-offset:3px;border-radius:3px;
 }
@@ -172,6 +186,14 @@ h2.title{
   font-family:var(--serif);font-weight:300;font-size:var(--step-3);
   letter-spacing:-.015em;margin:0 0 40px;text-wrap:balance;
 }
+.grouphead{
+  font-family:var(--mono);font-size:.75rem;font-weight:500;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--fg-dim);
+  display:flex;align-items:center;gap:14px;
+  margin:0 0 24px;
+}
+.grouphead::after{content:"";flex:1;height:1px;background:var(--line-soft)}
+.grid + .grouphead{margin-top:56px}
 
 /* ── timeline ────────────────────────────────────────── */
 .tl{display:grid;gap:1px;background:var(--line-soft);border-top:1px solid var(--line-soft)}
@@ -274,6 +296,7 @@ footer a:hover{color:var(--accent)}
       <a href="#/work"     data-nav="work">work</a>
       <a href="#/projects" data-nav="projects">projects</a>
     </nav>
+    <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle color theme">◐</button>
   </div>
 </header>
 
@@ -316,22 +339,6 @@ footer a:hover{color:var(--accent)}
             <h3>Samsung Fire &amp; Marine Insurance</h3>
             <div class="role">AI Development Part · Internship</div>
             <p>Built two computer vision modules for insurance claim data, each delivered as an end-to-end pipeline with a web service.</p>
-            <ul class="sub">
-              <li>
-                <b>Automatic license plate masking for dashcam video</b>
-                <p>Finds and masks every vehicle license plate in a video, so footage collected for training can be de-identified before use.</p>
-                <div class="figs">
-                  <span>recall <b>99.0%</b></span><span>F1 <b>0.98</b></span><span>throughput <b>27+ fps</b></span>
-                </div>
-              </li>
-              <li>
-                <b>Detection of generative-AI document forgery</b>
-                <p>Reads the noise fingerprint left in a photograph to locate tampering and score the document. Built the Korean insurance-form forgery dataset it trains on, since no public one existed.</p>
-                <div class="figs">
-                  <span>dataset <b>6,000</b></span><span>localization F1 <b>0.97</b></span><span>accuracy <b>93%</b></span>
-                </div>
-              </li>
-            </ul>
           </div>
         </article>
 
@@ -340,7 +347,6 @@ footer a:hover{color:var(--accent)}
           <div>
             <h3>POSTECH HAiV Lab</h3>
             <div class="role">Undergraduate Researcher</div>
-            <p>ACCIDENTOR — a multi-VLM framework that estimates traffic accident fault ratios from dashcam video.</p>
           </div>
         </article>
 
@@ -387,6 +393,34 @@ footer a:hover{color:var(--accent)}
       <p class="eyebrow">Projects</p>
       <h2 class="title">Services in production</h2>
 
+      <h3 class="grouphead">POSTECH CSE</h3>
+      <div class="grid">
+
+        <a class="card" href="https://pcss.postech.ac.kr/">
+          <div class="frame"><img src="assets/systems/pcss.webp" alt="PCSS search screen with conference selection by research area" loading="lazy"></div>
+          <div class="body">
+            <div class="owner">POSTECH CSE</div>
+            <h3>PCSS</h3>
+            <div class="host"><span class="pip"></span>pcss.postech.ac.kr</div>
+            <p>Finds Korean authors of top-venue papers within a chosen year and conference range. Parses DBLP XML dumps into MongoDB and identifies Korean names with an LLM API.</p>
+            <div class="note">Hours of manual search down to seconds</div>
+          </div>
+        </a>
+
+        <a class="card" href="https://commeet.postech.ac.kr">
+          <div class="frame"><img src="assets/systems/commeet.webp" alt="Commeet landing screen for the POSTECH CSE time scheduler" loading="lazy"></div>
+          <div class="body">
+            <div class="owner">POSTECH CSE</div>
+            <h3>Commeet</h3>
+            <div class="host"><span class="pip"></span>commeet.postech.ac.kr</div>
+            <p>Collects everyone's availability and assigns the meeting times automatically. Professors also get consultation records and student guidance fee settlement.</p>
+            <div class="note">min-cost max-flow assignment · encrypted records</div>
+          </div>
+        </a>
+
+      </div>
+
+      <h3 class="grouphead">KNPU · FPEI</h3>
       <div class="grid">
 
         <a class="card" href="https://manager.knpu.re.kr">
@@ -475,28 +509,6 @@ footer a:hover{color:var(--accent)}
           </div>
         </a>
 
-        <a class="card" href="https://pcss.postech.ac.kr/">
-          <div class="frame"><img src="assets/systems/pcss.webp" alt="PCSS search screen with conference selection by research area" loading="lazy"></div>
-          <div class="body">
-            <div class="owner">POSTECH CSE</div>
-            <h3>PCSS</h3>
-            <div class="host"><span class="pip"></span>pcss.postech.ac.kr</div>
-            <p>Finds Korean authors of top-venue papers within a chosen year and conference range. Parses DBLP XML dumps into MongoDB and identifies Korean names with an LLM API.</p>
-            <div class="note">Hours of manual search down to seconds</div>
-          </div>
-        </a>
-
-        <a class="card" href="https://commeet.postech.ac.kr">
-          <div class="frame"><img src="assets/systems/commeet.webp" alt="Commeet landing screen for the POSTECH CSE time scheduler" loading="lazy"></div>
-          <div class="body">
-            <div class="owner">POSTECH CSE</div>
-            <h3>Commeet</h3>
-            <div class="host"><span class="pip"></span>commeet.postech.ac.kr</div>
-            <p>Collects everyone's availability and assigns the meeting times automatically. Professors also get consultation records and student guidance fee settlement.</p>
-            <div class="note">min-cost max-flow assignment · encrypted records</div>
-          </div>
-        </a>
-
       </div>
     </div>
   </section>
@@ -539,6 +551,30 @@ footer a:hover{color:var(--accent)}
 
   window.addEventListener('hashchange', route);
   route();
+})();
+
+(function () {
+  var btn = document.getElementById('themeToggle');
+  var root = document.documentElement;
+
+  function current() {
+    var set = root.getAttribute('data-theme');
+    if (set === 'light' || set === 'dark') return set;
+    return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+  }
+  function render() {
+    var t = current();
+    btn.textContent = t === 'dark' ? '◐' : '◑';
+    btn.setAttribute('aria-label', t === 'dark' ? 'Switch to light theme' : 'Switch to dark theme');
+  }
+
+  btn.addEventListener('click', function () {
+    var next = current() === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem('theme', next); } catch (e) {}
+    render();
+  });
+  render();
 })();
 </script>
 
