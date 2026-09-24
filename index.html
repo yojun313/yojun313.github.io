@@ -232,6 +232,7 @@ h2.title{
   transition:border-color .18s ease,transform .18s ease,box-shadow .18s ease;
 }
 .card:hover{border-color:var(--accent-dim);transform:translateY(-3px);box-shadow:var(--shadow)}
+.card[data-project]{cursor:pointer}
 
 /* The frame owns the ratio; the image is contained inside it, never cropped. */
 .frame{
@@ -241,6 +242,10 @@ h2.title{
   overflow:hidden;
 }
 .frame img{width:100%;height:100%;object-fit:contain}
+button.frame{
+  padding:0;border:0;border-bottom:1px solid var(--line);
+  font:inherit;color:inherit;cursor:pointer;
+}
 .frame{position:relative}
 .count{
   position:absolute;right:10px;bottom:10px;
@@ -262,10 +267,22 @@ h2.title{
   margin:0;font-family:var(--mono);font-size:.8125rem;font-weight:500;
   letter-spacing:.08em;text-transform:uppercase;
 }
+.reach{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
 .host{
   font-family:var(--mono);font-size:.71rem;color:var(--muted);
-  display:flex;align-items:center;gap:7px;word-break:break-all;
+  display:inline-flex;align-items:center;gap:7px;word-break:break-all;
+  text-decoration:none;padding:4px 0;
+  transition:color .15s ease;
 }
+.host .ext{color:var(--line);transition:color .15s ease}
+.host:hover,.host:hover .ext{color:var(--accent)}
+.gh{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:28px;height:28px;margin-left:auto;border-radius:4px;
+  color:var(--muted);border:1px solid var(--line);
+  transition:color .15s ease,border-color .15s ease,background .15s ease;
+}
+.gh:hover{color:var(--fg);border-color:var(--accent-dim);background:var(--surface-2)}
 .pip{width:5px;height:5px;border-radius:50%;background:var(--live);flex:none}
 .card p{margin:0;font-size:.9375rem;color:var(--fg-dim);font-weight:300;line-height:1.55}
 .note{
@@ -327,6 +344,7 @@ h2.title{
 .g-foot p{margin:0;flex:1 1 320px;font-size:.9375rem;color:var(--fg-dim);font-weight:300;line-height:1.55}
 .g-links{display:flex;gap:8px;flex-wrap:wrap}
 .g-links a{
+  display:inline-flex;align-items:center;gap:8px;
   font-family:var(--mono);font-size:.75rem;letter-spacing:.03em;text-decoration:none;
   color:var(--ink);background:var(--accent);border:1px solid var(--accent);
   border-radius:4px;padding:8px 14px;white-space:nowrap;
@@ -472,161 +490,196 @@ footer a:hover{color:var(--accent)}
       <h3 class="grouphead">Personal</h3>
       <div class="grid">
 
-        <a class="card" href="https://lec.yojun.dev" data-project="lecai">
-          <div class="frame"><img src="assets/systems/lecai/1.webp" alt="LecAI lecture material management screen" loading="lazy"><span class="count">4</span></div>
+        <article class="card" data-project="lecai">
+          <button class="frame" type="button" aria-label="View LecAI screenshots"><img src="assets/systems/lecai/1.webp" alt="LecAI lecture material management screen" loading="lazy"><span class="count">4</span></button>
           <div class="body">
             <div class="owner">Personal</div>
             <h3>LecAI</h3>
-            <div class="host"><span class="pip"></span>lec.yojun.dev</div>
+            <div class="reach">
+              <a class="host" href="https://lec.yojun.dev" target="_blank" rel="noopener"><span class="pip"></span>lec.yojun.dev<span class="ext">↗</span></a>
+              <a class="gh" href="https://github.com/yojun313/LecAI" target="_blank" rel="noopener" aria-label="LecAI on GitHub" title="GitHub"><svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a>
+            </div>
             <p>Study assistant for slides, recordings and board notes. Generates per-slide explanations and links transcript excerpts from lecture recordings to the matching slides.</p>
             <div class="note">Faster-Whisper · PDF pipeline</div>
           </div>
-        </a>
+        </article>
 
-        <a class="card" href="https://eng.yojun.dev" data-project="eng2mouth">
-          <div class="frame"><img src="assets/systems/eng2mouth/1.webp" alt="Eng2Mouth landing page with a phone call to an AI friend" loading="lazy"><span class="count">4</span></div>
+        <article class="card" data-project="eng2mouth">
+          <button class="frame" type="button" aria-label="View Eng2Mouth screenshots"><img src="assets/systems/eng2mouth/1.webp" alt="Eng2Mouth landing page with a phone call to an AI friend" loading="lazy"><span class="count">4</span></button>
           <div class="body">
             <div class="owner">Personal</div>
             <h3>Eng2Mouth</h3>
-            <div class="host"><span class="pip"></span>eng.yojun.dev</div>
+            <div class="reach">
+              <a class="host" href="https://eng.yojun.dev" target="_blank" rel="noopener"><span class="pip"></span>eng.yojun.dev<span class="ext">↗</span></a>
+              <a class="gh" href="https://github.com/yojun313/eng2mouth" target="_blank" rel="noopener" aria-label="Eng2Mouth on GitHub" title="GitHub"><svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a>
+            </div>
             <p>AI phone-call English practice. Call an AI conversation partner and talk in real time — interrupt, pause, hang up — then get a speaking evaluation report after every call.</p>
             <div class="note">Real-time voice · bring-your-own OpenAI / Gemini key</div>
           </div>
-        </a>
+        </article>
 
       </div>
 
       <h3 class="grouphead">POSTECH CSE</h3>
       <div class="grid">
 
-        <a class="card" href="https://pcss.postech.ac.kr/" data-project="pcss">
-          <div class="frame"><img src="assets/systems/pcss/1.webp" alt="PCSS conference selection by research area" loading="lazy"><span class="count">4</span></div>
+        <article class="card" data-project="pcss">
+          <button class="frame" type="button" aria-label="View PCSS screenshots"><img src="assets/systems/pcss/1.webp" alt="PCSS conference selection by research area" loading="lazy"><span class="count">4</span></button>
           <div class="body">
             <div class="owner">POSTECH CSE</div>
             <h3>PCSS</h3>
-            <div class="host"><span class="pip"></span>pcss.postech.ac.kr</div>
+            <div class="reach">
+              <a class="host" href="https://pcss.postech.ac.kr/" target="_blank" rel="noopener"><span class="pip"></span>pcss.postech.ac.kr<span class="ext">↗</span></a>
+            </div>
             <p>Finds Korean authors of top-venue papers within a chosen year and conference range. Parses DBLP XML dumps into MongoDB and identifies Korean names with an LLM API.</p>
             <div class="note">Hours of manual search down to seconds</div>
           </div>
-        </a>
+        </article>
 
-        <a class="card" href="https://commeet.postech.ac.kr" data-project="commeet">
-          <div class="frame"><img src="assets/systems/commeet/1.webp" alt="Commeet home page" loading="lazy"><span class="count">4</span></div>
+        <article class="card" data-project="commeet">
+          <button class="frame" type="button" aria-label="View Commeet screenshots"><img src="assets/systems/commeet/1.webp" alt="Commeet home page" loading="lazy"><span class="count">4</span></button>
           <div class="body">
             <div class="owner">POSTECH CSE</div>
             <h3>Commeet</h3>
-            <div class="host"><span class="pip"></span>commeet.postech.ac.kr</div>
+            <div class="reach">
+              <a class="host" href="https://commeet.postech.ac.kr" target="_blank" rel="noopener"><span class="pip"></span>commeet.postech.ac.kr<span class="ext">↗</span></a>
+            </div>
             <p>Collects everyone's availability and assigns the meeting times automatically. Professors also get consultation records and student guidance fee settlement.</p>
             <div class="note">min-cost max-flow assignment · encrypted records</div>
           </div>
-        </a>
+        </article>
 
       </div>
 
       <h3 class="grouphead">Samsung Fire &amp; Marine Insurance</h3>
       <div class="grid">
 
-        <a class="card" href="https://masking.yojun.dev" data-project="masking">
-          <div class="frame"><img src="assets/systems/masking/1.webp" alt="License plate masking web service" loading="lazy"></div>
+        <article class="card" data-project="masking">
+          <button class="frame" type="button" aria-label="View Plate Masking screenshots"><img src="assets/systems/masking/1.webp" alt="License plate masking web service" loading="lazy"></button>
           <div class="body">
             <div class="owner">Samsung Fire · Internship</div>
             <h3>Plate Masking</h3>
-            <div class="host"><span class="pip"></span>masking.yojun.dev</div>
+            <div class="reach">
+              <a class="host" href="https://masking.yojun.dev" target="_blank" rel="noopener"><span class="pip"></span>masking.yojun.dev<span class="ext">↗</span></a>
+            </div>
             <p>Automatically masks every vehicle license plate in dashcam footage. YOLO vehicle detection feeds a degradation-tuned plate detector, sped up with optical-flow tracking and parallel segment processing.</p>
             <div class="note">99.0% recall · 0.98 F1 · 27+ fps</div>
           </div>
-        </a>
+        </article>
 
-        <a class="card" href="https://forge.yojun.dev" data-project="forge">
-          <div class="frame"><img src="assets/systems/forge/1.webp" alt="Generative-AI document forgery detection service" loading="lazy"></div>
+        <article class="card" data-project="forge">
+          <button class="frame" type="button" aria-label="View Forgery Detection screenshots"><img src="assets/systems/forge/1.webp" alt="Generative-AI document forgery detection service" loading="lazy"></button>
           <div class="body">
             <div class="owner">Samsung Fire · Internship</div>
             <h3>Forgery Detection</h3>
-            <div class="host"><span class="pip"></span>forge.yojun.dev</div>
+            <div class="reach">
+              <a class="host" href="https://forge.yojun.dev" target="_blank" rel="noopener"><span class="pip"></span>forge.yojun.dev<span class="ext">↗</span></a>
+            </div>
             <p>Detects document regions edited with generative AI. Built FinForge, a 6,000-image forgery dataset of insurance claim forms, and fine-tuned TruFor on it to localize edits and score each document.</p>
             <div class="note">Localization F1 0.51 → 0.97 · accuracy 55% → 93%</div>
           </div>
-        </a>
+        </article>
 
       </div>
 
       <h3 class="grouphead">KNPU · FPEI</h3>
       <div class="grid">
 
-        <a class="card" href="https://manager.knpu.re.kr" data-project="manager">
-          <div class="frame"><img src="assets/systems/manager/1.webp" alt="MANAGER introduction page" loading="lazy"><span class="count">8</span></div>
+        <article class="card" data-project="manager">
+          <button class="frame" type="button" aria-label="View Manager screenshots"><img src="assets/systems/manager/1.webp" alt="MANAGER introduction page" loading="lazy"><span class="count">8</span></button>
           <div class="body">
             <div class="owner">KNPU · FPEI</div>
             <h3>Manager</h3>
-            <div class="host"><span class="pip"></span>manager.knpu.re.kr</div>
+            <div class="reach">
+              <a class="host" href="https://manager.knpu.re.kr" target="_blank" rel="noopener"><span class="pip"></span>manager.knpu.re.kr<span class="ext">↗</span></a>
+              <a class="gh" href="https://github.com/yojun313/knpu/tree/main/manager" target="_blank" rel="noopener" aria-label="Manager on GitHub" title="GitHub"><svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a>
+            </div>
             <p>Integrated platform for managing research resources and running big-data analysis.</p>
             <div class="note">PyQt desktop client</div>
           </div>
-        </a>
+        </article>
 
-        <a class="card" href="https://crawler.knpu.re.kr" data-project="crawler">
-          <div class="frame"><img src="assets/systems/crawler/1.webp" alt="Crawler web service" loading="lazy"></div>
+        <article class="card" data-project="crawler">
+          <button class="frame" type="button" aria-label="View Crawler screenshots"><img src="assets/systems/crawler/1.webp" alt="Crawler web service" loading="lazy"></button>
           <div class="body">
             <div class="owner">KNPU · FPEI</div>
             <h3>Crawler</h3>
-            <div class="host"><span class="pip"></span>crawler.knpu.re.kr</div>
+            <div class="reach">
+              <a class="host" href="https://crawler.knpu.re.kr" target="_blank" rel="noopener"><span class="pip"></span>crawler.knpu.re.kr<span class="ext">↗</span></a>
+              <a class="gh" href="https://github.com/yojun313/knpu/tree/main/crawler" target="_blank" rel="noopener" aria-label="Crawler on GitHub" title="GitHub"><svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a>
+            </div>
             <p>Builds datasets through large-scale data collection across news, blogs, forums and video platforms.</p>
             <div class="note">1,500 articles · 60,000 comments per hour</div>
           </div>
-        </a>
+        </article>
 
-        <a class="card" href="https://network.knpu.re.kr" data-project="network">
-          <div class="frame"><img src="assets/systems/network/1.webp" alt="Network analysis and visualization" loading="lazy"></div>
+        <article class="card" data-project="network">
+          <button class="frame" type="button" aria-label="View Network screenshots"><img src="assets/systems/network/1.webp" alt="Network analysis and visualization" loading="lazy"></button>
           <div class="body">
             <div class="owner">KNPU · FPEI</div>
             <h3>Network</h3>
-            <div class="host"><span class="pip"></span>network.knpu.re.kr</div>
+            <div class="reach">
+              <a class="host" href="https://network.knpu.re.kr" target="_blank" rel="noopener"><span class="pip"></span>network.knpu.re.kr<span class="ext">↗</span></a>
+              <a class="gh" href="https://github.com/yojun313/knpu/tree/main/network" target="_blank" rel="noopener" aria-label="Network on GitHub" title="GitHub"><svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a>
+            </div>
             <p>Analyzes and visualizes the social networks embedded in natural language.</p>
             <div class="note">300 nodes · 44,850 edges</div>
           </div>
-        </a>
+        </article>
 
-        <a class="card" href="https://statistics.knpu.re.kr" data-project="statistics">
-          <div class="frame"><img src="assets/systems/statistics/1.webp" alt="Statistical analysis and visualization" loading="lazy"></div>
+        <article class="card" data-project="statistics">
+          <button class="frame" type="button" aria-label="View Statistics screenshots"><img src="assets/systems/statistics/1.webp" alt="Statistical analysis and visualization" loading="lazy"></button>
           <div class="body">
             <div class="owner">KNPU · FPEI</div>
             <h3>Statistics</h3>
-            <div class="host"><span class="pip"></span>statistics.knpu.re.kr</div>
+            <div class="reach">
+              <a class="host" href="https://statistics.knpu.re.kr" target="_blank" rel="noopener"><span class="pip"></span>statistics.knpu.re.kr<span class="ext">↗</span></a>
+              <a class="gh" href="https://github.com/yojun313/knpu/tree/main/statistics" target="_blank" rel="noopener" aria-label="Statistics on GitHub" title="GitHub"><svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a>
+            </div>
             <p>Runs statistical analysis over large datasets and visualizes the result.</p>
           </div>
-        </a>
+        </article>
 
-        <a class="card" href="https://kemkim.knpu.re.kr" data-project="kemkim">
-          <div class="frame"><img src="assets/systems/kemkim/1.webp" alt="KemKim keyword signal analysis" loading="lazy"></div>
+        <article class="card" data-project="kemkim">
+          <button class="frame" type="button" aria-label="View KemKim screenshots"><img src="assets/systems/kemkim/1.webp" alt="KemKim keyword signal analysis" loading="lazy"></button>
           <div class="body">
             <div class="owner">KNPU · FPEI</div>
             <h3>KemKim</h3>
-            <div class="host"><span class="pip"></span>kemkim.knpu.re.kr</div>
+            <div class="reach">
+              <a class="host" href="https://kemkim.knpu.re.kr" target="_blank" rel="noopener"><span class="pip"></span>kemkim.knpu.re.kr<span class="ext">↗</span></a>
+              <a class="gh" href="https://github.com/yojun313/knpu/tree/main/kemkim" target="_blank" rel="noopener" aria-label="KemKim on GitHub" title="GitHub"><svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a>
+            </div>
             <p>Visualizes future-signal prediction (KEM / KIM) over collected corpora.</p>
           </div>
-        </a>
+        </article>
 
-        <a class="card" href="https://llm.knpu.re.kr" data-project="labllm">
-          <div class="frame"><img src="assets/systems/labllm.webp" alt="Lab LLM chat interface" loading="lazy"></div>
+        <article class="card" data-project="labllm">
+          <button class="frame" type="button" aria-label="View Lab LLM screenshots"><img src="assets/systems/labllm.webp" alt="Lab LLM chat interface" loading="lazy"></button>
           <div class="body">
             <div class="owner">KNPU · FPEI</div>
             <h3>Lab LLM</h3>
-            <div class="host"><span class="pip"></span>llm.knpu.re.kr</div>
+            <div class="reach">
+              <a class="host" href="https://llm.knpu.re.kr" target="_blank" rel="noopener"><span class="pip"></span>llm.knpu.re.kr<span class="ext">↗</span></a>
+              <a class="gh" href="https://github.com/yojun313/knpu" target="_blank" rel="noopener" aria-label="Lab LLM on GitHub" title="GitHub"><svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a>
+            </div>
             <p>Serves large language models on the lab's own GPU resources.</p>
             <div class="note">vLLM</div>
           </div>
-        </a>
+        </article>
 
-        <a class="card" href="https://complaint.knpu.re.kr" data-project="complaint">
-          <div class="frame"><img src="assets/systems/complaint/1.webp" alt="AI legal complaint drafting service landing screen" loading="lazy"><span class="count">2</span></div>
+        <article class="card" data-project="complaint">
+          <button class="frame" type="button" aria-label="View Legal AI screenshots"><img src="assets/systems/complaint/1.webp" alt="AI legal complaint drafting service landing screen" loading="lazy"><span class="count">2</span></button>
           <div class="body">
             <div class="owner">KNPU · FPEI</div>
             <h3>Legal AI</h3>
-            <div class="host"><span class="pip"></span>complaint.knpu.re.kr</div>
+            <div class="reach">
+              <a class="host" href="https://complaint.knpu.re.kr" target="_blank" rel="noopener"><span class="pip"></span>complaint.knpu.re.kr<span class="ext">↗</span></a>
+              <a class="gh" href="https://github.com/yojun313/knpu/tree/main/complaint" target="_blank" rel="noopener" aria-label="Legal AI on GitHub" title="GitHub"><svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a>
+            </div>
             <p>Drafts legal complaints that meet statutory requirements, guiding the user through the police intake form step by step.</p>
             <div class="note">Letter of Appreciation, Apr 2024</div>
           </div>
-        </a>
+        </article>
 
       </div>
     </div>
@@ -695,7 +748,7 @@ footer a:hover{color:var(--accent)}
 
 (function () {
   var dlg = document.getElementById('gallery');
-  if (!dlg || typeof dlg.showModal !== 'function') return; // no <dialog> support: cards stay plain links
+  if (!dlg || typeof dlg.showModal !== 'function') return; // no <dialog> support: cards keep their direct links
 
   var $ = function (id) { return document.getElementById(id); };
   var imgEl = $('galleryImg'), thumbs = $('galleryThumbs'), counter = $('galleryCounter');
@@ -707,19 +760,6 @@ footer a:hover{color:var(--accent)}
     return out;
   }
   /* Extra links beyond the card's own href, keyed by data-project. */
-  var KNPU = 'https://github.com/yojun313/knpu';
-  function gh(href) { return [{ label: 'GitHub ↗', href: href }]; }
-  var EXTRA = {
-    lecai: gh('https://github.com/yojun313/LecAI'),
-    eng2mouth: gh('https://github.com/yojun313/eng2mouth'),
-    manager: gh(KNPU + '/tree/main/manager'),
-    crawler: gh(KNPU + '/tree/main/crawler'),
-    network: gh(KNPU + '/tree/main/network'),
-    statistics: gh(KNPU + '/tree/main/statistics'),
-    kemkim: gh(KNPU + '/tree/main/kemkim'),
-    complaint: gh(KNPU + '/tree/main/complaint'),
-    labllm: gh(KNPU)
-  };
   var IMAGES = {
     lecai: seq('lecai', 4),
     eng2mouth: seq('eng2mouth', 4),
@@ -761,10 +801,13 @@ footer a:hover{color:var(--accent)}
 
     var links = $('galleryLinks');
     links.innerHTML = '';
-    var host = card.querySelector('.host').textContent.trim();
-    [{ label: 'Visit ' + host + ' ↗', href: card.href }].concat(EXTRA[key] || []).forEach(function (l, i) {
+    var site = card.querySelector('.host'), repo = card.querySelector('.gh');
+    var list = [{ label: 'Visit ' + site.textContent.replace('↗', '').trim() + ' ↗', href: site.href }];
+    if (repo) list.push({ label: 'GitHub ↗', href: repo.href, icon: repo.querySelector('svg') });
+    list.forEach(function (l, i) {
       var a = document.createElement('a');
       a.href = l.href; a.textContent = l.label;
+      if (l.icon) a.insertBefore(l.icon.cloneNode(true), a.firstChild);
       a.target = '_blank'; a.rel = 'noopener';
       if (i > 0) a.className = 'alt';
       links.appendChild(a);
@@ -792,8 +835,7 @@ footer a:hover{color:var(--accent)}
 
   document.querySelectorAll('.card[data-project]').forEach(function (card) {
     card.addEventListener('click', function (e) {
-      if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return; // let modifier-clicks open the site
-      e.preventDefault();
+      if (e.target.closest('a')) return; // direct service / GitHub links navigate as usual
       open(card);
     });
   });
