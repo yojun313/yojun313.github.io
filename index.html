@@ -125,6 +125,7 @@ img{display:block;max-width:100%}
 
 /* ── view transitions ────────────────────────────────── */
 main{display:block;padding:0 0 96px}
+main:focus{outline:none}
 .view{padding-top:64px;animation:rise .34s cubic-bezier(.2,.7,.3,1) both}
 @keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 @media (prefers-reduced-motion:reduce){
@@ -240,6 +241,14 @@ h2.title{
   overflow:hidden;
 }
 .frame img{width:100%;height:100%;object-fit:contain}
+.frame{position:relative}
+.count{
+  position:absolute;right:10px;bottom:10px;
+  font-family:var(--mono);font-size:.625rem;letter-spacing:.06em;
+  color:#fff;background:rgba(10,13,19,.72);
+  border-radius:3px;padding:3px 7px;
+}
+.count::before{content:"▦ "}
 .frame--none{
   font-family:var(--mono);color:var(--line);font-size:2rem;
 }
@@ -262,6 +271,72 @@ h2.title{
 .note{
   margin-top:auto;padding-top:12px;
   font-family:var(--mono);font-size:.6875rem;letter-spacing:.03em;color:var(--accent);
+}
+
+/* ── gallery modal ───────────────────────────────────── */
+.gallery{
+  width:min(1080px,calc(100vw - 32px));max-height:calc(100dvh - 32px);
+  padding:0;border:1px solid var(--line);border-radius:10px;
+  background:var(--surface);color:var(--fg);
+  box-shadow:0 30px 80px -20px rgba(0,0,0,.6);
+  overflow:auto;
+}
+.gallery::backdrop{background:rgba(5,7,10,.72);backdrop-filter:blur(3px)}
+.gallery[open]{animation:rise .24s cubic-bezier(.2,.7,.3,1) both}
+.g-head{display:flex;align-items:flex-start;gap:16px;padding:18px 20px 14px}
+.g-head h3{
+  margin:4px 0 0;font-family:var(--mono);font-size:.9375rem;font-weight:500;
+  letter-spacing:.08em;text-transform:uppercase;
+}
+.g-close{
+  margin-left:auto;background:none;border:1px solid var(--line);border-radius:4px;
+  color:var(--muted);font-size:1.25rem;line-height:1;width:34px;height:34px;cursor:pointer;
+}
+.g-close:hover{color:var(--fg);border-color:var(--accent-dim)}
+.g-stage{
+  position:relative;background:var(--surface-2);
+  border-block:1px solid var(--line);
+  aspect-ratio:16/10;display:flex;align-items:center;justify-content:center;
+}
+.g-stage img{width:100%;height:100%;object-fit:contain}
+.g-nav{
+  position:absolute;top:50%;transform:translateY(-50%);
+  width:40px;height:56px;border:0;border-radius:4px;cursor:pointer;
+  background:rgba(10,13,19,.55);color:#fff;font-size:1.6rem;line-height:1;
+  transition:background .15s ease;
+}
+.g-nav:hover{background:rgba(10,13,19,.8)}
+.g-prev{left:10px}
+.g-next{right:10px}
+.g-counter{
+  position:absolute;right:12px;bottom:10px;
+  font-family:var(--mono);font-size:.6875rem;color:#fff;
+  background:rgba(10,13,19,.72);border-radius:3px;padding:3px 8px;
+  font-variant-numeric:tabular-nums;
+}
+.g-thumbs{display:flex;gap:8px;padding:12px 20px 0;overflow-x:auto}
+.g-thumbs button{
+  flex:none;width:96px;aspect-ratio:16/10;padding:0;cursor:pointer;
+  background:var(--surface-2);border:1px solid var(--line);border-radius:4px;
+  overflow:hidden;opacity:.55;transition:opacity .15s ease,border-color .15s ease;
+}
+.g-thumbs button:hover{opacity:.85}
+.g-thumbs button[aria-current="true"]{opacity:1;border-color:var(--accent)}
+.g-thumbs img{width:100%;height:100%;object-fit:cover}
+.g-foot{padding:14px 20px 20px;display:flex;gap:16px 24px;flex-wrap:wrap;align-items:flex-end}
+.g-foot p{margin:0;flex:1 1 320px;font-size:.9375rem;color:var(--fg-dim);font-weight:300;line-height:1.55}
+.g-links{display:flex;gap:8px;flex-wrap:wrap}
+.g-links a{
+  font-family:var(--mono);font-size:.75rem;letter-spacing:.03em;text-decoration:none;
+  color:var(--ink);background:var(--accent);border:1px solid var(--accent);
+  border-radius:4px;padding:8px 14px;white-space:nowrap;
+}
+.g-links a:hover{filter:brightness(1.1)}
+.g-links a.alt{color:var(--fg);background:none;border-color:var(--line)}
+.g-links a.alt:hover{border-color:var(--accent-dim);filter:none}
+@media (max-width:640px){
+  .g-nav{width:32px;height:44px;font-size:1.3rem}
+  .g-thumbs button{width:72px}
 }
 
 /* ── stack ───────────────────────────────────────────── */
@@ -392,11 +467,27 @@ footer a:hover{color:var(--accent)}
       <p class="eyebrow">Projects</p>
       <h2 class="title">Services in production</h2>
 
+      <h3 class="grouphead">Personal</h3>
+      <div class="grid">
+
+        <a class="card" href="https://lec.knpu.re.kr" data-project="lecai">
+          <div class="frame"><img src="assets/systems/lecai/1.webp" alt="LecAI lecture material management screen" loading="lazy"><span class="count">3</span></div>
+          <div class="body">
+            <div class="owner">Personal</div>
+            <h3>LecAI</h3>
+            <div class="host"><span class="pip"></span>lec.knpu.re.kr</div>
+            <p>Study assistant for slides, recordings and board notes. Generates per-slide explanations and links transcript excerpts from lecture recordings to the matching slides.</p>
+            <div class="note">Faster-Whisper · PDF pipeline</div>
+          </div>
+        </a>
+
+      </div>
+
       <h3 class="grouphead">POSTECH CSE</h3>
       <div class="grid">
 
-        <a class="card" href="https://pcss.postech.ac.kr/">
-          <div class="frame"><img src="assets/systems/pcss.webp" alt="PCSS search screen with conference selection by research area" loading="lazy"></div>
+        <a class="card" href="https://pcss.postech.ac.kr/" data-project="pcss">
+          <div class="frame"><img src="assets/systems/pcss/1.webp" alt="PCSS conference selection by research area" loading="lazy"><span class="count">3</span></div>
           <div class="body">
             <div class="owner">POSTECH CSE</div>
             <h3>PCSS</h3>
@@ -406,8 +497,8 @@ footer a:hover{color:var(--accent)}
           </div>
         </a>
 
-        <a class="card" href="https://commeet.postech.ac.kr">
-          <div class="frame"><img src="assets/systems/commeet.webp" alt="Commeet landing screen for the POSTECH CSE time scheduler" loading="lazy"></div>
+        <a class="card" href="https://commeet.postech.ac.kr" data-project="commeet">
+          <div class="frame"><img src="assets/systems/commeet/1.webp" alt="Commeet home page" loading="lazy"><span class="count">4</span></div>
           <div class="body">
             <div class="owner">POSTECH CSE</div>
             <h3>Commeet</h3>
@@ -422,8 +513,8 @@ footer a:hover{color:var(--accent)}
       <h3 class="grouphead">KNPU · FPEI</h3>
       <div class="grid">
 
-        <a class="card" href="https://manager.knpu.re.kr">
-          <div class="frame"><img src="assets/systems/manager.webp" alt="Manager desktop client showing the collection job table" loading="lazy"></div>
+        <a class="card" href="https://manager.knpu.re.kr" data-project="manager">
+          <div class="frame"><img src="assets/systems/manager/1.webp" alt="MANAGER introduction page" loading="lazy"><span class="count">8</span></div>
           <div class="body">
             <div class="owner">KNPU · FPEI</div>
             <h3>Manager</h3>
@@ -433,8 +524,8 @@ footer a:hover{color:var(--accent)}
           </div>
         </a>
 
-        <a class="card" href="https://crawler.knpu.re.kr">
-          <div class="frame"><img src="assets/systems/crawler.webp" alt="Crawler job queue screen" loading="lazy"></div>
+        <a class="card" href="https://crawler.knpu.re.kr" data-project="crawler">
+          <div class="frame"><img src="assets/systems/crawler/1.webp" alt="Crawler web service" loading="lazy"></div>
           <div class="body">
             <div class="owner">KNPU · FPEI</div>
             <h3>Crawler</h3>
@@ -444,8 +535,8 @@ footer a:hover{color:var(--accent)}
           </div>
         </a>
 
-        <a class="card" href="https://network.knpu.re.kr">
-          <div class="frame"><img src="assets/systems/network.webp" alt="Network view rendering a word co-occurrence graph" loading="lazy"></div>
+        <a class="card" href="https://network.knpu.re.kr" data-project="network">
+          <div class="frame"><img src="assets/systems/network/1.webp" alt="Network analysis and visualization" loading="lazy"></div>
           <div class="body">
             <div class="owner">KNPU · FPEI</div>
             <h3>Network</h3>
@@ -455,8 +546,8 @@ footer a:hover{color:var(--accent)}
           </div>
         </a>
 
-        <a class="card" href="https://statistics.knpu.re.kr">
-          <div class="frame"><img src="assets/systems/statistics.webp" alt="Statistics view with a bar chart and data table" loading="lazy"></div>
+        <a class="card" href="https://statistics.knpu.re.kr" data-project="statistics">
+          <div class="frame"><img src="assets/systems/statistics/1.webp" alt="Statistical analysis and visualization" loading="lazy"></div>
           <div class="body">
             <div class="owner">KNPU · FPEI</div>
             <h3>Statistics</h3>
@@ -465,8 +556,8 @@ footer a:hover{color:var(--accent)}
           </div>
         </a>
 
-        <a class="card" href="https://kemkim.knpu.re.kr">
-          <div class="frame"><img src="assets/systems/kemkim.webp" alt="KemKim future-signal prediction visualization" loading="lazy"></div>
+        <a class="card" href="https://kemkim.knpu.re.kr" data-project="kemkim">
+          <div class="frame"><img src="assets/systems/kemkim/1.webp" alt="KemKim keyword signal analysis" loading="lazy"></div>
           <div class="body">
             <div class="owner">KNPU · FPEI</div>
             <h3>KemKim</h3>
@@ -475,7 +566,7 @@ footer a:hover{color:var(--accent)}
           </div>
         </a>
 
-        <a class="card" href="https://llm.knpu.re.kr">
+        <a class="card" href="https://llm.knpu.re.kr" data-project="labllm">
           <div class="frame"><img src="assets/systems/labllm.webp" alt="Lab LLM chat interface" loading="lazy"></div>
           <div class="body">
             <div class="owner">KNPU · FPEI</div>
@@ -486,7 +577,7 @@ footer a:hover{color:var(--accent)}
           </div>
         </a>
 
-        <a class="card" href="https://complaint.knpu.re.kr">
+        <a class="card" href="https://complaint.knpu.re.kr" data-project="complaint">
           <div class="frame"><img src="assets/systems/complaint.webp" alt="AI legal complaint drafting service landing screen" loading="lazy"></div>
           <div class="body">
             <div class="owner">KNPU · FPEI</div>
@@ -494,17 +585,6 @@ footer a:hover{color:var(--accent)}
             <div class="host"><span class="pip"></span>complaint.knpu.re.kr</div>
             <p>Drafts legal complaints that meet statutory requirements, guiding the user through the police intake form step by step.</p>
             <div class="note">Letter of Appreciation, Apr 2024</div>
-          </div>
-        </a>
-
-        <a class="card" href="https://lec.knpu.re.kr">
-          <div class="frame"><img src="assets/systems/lecai.webp" alt="LecAI lecture material analysis screen" loading="lazy"></div>
-          <div class="body">
-            <div class="owner">KNPU · FPEI</div>
-            <h3>LecAI</h3>
-            <div class="host"><span class="pip"></span>lec.knpu.re.kr</div>
-            <p>Analyzes lecture material with AI — slide parsing, speech transcription and generated study reports.</p>
-            <div class="note">Faster-Whisper · PDF pipeline</div>
           </div>
         </a>
 
@@ -522,6 +602,27 @@ footer a:hover{color:var(--accent)}
   </div>
 
 </main>
+
+<dialog class="gallery" id="gallery" aria-labelledby="galleryTitle">
+  <div class="g-head">
+    <div>
+      <div class="owner" id="galleryOwner"></div>
+      <h3 id="galleryTitle"></h3>
+    </div>
+    <button class="g-close" type="button" id="galleryClose" aria-label="Close">×</button>
+  </div>
+  <div class="g-stage">
+    <img id="galleryImg" alt="">
+    <button class="g-nav g-prev" type="button" id="galleryPrev" aria-label="Previous image">‹</button>
+    <button class="g-nav g-next" type="button" id="galleryNext" aria-label="Next image">›</button>
+    <span class="g-counter" id="galleryCounter"></span>
+  </div>
+  <div class="g-thumbs" id="galleryThumbs"></div>
+  <div class="g-foot">
+    <p id="galleryDesc"></p>
+    <div class="g-links" id="galleryLinks"></div>
+  </div>
+</dialog>
 
 <script>
 (function () {
@@ -550,6 +651,109 @@ footer a:hover{color:var(--accent)}
 
   window.addEventListener('hashchange', route);
   route();
+})();
+
+(function () {
+  var dlg = document.getElementById('gallery');
+  if (!dlg || typeof dlg.showModal !== 'function') return; // no <dialog> support: cards stay plain links
+
+  var $ = function (id) { return document.getElementById(id); };
+  var imgEl = $('galleryImg'), thumbs = $('galleryThumbs'), counter = $('galleryCounter');
+  var prev = $('galleryPrev'), next = $('galleryNext');
+
+  function seq(dir, n) {
+    var out = [];
+    for (var i = 1; i <= n; i++) out.push('assets/systems/' + dir + '/' + i + '.webp');
+    return out;
+  }
+  /* Extra links beyond the card's own href, keyed by data-project. */
+  var EXTRA = {
+    lecai: [{ label: 'GitHub ↗', href: 'https://github.com/yojun313/LecAI' }]
+  };
+  var IMAGES = {
+    lecai: seq('lecai', 3),
+    pcss: seq('pcss', 3),
+    commeet: seq('commeet', 4),
+    manager: seq('manager', 8),
+    crawler: seq('crawler', 1),
+    network: seq('network', 1),
+    statistics: seq('statistics', 1),
+    kemkim: seq('kemkim', 1),
+    labllm: ['assets/systems/labllm.webp'],
+    complaint: ['assets/systems/complaint.webp']
+  };
+
+  var images = [], idx = 0, title = '';
+
+  function show(i) {
+    idx = (i + images.length) % images.length;
+    imgEl.src = images[idx];
+    imgEl.alt = title + ' screenshot ' + (idx + 1) + ' of ' + images.length;
+    counter.textContent = (idx + 1) + ' / ' + images.length;
+    Array.prototype.forEach.call(thumbs.children, function (b, j) {
+      b.setAttribute('aria-current', j === idx ? 'true' : 'false');
+    });
+    var active = thumbs.children[idx];
+    if (active) active.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+  }
+
+  function open(card) {
+    var key = card.getAttribute('data-project');
+    title = card.querySelector('h3').textContent;
+    images = IMAGES[key] || [card.querySelector('.frame img').getAttribute('src')];
+
+    $('galleryOwner').textContent = card.querySelector('.owner').textContent;
+    $('galleryTitle').textContent = title;
+    $('galleryDesc').textContent = card.querySelector('.body p').textContent;
+
+    var links = $('galleryLinks');
+    links.innerHTML = '';
+    var host = card.querySelector('.host').textContent.trim();
+    [{ label: 'Visit ' + host + ' ↗', href: card.href }].concat(EXTRA[key] || []).forEach(function (l, i) {
+      var a = document.createElement('a');
+      a.href = l.href; a.textContent = l.label;
+      a.target = '_blank'; a.rel = 'noopener';
+      if (i > 0) a.className = 'alt';
+      links.appendChild(a);
+    });
+
+    thumbs.innerHTML = '';
+    images.forEach(function (src, j) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.setAttribute('aria-label', 'Show image ' + (j + 1));
+      var t = document.createElement('img');
+      t.src = src; t.alt = '';
+      b.appendChild(t);
+      b.addEventListener('click', function () { show(j); });
+      thumbs.appendChild(b);
+    });
+
+    var multi = images.length > 1;
+    thumbs.hidden = prev.hidden = next.hidden = counter.hidden = !multi;
+
+    dlg.showModal();
+    show(0);
+    dlg.scrollTop = 0;
+  }
+
+  document.querySelectorAll('.card[data-project]').forEach(function (card) {
+    card.addEventListener('click', function (e) {
+      if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return; // let modifier-clicks open the site
+      e.preventDefault();
+      open(card);
+    });
+  });
+
+  prev.addEventListener('click', function () { show(idx - 1); });
+  next.addEventListener('click', function () { show(idx + 1); });
+  $('galleryClose').addEventListener('click', function () { dlg.close(); });
+  dlg.addEventListener('click', function (e) { if (e.target === dlg) dlg.close(); }); // backdrop click
+  dlg.addEventListener('keydown', function (e) {
+    if (images.length < 2) return;
+    if (e.key === 'ArrowLeft') { e.preventDefault(); show(idx - 1); }
+    if (e.key === 'ArrowRight') { e.preventDefault(); show(idx + 1); }
+  });
 })();
 
 (function () {
