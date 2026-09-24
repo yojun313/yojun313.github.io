@@ -470,23 +470,23 @@ footer a:hover{color:var(--accent)}
       <h3 class="grouphead">Personal</h3>
       <div class="grid">
 
-        <a class="card" href="https://lec.knpu.re.kr" data-project="lecai">
+        <a class="card" href="https://lec.yojun.dev" data-project="lecai">
           <div class="frame"><img src="assets/systems/lecai/1.webp" alt="LecAI lecture material management screen" loading="lazy"><span class="count">4</span></div>
           <div class="body">
             <div class="owner">Personal</div>
             <h3>LecAI</h3>
-            <div class="host"><span class="pip"></span>lec.knpu.re.kr</div>
+            <div class="host"><span class="pip"></span>lec.yojun.dev</div>
             <p>Study assistant for slides, recordings and board notes. Generates per-slide explanations and links transcript excerpts from lecture recordings to the matching slides.</p>
             <div class="note">Faster-Whisper · PDF pipeline</div>
           </div>
         </a>
 
-        <a class="card" href="https://eng.knpu.re.kr" data-project="eng2mouth">
+        <a class="card" href="https://eng.yojun.dev" data-project="eng2mouth">
           <div class="frame"><img src="assets/systems/eng2mouth/1.webp" alt="Eng2Mouth landing page with a phone call to an AI friend" loading="lazy"><span class="count">4</span></div>
           <div class="body">
             <div class="owner">Personal</div>
             <h3>Eng2Mouth</h3>
-            <div class="host"><span class="pip"></span>eng.knpu.re.kr</div>
+            <div class="host"><span class="pip"></span>eng.yojun.dev</div>
             <p>AI phone-call English practice. Call an AI conversation partner and talk in real time — interrupt, pause, hang up — then get a speaking evaluation report after every call.</p>
             <div class="note">Real-time voice · bring-your-own OpenAI / Gemini key</div>
           </div>
@@ -516,6 +516,33 @@ footer a:hover{color:var(--accent)}
             <div class="host"><span class="pip"></span>commeet.postech.ac.kr</div>
             <p>Collects everyone's availability and assigns the meeting times automatically. Professors also get consultation records and student guidance fee settlement.</p>
             <div class="note">min-cost max-flow assignment · encrypted records</div>
+          </div>
+        </a>
+
+      </div>
+
+      <h3 class="grouphead">Samsung Fire &amp; Marine Insurance</h3>
+      <div class="grid">
+
+        <a class="card" href="https://masking.yojun.dev" data-project="masking">
+          <div class="frame"><img src="assets/systems/masking/1.webp" alt="License plate masking web service" loading="lazy"></div>
+          <div class="body">
+            <div class="owner">Samsung Fire · Internship</div>
+            <h3>Plate Masking</h3>
+            <div class="host"><span class="pip"></span>masking.yojun.dev</div>
+            <p>Automatically masks every vehicle license plate in dashcam footage. YOLO vehicle detection feeds a degradation-tuned plate detector, sped up with optical-flow tracking and parallel segment processing.</p>
+            <div class="note">99.0% recall · 0.98 F1 · 27+ fps</div>
+          </div>
+        </a>
+
+        <a class="card" href="https://forge.yojun.dev" data-project="forge">
+          <div class="frame"><img src="assets/systems/forge/1.webp" alt="Generative-AI document forgery detection service" loading="lazy"></div>
+          <div class="body">
+            <div class="owner">Samsung Fire · Internship</div>
+            <h3>Forgery Detection</h3>
+            <div class="host"><span class="pip"></span>forge.yojun.dev</div>
+            <p>Detects document regions edited with generative AI. Built FinForge, a 6,000-image forgery dataset of insurance claim forms, and fine-tuned TruFor on it to localize edits and score each document.</p>
+            <div class="note">Localization F1 0.51 → 0.97 · accuracy 55% → 93%</div>
           </div>
         </a>
 
@@ -686,6 +713,8 @@ footer a:hover{color:var(--accent)}
     eng2mouth: seq('eng2mouth', 4),
     pcss: seq('pcss', 4),
     commeet: seq('commeet', 4),
+    masking: seq('masking', 1),
+    forge: seq('forge', 1),
     manager: seq('manager', 7),
     crawler: seq('crawler', 1),
     network: seq('network', 1),
