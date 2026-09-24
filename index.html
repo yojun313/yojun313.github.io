@@ -112,13 +112,60 @@ img{display:block;max-width:100%}
 }
 .nav a:hover{color:var(--fg);background:var(--surface)}
 .nav a[aria-current="page"]{color:var(--accent);background:var(--surface)}
-.theme-toggle{
+.theme-toggle,.menu-btn{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:34px;height:34px;padding:0;flex:none;
   font-family:var(--mono);font-size:.85rem;line-height:1;
   color:var(--muted);background:none;border:1px solid var(--line);
-  border-radius:4px;padding:6px 9px;cursor:pointer;
+  border-radius:4px;cursor:pointer;
   transition:color .15s ease,border-color .15s ease,background .15s ease;
 }
-.theme-toggle:hover{color:var(--fg);border-color:var(--accent-dim);background:var(--surface)}
+.theme-toggle:hover,.menu-btn:hover{color:var(--fg);border-color:var(--accent-dim);background:var(--surface)}
+.menu-btn{display:none}
+
+/* ── mobile sidebar ──────────────────────────────────── */
+.drawer{display:none}
+.scrim{
+  position:fixed;inset:0;z-index:40;
+  background:rgba(5,7,10,.5);backdrop-filter:blur(2px);
+  opacity:0;transition:opacity .22s ease;
+}
+.scrim.show{opacity:1}
+@media (max-width:640px){
+  .topbar .wrap{gap:10px;flex-wrap:nowrap}
+  .topbar .nav{display:none}
+  .theme-toggle{margin-left:auto}
+  .menu-btn{display:inline-flex}
+
+  .drawer{
+    display:flex;flex-direction:column;
+    position:fixed;top:0;right:0;bottom:0;z-index:50;
+    width:min(280px,82vw);
+    padding:calc(env(safe-area-inset-top,0px) + 12px) 20px calc(env(safe-area-inset-bottom,0px) + 24px);
+    background:var(--ink);border-left:1px solid var(--line);
+    box-shadow:-24px 0 48px -24px rgba(0,0,0,.5);
+    transform:translateX(100%);visibility:hidden;
+    transition:transform .26s cubic-bezier(.2,.7,.3,1),visibility 0s linear .26s;
+  }
+  .drawer.open{transform:none;visibility:visible;transition:transform .26s cubic-bezier(.2,.7,.3,1)}
+  .drawer-head{
+    display:flex;align-items:center;justify-content:space-between;
+    min-height:48px;margin-bottom:20px;
+    border-bottom:1px solid var(--line-soft);padding-bottom:12px;
+  }
+  .drawer a{
+    display:flex;align-items:baseline;gap:14px;
+    padding:14px 4px;text-decoration:none;
+    font-family:var(--mono);font-size:1rem;letter-spacing:.04em;color:var(--fg-dim);
+    border-bottom:1px solid var(--line-soft);
+  }
+  .drawer a .num{font-size:.6875rem;color:var(--muted);font-variant-numeric:tabular-nums}
+  .drawer a[aria-current="page"]{color:var(--accent)}
+  .drawer a[aria-current="page"] .num{color:var(--accent-dim)}
+}
+@media (prefers-reduced-motion:reduce){
+  .drawer,.drawer.open,.scrim{transition:none}
+}
 :where(a,button):focus-visible{
   outline:2px solid var(--accent);outline-offset:3px;border-radius:3px;
 }
@@ -236,7 +283,7 @@ h2.title{
 
 /* The frame owns the ratio; the image is contained inside it, never cropped. */
 .frame{
-  aspect-ratio:4/3;width:100%;flex:none;
+  aspect-ratio:16/10;width:100%;flex:none;
   background:var(--surface-2);border-bottom:1px solid var(--line);
   display:flex;align-items:center;justify-content:center;
   overflow:hidden;
@@ -390,8 +437,25 @@ footer a:hover{color:var(--accent)}
       <a href="#/projects" data-nav="projects">projects</a>
     </nav>
     <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle color theme">◐</button>
+    <button class="menu-btn" id="menuOpen" type="button" aria-label="Open menu" aria-controls="drawer" aria-expanded="false">
+      <svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M2 4h12M2 8h12M2 12h12" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+    </button>
   </div>
 </header>
+
+<!-- Mobile sidebar. Lives outside .topbar: its backdrop-filter would trap position:fixed children. -->
+<div class="scrim" id="scrim" hidden></div>
+<nav class="drawer" id="drawer" aria-label="Sections">
+  <div class="drawer-head">
+    <span class="brand">yojun<span class="dot">.</span>moon</span>
+    <button class="menu-btn" id="menuClose" type="button" aria-label="Close menu">
+      <svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M3.5 3.5l9 9M12.5 3.5l-9 9" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+  <a href="#/index"    data-nav="index"><span class="num">01</span>index</a>
+  <a href="#/work"     data-nav="work"><span class="num">02</span>work</a>
+  <a href="#/projects" data-nav="projects"><span class="num">03</span>projects</a>
+</nav>
 
 <main id="main" tabindex="-1">
 
@@ -833,6 +897,41 @@ footer a:hover{color:var(--accent)}
     if (images.length < 2) return;
     if (e.key === 'ArrowLeft') { e.preventDefault(); show(idx - 1); }
     if (e.key === 'ArrowRight') { e.preventDefault(); show(idx + 1); }
+  });
+})();
+
+(function () {
+  var drawer = document.getElementById('drawer');
+  var scrim = document.getElementById('scrim');
+  var openBtn = document.getElementById('menuOpen');
+  var closeBtn = document.getElementById('menuClose');
+  var hideTimer;
+
+  function setOpen(open) {
+    clearTimeout(hideTimer);
+    drawer.classList.toggle('open', open);
+    openBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    document.body.style.overflow = open ? 'hidden' : '';
+    if (open) {
+      scrim.hidden = false;
+      requestAnimationFrame(function () { scrim.classList.add('show'); });
+      closeBtn.focus();
+    } else {
+      scrim.classList.remove('show');
+      hideTimer = setTimeout(function () { scrim.hidden = true; }, 220);
+    }
+  }
+  function isOpen() { return drawer.classList.contains('open'); }
+
+  openBtn.addEventListener('click', function () { setOpen(true); });
+  closeBtn.addEventListener('click', function () { setOpen(false); openBtn.focus(); });
+  scrim.addEventListener('click', function () { setOpen(false); });
+  drawer.addEventListener('click', function (e) { if (e.target.closest('a')) setOpen(false); });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && isOpen()) { setOpen(false); openBtn.focus(); }
+  });
+  window.matchMedia('(max-width:640px)').addEventListener('change', function (m) {
+    if (!m.matches && isOpen()) setOpen(false);
   });
 })();
 
