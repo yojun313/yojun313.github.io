@@ -707,8 +707,18 @@ footer a:hover{color:var(--accent)}
     return out;
   }
   /* Extra links beyond the card's own href, keyed by data-project. */
+  var KNPU = 'https://github.com/yojun313/knpu';
+  function gh(href) { return [{ label: 'GitHub ↗', href: href }]; }
   var EXTRA = {
-    lecai: [{ label: 'GitHub ↗', href: 'https://github.com/yojun313/LecAI' }]
+    lecai: gh('https://github.com/yojun313/LecAI'),
+    eng2mouth: gh('https://github.com/yojun313/eng2mouth'),
+    manager: gh(KNPU + '/tree/main/manager'),
+    crawler: gh(KNPU + '/tree/main/crawler'),
+    network: gh(KNPU + '/tree/main/network'),
+    statistics: gh(KNPU + '/tree/main/statistics'),
+    kemkim: gh(KNPU + '/tree/main/kemkim'),
+    complaint: gh(KNPU + '/tree/main/complaint'),
+    labllm: gh(KNPU)
   };
   var IMAGES = {
     lecai: seq('lecai', 4),
