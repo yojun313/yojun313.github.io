@@ -209,16 +209,19 @@ main:focus{outline:none}
 }
 .links li{background:var(--ink)}
 .links a{
-  display:flex;align-items:baseline;gap:16px;
+  display:flex;align-items:center;gap:16px;
   padding:16px 4px;text-decoration:none;
   transition:background .15s ease,padding-left .18s ease;
 }
 .links a:hover{background:var(--surface);padding-left:12px}
 .links .label{
   font-family:var(--mono);font-size:.75rem;letter-spacing:.08em;
-  color:var(--muted);min-width:92px;text-transform:uppercase;
+  color:var(--muted);min-width:124px;text-transform:uppercase;
 }
 .links .val{font-size:var(--step-1);font-weight:300}
+.links .label{display:inline-flex;align-items:center;gap:10px}
+.links .ico{flex:none;transition:color .15s ease}
+.links a:hover .ico{color:var(--accent)}
 .links a:hover .val{color:var(--accent)}
 .links .arrow{margin-left:auto;color:var(--line);font-family:var(--mono)}
 .links a:hover .arrow{color:var(--accent)}
@@ -429,7 +432,9 @@ footer a:hover{color:var(--accent)}
   .entry{grid-template-columns:1fr;gap:10px}
   .entry .when{padding-top:0}
   .stack div{grid-template-columns:1fr;gap:4px}
-  .links .label{min-width:76px}
+  /* Icon only on phones; the label text stays for screen readers. */
+  .links .label{min-width:0}
+  .links .label .txt{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
 }
 </style>
 </head>
@@ -478,15 +483,15 @@ footer a:hover{color:var(--accent)}
 
       <ul class="links">
         <li><a href="https://github.com/yojun313">
-          <span class="label">GitHub</span><span class="val">github.com/yojun313</span><span class="arrow">↗</span></a></li>
+          <span class="label"><svg class="ico" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg><span class="txt">GitHub</span></span><span class="val">github.com/yojun313</span><span class="arrow">↗</span></a></li>
         <li><a href="https://www.linkedin.com/in/yojun-moon/">
-          <span class="label">LinkedIn</span><span class="val">linkedin.com/in/yojun-moon</span><span class="arrow">↗</span></a></li>
+          <span class="label"><svg class="ico" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 1 1 0-4.125 2.062 2.062 0 0 1 0 4.125zM7.119 20.452H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg><span class="txt">LinkedIn</span></span><span class="val">linkedin.com/in/yojun-moon</span><span class="arrow">↗</span></a></li>
         <li><a href="mailto:yojun313@postech.ac.kr">
-          <span class="label">Email</span><span class="val">yojun313@postech.ac.kr</span><span class="arrow">↗</span></a></li>
+          <span class="label"><svg class="ico" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1.75" y="3.25" width="12.5" height="9.5" rx="1.5"/><path d="M2.25 4.25 8 8.75l5.75-4.5"/></g></svg><span class="txt">Email</span></span><span class="val">yojun313@postech.ac.kr</span><span class="arrow">↗</span></a></li>
         <li><a href="yojun_CV.pdf">
-          <span class="label">CV</span><span class="val">yojun_CV.pdf</span><span class="arrow">↗</span></a></li>
+          <span class="label"><svg class="ico" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9.25 1.75H4.25a1.5 1.5 0 0 0-1.5 1.5v9.5a1.5 1.5 0 0 0 1.5 1.5h7.5a1.5 1.5 0 0 0 1.5-1.5V5.75z"/><path d="M9.25 1.75v4h4M5.5 8.75h5M5.5 11.25h3.5"/></g></svg><span class="txt">CV</span></span><span class="val">yojun_CV.pdf</span><span class="arrow">↗</span></a></li>
         <li><a href="yojun_portfolio.pdf" download>
-          <span class="label">Portfolio</span><span class="val">yojun_portfolio.pdf</span><span class="arrow">↓</span></a></li>
+          <span class="label"><svg class="ico" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1.75 4.25a1.5 1.5 0 0 1 1.5-1.5h3l1.5 1.75h5a1.5 1.5 0 0 1 1.5 1.5v6.25a1.5 1.5 0 0 1-1.5 1.5h-9.5a1.5 1.5 0 0 1-1.5-1.5z"/><path d="M1.75 7h12.5"/></g></svg><span class="txt">Portfolio</span></span><span class="val">yojun_portfolio.pdf</span><span class="arrow">↓</span></a></li>
       </ul>
     </div>
   </section>
