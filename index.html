@@ -1,1026 +1,2143 @@
 <!doctype html>
 <html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Yojun Moon</title>
-<script>
-/* Restore saved theme before first paint to avoid a flash of the wrong theme. */
-try{
-  var t=localStorage.getItem('theme');
-  if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);
-}catch(e){}
-</script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Newsreader:opsz,wght@6..72,300;6..72,400;6..72,500&display=swap">
-<style>
-/* ── tokens ─────────────────────────────────────────────
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Yojun Moon</title>
+    <script>
+      /* Restore saved theme before first paint to avoid a flash of the wrong theme. */
+      try {
+        var t = localStorage.getItem("theme");
+        if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t);
+      } catch (e) {}
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Newsreader:opsz,wght@6..72,300;6..72,400;6..72,500&display=swap"
+    />
+    <style>
+      /* ── tokens ─────────────────────────────────────────────
    Dark is the committed default; light is a full re-spec. */
-:root{
-  --ink:#0A0D13;
-  --surface:#10141C;
-  --surface-2:#151A24;
-  --line:#1E2430;
-  --line-soft:#181D27;
-  --fg:#DCE0E8;
-  --fg-dim:#A6AEBF;
-  --muted:#79839A;
-  --accent:#C9A227;
-  --accent-dim:#8C7220;
-  --live:#4E9E7E;
-  --shadow:0 20px 44px -28px rgba(0,0,0,.95);
+      :root {
+        --ink: #0a0d13;
+        --surface: #10141c;
+        --surface-2: #151a24;
+        --line: #1e2430;
+        --line-soft: #181d27;
+        --fg: #dce0e8;
+        --fg-dim: #a6aebf;
+        --muted: #79839a;
+        --accent: #c9a227;
+        --accent-dim: #8c7220;
+        --live: #4e9e7e;
+        --shadow: 0 20px 44px -28px rgba(0, 0, 0, 0.95);
 
-  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
-  --serif:"Newsreader",Georgia,"Times New Roman",serif;
+        --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+        --serif: "Newsreader", Georgia, "Times New Roman", serif;
 
-  --wrap:1080px;
-  --step-0:1rem;
-  --step-1:1.1875rem;
-  --step-2:1.5rem;
-  --step-3:2.125rem;
-  --step-4:clamp(2.75rem,7vw,4.25rem);
-}
-@media (prefers-color-scheme: light){
-  :root:not([data-theme="dark"]){
-    --ink:#F7F6F2;
-    --surface:#FFFFFF;
-    --surface-2:#F1EEE7;
-    --line:#DFDACE;
-    --line-soft:#EAE6DC;
-    --fg:#161A21;
-    --fg-dim:#3E4551;
-    --muted:#6E7686;
-    --accent:#87680E;
-    --accent-dim:#A98A2C;
-    --live:#2F7358;
-    --shadow:0 20px 40px -30px rgba(30,26,10,.35);
-  }
-}
-:root[data-theme="light"]{
-  --ink:#F7F6F2;
-  --surface:#FFFFFF;
-  --surface-2:#F1EEE7;
-  --line:#DFDACE;
-  --line-soft:#EAE6DC;
-  --fg:#161A21;
-  --fg-dim:#3E4551;
-  --muted:#6E7686;
-  --accent:#87680E;
-  --accent-dim:#A98A2C;
-  --live:#2F7358;
-  --shadow:0 20px 40px -30px rgba(30,26,10,.35);
-}
+        --wrap: 1080px;
+        --step-0: 1rem;
+        --step-1: 1.1875rem;
+        --step-2: 1.5rem;
+        --step-3: 2.125rem;
+        --step-4: clamp(2.75rem, 7vw, 4.25rem);
+      }
+      @media (prefers-color-scheme: light) {
+        :root:not([data-theme="dark"]) {
+          --ink: #f7f6f2;
+          --surface: #ffffff;
+          --surface-2: #f1eee7;
+          --line: #dfdace;
+          --line-soft: #eae6dc;
+          --fg: #161a21;
+          --fg-dim: #3e4551;
+          --muted: #6e7686;
+          --accent: #87680e;
+          --accent-dim: #a98a2c;
+          --live: #2f7358;
+          --shadow: 0 20px 40px -30px rgba(30, 26, 10, 0.35);
+        }
+      }
+      :root[data-theme="light"] {
+        --ink: #f7f6f2;
+        --surface: #ffffff;
+        --surface-2: #f1eee7;
+        --line: #dfdace;
+        --line-soft: #eae6dc;
+        --fg: #161a21;
+        --fg-dim: #3e4551;
+        --muted: #6e7686;
+        --accent: #87680e;
+        --accent-dim: #a98a2c;
+        --live: #2f7358;
+        --shadow: 0 20px 40px -30px rgba(30, 26, 10, 0.35);
+      }
 
-*{box-sizing:border-box}
-body{
-  margin:0;
-  background:var(--ink);
-  color:var(--fg);
-  font-family:var(--serif);
-  font-size:var(--step-0);
-  line-height:1.65;
-  -webkit-font-smoothing:antialiased;
-}
-a{color:inherit}
-img{display:block;max-width:100%}
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: var(--ink);
+        color: var(--fg);
+        font-family: var(--serif);
+        font-size: var(--step-0);
+        line-height: 1.65;
+        -webkit-font-smoothing: antialiased;
+      }
+      a {
+        color: inherit;
+      }
+      img {
+        display: block;
+        max-width: 100%;
+      }
 
-.wrap{max-width:var(--wrap);margin:0 auto;padding:0 24px}
+      .wrap {
+        max-width: var(--wrap);
+        margin: 0 auto;
+        padding: 0 24px;
+      }
 
-/* ── nav ─────────────────────────────────────────────── */
-.topbar{
-  position:sticky;top:0;z-index:20;
-  background:color-mix(in srgb,var(--ink) 88%,transparent);
-  backdrop-filter:blur(10px);
-  border-bottom:1px solid var(--line-soft);
-}
-.topbar .wrap{
-  display:flex;align-items:center;gap:24px;
-  min-height:60px;flex-wrap:wrap;
-}
-.brand{
-  font-family:var(--mono);font-size:.8125rem;letter-spacing:.02em;
-  color:var(--fg);text-decoration:none;white-space:nowrap;
-}
-.brand .dot{color:var(--accent)}
-.nav{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
-.nav a{
-  font-family:var(--mono);font-size:.75rem;letter-spacing:.04em;
-  color:var(--muted);text-decoration:none;
-  padding:6px 10px;border-radius:4px;
-  transition:color .15s ease,background .15s ease;
-}
-.nav a:hover{color:var(--fg);background:var(--surface)}
-.nav a[aria-current="page"]{color:var(--accent);background:var(--surface)}
-.theme-toggle,.menu-btn{
-  display:inline-flex;align-items:center;justify-content:center;
-  width:34px;height:34px;padding:0;flex:none;
-  font-family:var(--mono);font-size:.85rem;line-height:1;
-  color:var(--muted);background:none;border:1px solid var(--line);
-  border-radius:4px;cursor:pointer;
-  transition:color .15s ease,border-color .15s ease,background .15s ease;
-}
-.theme-toggle:hover,.menu-btn:hover{color:var(--fg);border-color:var(--accent-dim);background:var(--surface)}
-.menu-btn{display:none}
+      /* ── nav ─────────────────────────────────────────────── */
+      .topbar {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        background: color-mix(in srgb, var(--ink) 88%, transparent);
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid var(--line-soft);
+      }
+      .topbar .wrap {
+        display: flex;
+        align-items: center;
+        gap: 24px;
+        min-height: 60px;
+        flex-wrap: wrap;
+      }
+      .brand {
+        font-family: var(--mono);
+        font-size: 0.8125rem;
+        letter-spacing: 0.02em;
+        color: var(--fg);
+        text-decoration: none;
+        white-space: nowrap;
+      }
+      .brand .dot {
+        color: var(--accent);
+      }
+      .nav {
+        display: flex;
+        gap: 4px;
+        margin-left: auto;
+        flex-wrap: wrap;
+      }
+      .nav a {
+        font-family: var(--mono);
+        font-size: 0.75rem;
+        letter-spacing: 0.04em;
+        color: var(--muted);
+        text-decoration: none;
+        padding: 6px 10px;
+        border-radius: 4px;
+        transition:
+          color 0.15s ease,
+          background 0.15s ease;
+      }
+      .nav a:hover {
+        color: var(--fg);
+        background: var(--surface);
+      }
+      .nav a[aria-current="page"] {
+        color: var(--accent);
+        background: var(--surface);
+      }
+      .theme-toggle,
+      .menu-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 34px;
+        height: 34px;
+        padding: 0;
+        flex: none;
+        font-family: var(--mono);
+        font-size: 0.85rem;
+        line-height: 1;
+        color: var(--muted);
+        background: none;
+        border: 1px solid var(--line);
+        border-radius: 4px;
+        cursor: pointer;
+        transition:
+          color 0.15s ease,
+          border-color 0.15s ease,
+          background 0.15s ease;
+      }
+      .theme-toggle:hover,
+      .menu-btn:hover {
+        color: var(--fg);
+        border-color: var(--accent-dim);
+        background: var(--surface);
+      }
+      .menu-btn {
+        display: none;
+      }
 
-/* ── mobile sidebar ──────────────────────────────────── */
-.drawer{display:none}
-.scrim{
-  position:fixed;inset:0;z-index:40;
-  background:rgba(5,7,10,.5);backdrop-filter:blur(2px);
-  opacity:0;transition:opacity .22s ease;
-}
-.scrim.show{opacity:1}
-@media (max-width:640px){
-  .topbar .wrap{gap:10px;flex-wrap:nowrap}
-  .topbar .nav{display:none}
-  .theme-toggle{margin-left:auto}
-  .menu-btn{display:inline-flex}
+      /* ── mobile sidebar ──────────────────────────────────── */
+      .drawer {
+        display: none;
+      }
+      .scrim {
+        position: fixed;
+        inset: 0;
+        z-index: 40;
+        background: rgba(5, 7, 10, 0.5);
+        backdrop-filter: blur(2px);
+        opacity: 0;
+        transition: opacity 0.22s ease;
+      }
+      .scrim.show {
+        opacity: 1;
+      }
+      @media (max-width: 640px) {
+        .topbar .wrap {
+          gap: 10px;
+          flex-wrap: nowrap;
+        }
+        .topbar .nav {
+          display: none;
+        }
+        .theme-toggle {
+          margin-left: auto;
+        }
+        .menu-btn {
+          display: inline-flex;
+        }
 
-  .drawer{
-    display:flex;flex-direction:column;
-    position:fixed;top:0;right:0;bottom:0;z-index:50;
-    width:min(280px,82vw);
-    padding:calc(env(safe-area-inset-top,0px) + 12px) 20px calc(env(safe-area-inset-bottom,0px) + 24px);
-    background:var(--ink);border-left:1px solid var(--line);
-    box-shadow:-24px 0 48px -24px rgba(0,0,0,.5);
-    transform:translateX(100%);visibility:hidden;
-    transition:transform .26s cubic-bezier(.2,.7,.3,1),visibility 0s linear .26s;
-  }
-  .drawer.open{transform:none;visibility:visible;transition:transform .26s cubic-bezier(.2,.7,.3,1)}
-  .drawer-head{
-    display:flex;align-items:center;justify-content:space-between;
-    min-height:48px;margin-bottom:20px;
-    border-bottom:1px solid var(--line-soft);padding-bottom:12px;
-  }
-  .drawer a{
-    display:flex;align-items:baseline;gap:14px;
-    padding:14px 4px;text-decoration:none;
-    font-family:var(--mono);font-size:1rem;letter-spacing:.04em;color:var(--fg-dim);
-    border-bottom:1px solid var(--line-soft);
-  }
-  .drawer a .num{font-size:.6875rem;color:var(--muted);font-variant-numeric:tabular-nums}
-  .drawer a[aria-current="page"]{color:var(--accent)}
-  .drawer a[aria-current="page"] .num{color:var(--accent-dim)}
-}
-@media (prefers-reduced-motion:reduce){
-  .drawer,.drawer.open,.scrim{transition:none}
-}
-:where(a,button):focus-visible{
-  outline:2px solid var(--accent);outline-offset:3px;border-radius:3px;
-}
+        .drawer {
+          display: flex;
+          flex-direction: column;
+          position: fixed;
+          top: 0;
+          right: 0;
+          bottom: 0;
+          z-index: 50;
+          width: min(280px, 82vw);
+          padding: calc(env(safe-area-inset-top, 0px) + 12px) 20px
+            calc(env(safe-area-inset-bottom, 0px) + 24px);
+          background: var(--ink);
+          border-left: 1px solid var(--line);
+          box-shadow: -24px 0 48px -24px rgba(0, 0, 0, 0.5);
+          transform: translateX(100%);
+          visibility: hidden;
+          transition:
+            transform 0.26s cubic-bezier(0.2, 0.7, 0.3, 1),
+            visibility 0s linear 0.26s;
+        }
+        .drawer.open {
+          transform: none;
+          visibility: visible;
+          transition: transform 0.26s cubic-bezier(0.2, 0.7, 0.3, 1);
+        }
+        .drawer-head {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          min-height: 48px;
+          margin-bottom: 20px;
+          border-bottom: 1px solid var(--line-soft);
+          padding-bottom: 12px;
+        }
+        .drawer a {
+          display: flex;
+          align-items: baseline;
+          gap: 14px;
+          padding: 14px 4px;
+          text-decoration: none;
+          font-family: var(--mono);
+          font-size: 1rem;
+          letter-spacing: 0.04em;
+          color: var(--fg-dim);
+          border-bottom: 1px solid var(--line-soft);
+        }
+        .drawer a .num {
+          font-size: 0.6875rem;
+          color: var(--muted);
+          font-variant-numeric: tabular-nums;
+        }
+        .drawer a[aria-current="page"] {
+          color: var(--accent);
+        }
+        .drawer a[aria-current="page"] .num {
+          color: var(--accent-dim);
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .drawer,
+        .drawer.open,
+        .scrim {
+          transition: none;
+        }
+      }
+      :where(a, button):focus-visible {
+        outline: 2px solid var(--accent);
+        outline-offset: 3px;
+        border-radius: 3px;
+      }
 
-/* ── view transitions ────────────────────────────────── */
-main{display:block;padding:0 0 96px}
-main:focus{outline:none}
-.view{padding-top:64px;animation:rise .34s cubic-bezier(.2,.7,.3,1) both}
-@keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-@media (prefers-reduced-motion:reduce){
-  .view{animation:none}
-}
+      /* ── view transitions ────────────────────────────────── */
+      main {
+        display: block;
+        padding: 0 0 96px;
+      }
+      main:focus {
+        outline: none;
+      }
+      .view {
+        padding-top: 64px;
+        animation: rise 0.34s cubic-bezier(0.2, 0.7, 0.3, 1) both;
+      }
+      @keyframes rise {
+        from {
+          opacity: 0;
+          transform: translateY(8px);
+        }
+        to {
+          opacity: 1;
+          transform: none;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .view {
+          animation: none;
+        }
+      }
 
-/* ── landing ─────────────────────────────────────────── */
-.hero{padding-top:clamp(48px,12vh,120px)}
-.hero h1{
-  font-family:var(--serif);font-weight:300;
-  font-size:var(--step-4);line-height:1.02;letter-spacing:-.02em;
-  margin:0;text-wrap:balance;
-}
-.hero .ko{
-  display:block;font-size:.34em;color:var(--muted);
-  letter-spacing:.06em;margin-top:.7em;font-weight:400;
-}
-.hero p{
-  max-width:34em;margin:32px 0 0;
-  font-size:var(--step-1);line-height:1.6;color:var(--fg-dim);font-weight:300;
-}
-.meta{
-  font-family:var(--mono);font-size:.75rem;letter-spacing:.05em;
-  color:var(--muted);margin-top:28px;
-  display:flex;gap:10px;flex-wrap:wrap;align-items:center;
-}
-.meta .sep{color:var(--line)}
+      /* ── landing ─────────────────────────────────────────── */
+      .hero {
+        padding-top: clamp(48px, 12vh, 120px);
+      }
+      .hero h1 {
+        font-family: var(--serif);
+        font-weight: 300;
+        font-size: var(--step-4);
+        line-height: 1.02;
+        letter-spacing: -0.02em;
+        margin: 0;
+        text-wrap: balance;
+      }
+      .hero .ko {
+        display: block;
+        font-size: 0.34em;
+        color: var(--muted);
+        letter-spacing: 0.06em;
+        margin-top: 0.7em;
+        font-weight: 400;
+      }
+      .hero p {
+        max-width: 34em;
+        margin: 32px 0 0;
+        font-size: var(--step-1);
+        line-height: 1.6;
+        color: var(--fg-dim);
+        font-weight: 300;
+      }
+      .meta {
+        font-family: var(--mono);
+        font-size: 0.75rem;
+        letter-spacing: 0.05em;
+        color: var(--muted);
+        margin-top: 28px;
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        align-items: center;
+      }
+      .meta .sep {
+        color: var(--line);
+      }
 
-.links{
-  list-style:none;padding:0;margin:44px 0 0;
-  display:grid;gap:1px;background:var(--line-soft);
-  border-block:1px solid var(--line-soft);
-  max-width:720px;
-}
-.links li{background:var(--ink)}
-.links a{
-  display:flex;align-items:center;gap:16px;
-  padding:16px 4px;text-decoration:none;
-  transition:background .15s ease,padding-left .18s ease;
-}
-.links a:hover{background:var(--surface);padding-left:12px}
-.links .label{
-  font-family:var(--mono);font-size:.75rem;letter-spacing:.08em;
-  color:var(--muted);min-width:124px;text-transform:uppercase;
-}
-.links .val{font-size:var(--step-1);font-weight:300}
-.links .label{display:inline-flex;align-items:center;gap:10px}
-.links .ico{flex:none;transition:color .15s ease}
-.links a:hover .ico{color:var(--accent)}
-.links a:hover .val{color:var(--accent)}
-.links .arrow{margin-left:auto;color:var(--line);font-family:var(--mono)}
-.links a:hover .arrow{color:var(--accent)}
+      .links {
+        list-style: none;
+        padding: 0;
+        margin: 44px 0 0;
+        display: grid;
+        gap: 1px;
+        background: var(--line-soft);
+        border-block: 1px solid var(--line-soft);
+        max-width: 720px;
+      }
+      .links li {
+        background: var(--ink);
+      }
+      .links a {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        padding: 16px 4px;
+        text-decoration: none;
+        transition:
+          background 0.15s ease,
+          padding-left 0.18s ease;
+      }
+      .links a:hover {
+        background: var(--surface);
+        padding-left: 12px;
+      }
+      .links .label {
+        font-family: var(--mono);
+        font-size: 0.75rem;
+        letter-spacing: 0.08em;
+        color: var(--muted);
+        min-width: 124px;
+        text-transform: uppercase;
+      }
+      .links .val {
+        font-size: var(--step-1);
+        font-weight: 300;
+      }
+      .links .label {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .links .ico {
+        flex: none;
+        transition: color 0.15s ease;
+      }
+      .links a:hover .ico {
+        color: var(--accent);
+      }
+      .links a:hover .val {
+        color: var(--accent);
+      }
+      .links .arrow {
+        margin-left: auto;
+        color: var(--line);
+        font-family: var(--mono);
+      }
+      .links a:hover .arrow {
+        color: var(--accent);
+      }
 
-/* ── section furniture ───────────────────────────────── */
-.eyebrow{
-  font-family:var(--mono);font-size:.6875rem;letter-spacing:.16em;
-  text-transform:uppercase;color:var(--accent);
-  display:flex;align-items:center;gap:12px;margin:0 0 8px;
-}
-.eyebrow::after{content:"";flex:1;height:1px;background:var(--line)}
-h2.title{
-  font-family:var(--serif);font-weight:300;font-size:var(--step-3);
-  letter-spacing:-.015em;margin:0 0 40px;text-wrap:balance;
-}
-.grouphead{
-  font-family:var(--mono);font-size:.75rem;font-weight:500;
-  letter-spacing:.14em;text-transform:uppercase;color:var(--fg-dim);
-  display:flex;align-items:center;gap:14px;
-  margin:0 0 24px;
-}
-.grouphead::after{content:"";flex:1;height:1px;background:var(--line-soft)}
-.grid + .grouphead{margin-top:56px}
+      /* ── section furniture ───────────────────────────────── */
+      .eyebrow {
+        font-family: var(--mono);
+        font-size: 0.6875rem;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--accent);
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin: 0 0 8px;
+      }
+      .eyebrow::after {
+        content: "";
+        flex: 1;
+        height: 1px;
+        background: var(--line);
+      }
+      h2.title {
+        font-family: var(--serif);
+        font-weight: 300;
+        font-size: var(--step-3);
+        letter-spacing: -0.015em;
+        margin: 0 0 40px;
+        text-wrap: balance;
+      }
+      .grouphead {
+        font-family: var(--mono);
+        font-size: 0.75rem;
+        font-weight: 500;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--fg-dim);
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        margin: 0 0 24px;
+      }
+      .grouphead::after {
+        content: "";
+        flex: 1;
+        height: 1px;
+        background: var(--line-soft);
+      }
+      .grid + .grouphead {
+        margin-top: 56px;
+      }
 
-/* ── timeline ────────────────────────────────────────── */
-.tl{display:grid;gap:1px;background:var(--line-soft);border-top:1px solid var(--line-soft)}
-.entry{background:var(--ink);padding:28px 0;display:grid;grid-template-columns:132px 1fr;gap:28px}
-.entry .when{
-  font-family:var(--mono);font-size:.75rem;letter-spacing:.03em;
-  color:var(--muted);padding-top:.5em;font-variant-numeric:tabular-nums;
-}
-.entry h3{margin:0;font-size:var(--step-2);font-weight:400;letter-spacing:-.01em}
-.entry .role{
-  font-family:var(--mono);font-size:.75rem;letter-spacing:.04em;
-  color:var(--accent);margin-top:6px;
-}
-.entry p{margin:12px 0 0;color:var(--fg-dim);font-weight:300;max-width:46em}
-.sub{list-style:none;padding:0;margin:18px 0 0;display:grid;gap:14px}
-.sub li{border-left:1px solid var(--line);padding-left:16px}
-.sub b{font-weight:500;font-size:var(--step-0)}
-.sub p{margin:4px 0 0;font-size:.9375rem}
-.figs{
-  display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;
-  font-family:var(--mono);font-size:.6875rem;letter-spacing:.03em;
-}
-.figs span{
-  border:1px solid var(--line);border-radius:3px;padding:3px 8px;
-  color:var(--fg-dim);font-variant-numeric:tabular-nums;
-}
-.figs b{color:var(--accent);font-weight:500}
+      /* ── timeline ────────────────────────────────────────── */
+      .tl {
+        display: grid;
+        gap: 1px;
+        background: var(--line-soft);
+        border-top: 1px solid var(--line-soft);
+      }
+      .entry {
+        background: var(--ink);
+        padding: 28px 0;
+        display: grid;
+        grid-template-columns: 132px 1fr;
+        gap: 28px;
+      }
+      .entry .when {
+        font-family: var(--mono);
+        font-size: 0.75rem;
+        letter-spacing: 0.03em;
+        color: var(--muted);
+        padding-top: 0.5em;
+        font-variant-numeric: tabular-nums;
+      }
+      .entry h3 {
+        margin: 0;
+        font-size: var(--step-2);
+        font-weight: 400;
+        letter-spacing: -0.01em;
+      }
+      .entry .role {
+        font-family: var(--mono);
+        font-size: 0.75rem;
+        letter-spacing: 0.04em;
+        color: var(--accent);
+        margin-top: 6px;
+      }
+      .entry p {
+        margin: 12px 0 0;
+        color: var(--fg-dim);
+        font-weight: 300;
+        max-width: 46em;
+      }
+      .sub {
+        list-style: none;
+        padding: 0;
+        margin: 18px 0 0;
+        display: grid;
+        gap: 14px;
+      }
+      .sub li {
+        border-left: 1px solid var(--line);
+        padding-left: 16px;
+      }
+      .sub b {
+        font-weight: 500;
+        font-size: var(--step-0);
+      }
+      .sub p {
+        margin: 4px 0 0;
+        font-size: 0.9375rem;
+      }
+      .figs {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        margin-top: 10px;
+        font-family: var(--mono);
+        font-size: 0.6875rem;
+        letter-spacing: 0.03em;
+      }
+      .figs span {
+        border: 1px solid var(--line);
+        border-radius: 3px;
+        padding: 3px 8px;
+        color: var(--fg-dim);
+        font-variant-numeric: tabular-nums;
+      }
+      .figs b {
+        color: var(--accent);
+        font-weight: 500;
+      }
 
-/* ── service cards ───────────────────────────────────── */
-.grid{display:grid;gap:24px;grid-template-columns:repeat(auto-fill,minmax(300px,1fr))}
-.card{
-  background:var(--surface);border:1px solid var(--line);border-radius:8px;
-  overflow:hidden;display:flex;flex-direction:column;
-  text-decoration:none;color:inherit;
-  transition:border-color .18s ease,transform .18s ease,box-shadow .18s ease;
-}
-.card:hover{border-color:var(--accent-dim);transform:translateY(-3px);box-shadow:var(--shadow)}
-.card[data-project]{cursor:pointer}
+      /* ── service cards ───────────────────────────────────── */
+      .grid {
+        display: grid;
+        gap: 24px;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      }
+      .card {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        text-decoration: none;
+        color: inherit;
+        transition:
+          border-color 0.18s ease,
+          transform 0.18s ease,
+          box-shadow 0.18s ease;
+      }
+      .card:hover {
+        border-color: var(--accent-dim);
+        transform: translateY(-3px);
+        box-shadow: var(--shadow);
+      }
+      .card[data-project] {
+        cursor: pointer;
+      }
 
-/* The frame owns the ratio; the image is contained inside it, never cropped. */
-.frame{
-  aspect-ratio:16/10;width:100%;flex:none;
-  background:var(--surface-2);border-bottom:1px solid var(--line);
-  display:flex;align-items:center;justify-content:center;
-  overflow:hidden;
-}
-.frame img{width:100%;height:100%;object-fit:contain}
-button.frame{
-  padding:0;border:0;border-bottom:1px solid var(--line);
-  font:inherit;color:inherit;cursor:pointer;
-}
-.frame{position:relative}
-.count{
-  position:absolute;right:10px;bottom:10px;
-  font-family:var(--mono);font-size:.625rem;letter-spacing:.06em;
-  color:#fff;background:rgba(10,13,19,.72);
-  border-radius:3px;padding:3px 7px;
-}
-.count::before{content:"▦ "}
-.frame--none{
-  font-family:var(--mono);color:var(--line);font-size:2rem;
-}
+      /* The frame owns the ratio; the image is contained inside it, never cropped. */
+      .frame {
+        aspect-ratio: 16/10;
+        width: 100%;
+        flex: none;
+        background: var(--surface-2);
+        border-bottom: 1px solid var(--line);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+      }
+      .frame img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
+      button.frame {
+        padding: 0;
+        border: 0;
+        border-bottom: 1px solid var(--line);
+        font: inherit;
+        color: inherit;
+        cursor: pointer;
+      }
+      .frame {
+        position: relative;
+      }
+      .count {
+        position: absolute;
+        right: 10px;
+        bottom: 10px;
+        font-family: var(--mono);
+        font-size: 0.625rem;
+        letter-spacing: 0.06em;
+        color: #fff;
+        background: rgba(10, 13, 19, 0.72);
+        border-radius: 3px;
+        padding: 3px 7px;
+      }
+      .count::before {
+        content: "▦ ";
+      }
+      .frame--none {
+        font-family: var(--mono);
+        color: var(--line);
+        font-size: 2rem;
+      }
 
-.card .body{padding:18px 20px 20px;display:flex;flex-direction:column;gap:9px;flex:1}
-.owner{
-  font-family:var(--mono);font-size:.625rem;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--muted);
-}
-.card h3{
-  margin:0;font-family:var(--mono);font-size:.8125rem;font-weight:500;
-  letter-spacing:.08em;text-transform:uppercase;
-}
-.reach{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
-.host{
-  font-family:var(--mono);font-size:.71rem;color:var(--muted);
-  display:inline-flex;align-items:center;gap:7px;word-break:break-all;
-  text-decoration:none;padding:4px 0;
-  transition:color .15s ease;
-}
-.host .ext{color:var(--line);transition:color .15s ease}
-.host:hover,.host:hover .ext{color:var(--accent)}
-.gh{
-  display:inline-flex;align-items:center;justify-content:center;
-  width:28px;height:28px;margin-left:auto;border-radius:4px;
-  color:var(--muted);border:1px solid var(--line);
-  transition:color .15s ease,border-color .15s ease,background .15s ease;
-}
-.gh:hover{color:var(--fg);border-color:var(--accent-dim);background:var(--surface-2)}
-/* Repo-only projects: the GitHub link takes the domain's place, icon plus label. */
-.gh--wide{
-  width:auto;margin-left:0;gap:8px;padding:0 10px;
-  font-family:var(--mono);font-size:.71rem;text-decoration:none;
-}
-.gh--wide .ext{color:var(--line);transition:color .15s ease}
-.gh--wide:hover .ext{color:var(--accent)}
-.pip{width:5px;height:5px;border-radius:50%;background:var(--live);flex:none}
-.card p{margin:0;font-size:.9375rem;color:var(--fg-dim);font-weight:300;line-height:1.55}
-.note{
-  margin-top:auto;padding-top:12px;
-  font-family:var(--mono);font-size:.6875rem;letter-spacing:.03em;color:var(--accent);
-}
+      .card .body {
+        padding: 18px 20px 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 9px;
+        flex: 1;
+      }
+      .owner {
+        font-family: var(--mono);
+        font-size: 0.625rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+      .card h3 {
+        margin: 0;
+        font-family: var(--mono);
+        font-size: 0.8125rem;
+        font-weight: 500;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+      .reach {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+      .host {
+        font-family: var(--mono);
+        font-size: 0.71rem;
+        color: var(--muted);
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        word-break: break-all;
+        text-decoration: none;
+        padding: 4px 0;
+        transition: color 0.15s ease;
+      }
+      .host .ext {
+        color: var(--line);
+        transition: color 0.15s ease;
+      }
+      .host:hover,
+      .host:hover .ext {
+        color: var(--accent);
+      }
+      .gh {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 28px;
+        height: 28px;
+        margin-left: auto;
+        border-radius: 4px;
+        color: var(--muted);
+        border: 1px solid var(--line);
+        transition:
+          color 0.15s ease,
+          border-color 0.15s ease,
+          background 0.15s ease;
+      }
+      .gh:hover {
+        color: var(--fg);
+        border-color: var(--accent-dim);
+        background: var(--surface-2);
+      }
+      /* Repo-only projects: the GitHub link takes the domain's place, icon plus label. */
+      .gh--wide {
+        width: auto;
+        margin-left: 0;
+        gap: 8px;
+        padding: 0 10px;
+        font-family: var(--mono);
+        font-size: 0.71rem;
+        text-decoration: none;
+      }
+      .gh--wide .ext {
+        color: var(--line);
+        transition: color 0.15s ease;
+      }
+      .gh--wide:hover .ext {
+        color: var(--accent);
+      }
+      .pip {
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background: var(--live);
+        flex: none;
+      }
+      .card p {
+        margin: 0;
+        font-size: 0.9375rem;
+        color: var(--fg-dim);
+        font-weight: 300;
+        line-height: 1.55;
+      }
+      .note {
+        margin-top: auto;
+        padding-top: 12px;
+        font-family: var(--mono);
+        font-size: 0.6875rem;
+        letter-spacing: 0.03em;
+        color: var(--accent);
+      }
 
-/* ── gallery modal ───────────────────────────────────── */
-.gallery{
-  width:min(1080px,calc(100vw - 32px));max-height:calc(100dvh - 32px);
-  padding:0;border:1px solid var(--line);border-radius:10px;
-  background:var(--surface);color:var(--fg);
-  box-shadow:0 30px 80px -20px rgba(0,0,0,.6);
-  overflow:auto;
-}
-.gallery::backdrop{background:rgba(5,7,10,.72);backdrop-filter:blur(3px)}
-.gallery[open]{animation:rise .24s cubic-bezier(.2,.7,.3,1) both}
-.g-head{display:flex;align-items:flex-start;gap:16px;padding:18px 20px 14px}
-.g-head h3{
-  margin:4px 0 0;font-family:var(--mono);font-size:.9375rem;font-weight:500;
-  letter-spacing:.08em;text-transform:uppercase;
-}
-.g-close{
-  margin-left:auto;background:none;border:1px solid var(--line);border-radius:4px;
-  color:var(--muted);font-size:1.25rem;line-height:1;width:34px;height:34px;cursor:pointer;
-}
-.g-close:hover{color:var(--fg);border-color:var(--accent-dim)}
-.g-stage{
-  position:relative;background:var(--surface-2);
-  border-block:1px solid var(--line);
-  aspect-ratio:16/10;display:flex;align-items:center;justify-content:center;
-}
-.g-stage img{width:100%;height:100%;object-fit:contain}
-.g-nav{
-  position:absolute;top:50%;transform:translateY(-50%);
-  width:40px;height:56px;border:0;border-radius:4px;cursor:pointer;
-  background:rgba(10,13,19,.55);color:#fff;font-size:1.6rem;line-height:1;
-  transition:background .15s ease;
-}
-.g-nav:hover{background:rgba(10,13,19,.8)}
-.g-prev{left:10px}
-.g-next{right:10px}
-.g-counter{
-  position:absolute;right:12px;bottom:10px;
-  font-family:var(--mono);font-size:.6875rem;color:#fff;
-  background:rgba(10,13,19,.72);border-radius:3px;padding:3px 8px;
-  font-variant-numeric:tabular-nums;
-}
-.g-thumbs{display:flex;gap:8px;padding:12px 20px 0;overflow-x:auto}
-.g-thumbs button{
-  flex:none;width:96px;aspect-ratio:16/10;padding:0;cursor:pointer;
-  background:var(--surface-2);border:1px solid var(--line);border-radius:4px;
-  overflow:hidden;opacity:.55;transition:opacity .15s ease,border-color .15s ease;
-}
-.g-thumbs button:hover{opacity:.85}
-.g-thumbs button[aria-current="true"]{opacity:1;border-color:var(--accent)}
-.g-thumbs img{width:100%;height:100%;object-fit:cover}
-.g-foot{padding:14px 20px 20px;display:flex;gap:16px 24px;flex-wrap:wrap;align-items:flex-end}
-.g-foot p{margin:0;flex:1 1 320px;font-size:.9375rem;color:var(--fg-dim);font-weight:300;line-height:1.55}
-.g-links{display:flex;gap:8px;flex-wrap:wrap}
-.g-links a{
-  display:inline-flex;align-items:center;gap:8px;
-  font-family:var(--mono);font-size:.75rem;letter-spacing:.03em;text-decoration:none;
-  color:var(--ink);background:var(--accent);border:1px solid var(--accent);
-  border-radius:4px;padding:8px 14px;white-space:nowrap;
-}
-.g-links a:hover{filter:brightness(1.1)}
-.g-links a.alt{color:var(--fg);background:none;border-color:var(--line)}
-.g-links a.alt:hover{border-color:var(--accent-dim);filter:none}
-@media (max-width:640px){
-  .g-nav{width:32px;height:44px;font-size:1.3rem}
-  .g-thumbs button{width:72px}
-}
+      /* ── gallery modal ───────────────────────────────────── */
+      .gallery {
+        width: min(1080px, calc(100vw - 32px));
+        max-height: calc(100dvh - 32px);
+        padding: 0;
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        background: var(--surface);
+        color: var(--fg);
+        box-shadow: 0 30px 80px -20px rgba(0, 0, 0, 0.6);
+        overflow: auto;
+      }
+      .gallery::backdrop {
+        background: rgba(5, 7, 10, 0.72);
+        backdrop-filter: blur(3px);
+      }
+      .gallery[open] {
+        animation: rise 0.24s cubic-bezier(0.2, 0.7, 0.3, 1) both;
+      }
+      .g-head {
+        display: flex;
+        align-items: flex-start;
+        gap: 16px;
+        padding: 18px 20px 14px;
+      }
+      .g-head h3 {
+        margin: 4px 0 0;
+        font-family: var(--mono);
+        font-size: 0.9375rem;
+        font-weight: 500;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+      .g-close {
+        margin-left: auto;
+        background: none;
+        border: 1px solid var(--line);
+        border-radius: 4px;
+        color: var(--muted);
+        font-size: 1.25rem;
+        line-height: 1;
+        width: 34px;
+        height: 34px;
+        cursor: pointer;
+      }
+      .g-close:hover {
+        color: var(--fg);
+        border-color: var(--accent-dim);
+      }
+      .g-stage {
+        position: relative;
+        background: var(--surface-2);
+        border-block: 1px solid var(--line);
+        aspect-ratio: 16/10;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .g-stage img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
+      .g-nav {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 40px;
+        height: 56px;
+        border: 0;
+        border-radius: 4px;
+        cursor: pointer;
+        background: rgba(10, 13, 19, 0.55);
+        color: #fff;
+        font-size: 1.6rem;
+        line-height: 1;
+        transition: background 0.15s ease;
+      }
+      .g-nav:hover {
+        background: rgba(10, 13, 19, 0.8);
+      }
+      .g-prev {
+        left: 10px;
+      }
+      .g-next {
+        right: 10px;
+      }
+      .g-counter {
+        position: absolute;
+        right: 12px;
+        bottom: 10px;
+        font-family: var(--mono);
+        font-size: 0.6875rem;
+        color: #fff;
+        background: rgba(10, 13, 19, 0.72);
+        border-radius: 3px;
+        padding: 3px 8px;
+        font-variant-numeric: tabular-nums;
+      }
+      .g-thumbs {
+        display: flex;
+        gap: 8px;
+        padding: 12px 20px 0;
+        overflow-x: auto;
+      }
+      .g-thumbs button {
+        flex: none;
+        width: 96px;
+        aspect-ratio: 16/10;
+        padding: 0;
+        cursor: pointer;
+        background: var(--surface-2);
+        border: 1px solid var(--line);
+        border-radius: 4px;
+        overflow: hidden;
+        opacity: 0.55;
+        transition:
+          opacity 0.15s ease,
+          border-color 0.15s ease;
+      }
+      .g-thumbs button:hover {
+        opacity: 0.85;
+      }
+      .g-thumbs button[aria-current="true"] {
+        opacity: 1;
+        border-color: var(--accent);
+      }
+      .g-thumbs img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .g-foot {
+        padding: 14px 20px 20px;
+        display: flex;
+        gap: 16px 24px;
+        flex-wrap: wrap;
+        align-items: flex-end;
+      }
+      .g-foot p {
+        margin: 0;
+        flex: 1 1 320px;
+        font-size: 0.9375rem;
+        color: var(--fg-dim);
+        font-weight: 300;
+        line-height: 1.55;
+      }
+      .g-links {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+      .g-links a {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-family: var(--mono);
+        font-size: 0.75rem;
+        letter-spacing: 0.03em;
+        text-decoration: none;
+        color: var(--ink);
+        background: var(--accent);
+        border: 1px solid var(--accent);
+        border-radius: 4px;
+        padding: 8px 14px;
+        white-space: nowrap;
+      }
+      .g-links a:hover {
+        filter: brightness(1.1);
+      }
+      .g-links a.alt {
+        color: var(--fg);
+        background: none;
+        border-color: var(--line);
+      }
+      .g-links a.alt:hover {
+        border-color: var(--accent-dim);
+        filter: none;
+      }
+      @media (max-width: 640px) {
+        .g-nav {
+          width: 32px;
+          height: 44px;
+          font-size: 1.3rem;
+        }
+        .g-thumbs button {
+          width: 72px;
+        }
+      }
 
-/* ── stack ───────────────────────────────────────────── */
-.stack{margin-top:56px;display:grid;gap:1px;background:var(--line-soft);border-block:1px solid var(--line-soft)}
-.stack div{background:var(--ink);padding:14px 4px;display:grid;grid-template-columns:150px 1fr;gap:20px;align-items:baseline}
-.stack dt{font-family:var(--mono);font-size:.6875rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
-.stack dd{margin:0;font-family:var(--mono);font-size:.8125rem;color:var(--fg-dim)}
+      /* ── stack ───────────────────────────────────────────── */
+      .stack {
+        margin-top: 56px;
+        display: grid;
+        gap: 1px;
+        background: var(--line-soft);
+        border-block: 1px solid var(--line-soft);
+      }
+      .stack div {
+        background: var(--ink);
+        padding: 14px 4px;
+        display: grid;
+        grid-template-columns: 150px 1fr;
+        gap: 20px;
+        align-items: baseline;
+      }
+      .stack dt {
+        font-family: var(--mono);
+        font-size: 0.6875rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+      .stack dd {
+        margin: 0;
+        font-family: var(--mono);
+        font-size: 0.8125rem;
+        color: var(--fg-dim);
+      }
 
-footer{
-  border-top:1px solid var(--line-soft);margin-top:80px;padding:28px 0 0;
-  font-family:var(--mono);font-size:.71rem;letter-spacing:.04em;color:var(--muted);
-  display:flex;gap:16px;flex-wrap:wrap;
-}
-footer a{color:var(--muted);text-decoration:none}
-footer a:hover{color:var(--accent)}
+      footer {
+        border-top: 1px solid var(--line-soft);
+        margin-top: 80px;
+        padding: 28px 0 0;
+        font-family: var(--mono);
+        font-size: 0.71rem;
+        letter-spacing: 0.04em;
+        color: var(--muted);
+        display: flex;
+        gap: 16px;
+        flex-wrap: wrap;
+      }
+      footer a {
+        color: var(--muted);
+        text-decoration: none;
+      }
+      footer a:hover {
+        color: var(--accent);
+      }
 
-@media (max-width:640px){
-  .entry{grid-template-columns:1fr;gap:10px}
-  .entry .when{padding-top:0}
-  .stack div{grid-template-columns:1fr;gap:4px}
-  /* Icon only on phones; the label text stays for screen readers. */
-  .links .label{min-width:0}
-  .links .label .txt{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
-}
-</style>
-</head>
-<body>
+      @media (max-width: 640px) {
+        .entry {
+          grid-template-columns: 1fr;
+          gap: 10px;
+        }
+        .entry .when {
+          padding-top: 0;
+        }
+        .stack div {
+          grid-template-columns: 1fr;
+          gap: 4px;
+        }
+        /* Icon only on phones; the label text stays for screen readers. */
+        .links .label {
+          min-width: 0;
+        }
+        .links .label .txt {
+          position: absolute;
+          width: 1px;
+          height: 1px;
+          overflow: hidden;
+          clip-path: inset(50%);
+          white-space: nowrap;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="wrap">
+        <a class="brand" href="#/index">yojun<span class="dot">.</span>moon</a>
+        <nav class="nav" aria-label="Sections">
+          <a href="#/index" data-nav="index">index</a>
+          <a href="#/work" data-nav="work">work</a>
+          <a href="#/projects" data-nav="projects">projects</a>
+        </nav>
+        <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle color theme">
+          ◐
+        </button>
+        <button
+          class="menu-btn"
+          id="menuOpen"
+          type="button"
+          aria-label="Open menu"
+          aria-controls="drawer"
+          aria-expanded="false"
+        >
+          <svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true">
+            <path
+              d="M2 4h12M2 8h12M2 12h12"
+              stroke="currentColor"
+              stroke-width="1.4"
+              stroke-linecap="round"
+            />
+          </svg>
+        </button>
+      </div>
+    </header>
 
-<header class="topbar">
-  <div class="wrap">
-    <a class="brand" href="#/index">yojun<span class="dot">.</span>moon</a>
-    <nav class="nav" aria-label="Sections">
-      <a href="#/index"    data-nav="index">index</a>
-      <a href="#/work"     data-nav="work">work</a>
-      <a href="#/projects" data-nav="projects">projects</a>
+    <!-- Mobile sidebar. Lives outside .topbar: its backdrop-filter would trap position:fixed children. -->
+    <div class="scrim" id="scrim" hidden></div>
+    <nav class="drawer" id="drawer" aria-label="Sections">
+      <div class="drawer-head">
+        <span class="brand">yojun<span class="dot">.</span>moon</span>
+        <button class="menu-btn" id="menuClose" type="button" aria-label="Close menu">
+          <svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true">
+            <path
+              d="M3.5 3.5l9 9M12.5 3.5l-9 9"
+              stroke="currentColor"
+              stroke-width="1.4"
+              stroke-linecap="round"
+            />
+          </svg>
+        </button>
+      </div>
+      <a href="#/index" data-nav="index"><span class="num">01</span>index</a>
+      <a href="#/work" data-nav="work"><span class="num">02</span>work</a>
+      <a href="#/projects" data-nav="projects"><span class="num">03</span>projects</a>
     </nav>
-    <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle color theme">◐</button>
-    <button class="menu-btn" id="menuOpen" type="button" aria-label="Open menu" aria-controls="drawer" aria-expanded="false">
-      <svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M2 4h12M2 8h12M2 12h12" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
-    </button>
-  </div>
-</header>
 
-<!-- Mobile sidebar. Lives outside .topbar: its backdrop-filter would trap position:fixed children. -->
-<div class="scrim" id="scrim" hidden></div>
-<nav class="drawer" id="drawer" aria-label="Sections">
-  <div class="drawer-head">
-    <span class="brand">yojun<span class="dot">.</span>moon</span>
-    <button class="menu-btn" id="menuClose" type="button" aria-label="Close menu">
-      <svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M3.5 3.5l9 9M12.5 3.5l-9 9" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
-    </button>
-  </div>
-  <a href="#/index"    data-nav="index"><span class="num">01</span>index</a>
-  <a href="#/work"     data-nav="work"><span class="num">02</span>work</a>
-  <a href="#/projects" data-nav="projects"><span class="num">03</span>projects</a>
-</nav>
-
-<main id="main" tabindex="-1">
-
-  <!-- ══ index ══════════════════════════════════════ -->
-  <section class="view hero" data-view="index">
-    <div class="wrap">
-      <h1>Yojun Moon<span class="ko">문요준</span></h1>
-      <div class="meta">
-        <span>POSTECH CSE</span><span class="sep">/</span>
-        <span>Backend &amp; AI Systems</span><span class="sep">/</span>
-        <span>Pohang, KR</span>
-      </div>
-
-      <ul class="links">
-        <li><a href="https://github.com/yojun313">
-          <span class="label"><svg class="ico" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg><span class="txt">GitHub</span></span><span class="val">github.com/yojun313</span><span class="arrow">↗</span></a></li>
-        <li><a href="https://www.linkedin.com/in/yojun-moon/">
-          <span class="label"><svg class="ico" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 1 1 0-4.125 2.062 2.062 0 0 1 0 4.125zM7.119 20.452H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg><span class="txt">LinkedIn</span></span><span class="val">linkedin.com/in/yojun-moon</span><span class="arrow">↗</span></a></li>
-        <li><a href="mailto:yojun313@postech.ac.kr">
-          <span class="label"><svg class="ico" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1.75" y="3.25" width="12.5" height="9.5" rx="1.5"/><path d="M2.25 4.25 8 8.75l5.75-4.5"/></g></svg><span class="txt">Email</span></span><span class="val">yojun313@postech.ac.kr</span><span class="arrow">↗</span></a></li>
-        <li><a href="yojun_CV.pdf">
-          <span class="label"><svg class="ico" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9.25 1.75H4.25a1.5 1.5 0 0 0-1.5 1.5v9.5a1.5 1.5 0 0 0 1.5 1.5h7.5a1.5 1.5 0 0 0 1.5-1.5V5.75z"/><path d="M9.25 1.75v4h4M5.5 8.75h5M5.5 11.25h3.5"/></g></svg><span class="txt">CV</span></span><span class="val">yojun_CV.pdf</span><span class="arrow">↗</span></a></li>
-        <li><a href="yojun_portfolio.pdf" download>
-          <span class="label"><svg class="ico" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1.75 4.25a1.5 1.5 0 0 1 1.5-1.5h3l1.5 1.75h5a1.5 1.5 0 0 1 1.5 1.5v6.25a1.5 1.5 0 0 1-1.5 1.5h-9.5a1.5 1.5 0 0 1-1.5-1.5z"/><path d="M1.75 7h12.5"/></g></svg><span class="txt">Portfolio</span></span><span class="val">yojun_portfolio.pdf</span><span class="arrow">↓</span></a></li>
-      </ul>
-    </div>
-  </section>
-
-  <!-- ══ work ═══════════════════════════════════════ -->
-  <section class="view" data-view="work" hidden>
-    <div class="wrap">
-      <p class="eyebrow">Work</p>
-      <h2 class="title">Experience</h2>
-
-      <div class="tl">
-        <article class="entry">
-          <div class="when">Jul 2026<br>— Aug 2026</div>
-          <div>
-            <h3>Samsung Fire &amp; Marine Insurance</h3>
-            <div class="role">AI Development Part · Internship</div>
-            <p>Built two computer vision modules for insurance claim data, each delivered as an end-to-end pipeline with a web service.</p>
+    <main id="main" tabindex="-1">
+      <!-- ══ index ══════════════════════════════════════ -->
+      <section class="view hero" data-view="index">
+        <div class="wrap">
+          <h1>Yojun Moon<span class="ko">문요준</span></h1>
+          <div class="meta">
+            <span>POSTECH CSE</span><span class="sep">/</span> <span>Backend &amp; AI Systems</span
+            ><span class="sep">/</span>
+            <span>Pohang, KR</span>
           </div>
-        </article>
 
-        <article class="entry">
-          <div class="when">Jan 2026<br>— Feb 2026</div>
-          <div>
-            <h3>POSTECH HAiV Lab</h3>
-            <div class="role">Undergraduate Researcher</div>
+          <ul class="links">
+            <li>
+              <a href="https://github.com/yojun313">
+                <span class="label"
+                  ><svg class="ico" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true">
+                    <path
+                      fill="currentColor"
+                      d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"
+                    /></svg
+                  ><span class="txt">GitHub</span></span
+                ><span class="val">github.com/yojun313</span><span class="arrow">↗</span></a
+              >
+            </li>
+            <li>
+              <a href="https://www.linkedin.com/in/yojun-moon/">
+                <span class="label"
+                  ><svg class="ico" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
+                    <path
+                      fill="currentColor"
+                      d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 1 1 0-4.125 2.062 2.062 0 0 1 0 4.125zM7.119 20.452H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"
+                    /></svg
+                  ><span class="txt">LinkedIn</span></span
+                ><span class="val">linkedin.com/in/yojun-moon</span><span class="arrow">↗</span></a
+              >
+            </li>
+            <li>
+              <a href="mailto:yojun313@postech.ac.kr">
+                <span class="label"
+                  ><svg class="ico" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true">
+                    <g
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <rect x="1.75" y="3.25" width="12.5" height="9.5" rx="1.5" />
+                      <path d="M2.25 4.25 8 8.75l5.75-4.5" />
+                    </g></svg
+                  ><span class="txt">Email</span></span
+                ><span class="val">yojun313@postech.ac.kr</span><span class="arrow">↗</span></a
+              >
+            </li>
+            <li>
+              <a href="yojun_CV.pdf">
+                <span class="label"
+                  ><svg class="ico" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true">
+                    <g
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path
+                        d="M9.25 1.75H4.25a1.5 1.5 0 0 0-1.5 1.5v9.5a1.5 1.5 0 0 0 1.5 1.5h7.5a1.5 1.5 0 0 0 1.5-1.5V5.75z"
+                      />
+                      <path d="M9.25 1.75v4h4M5.5 8.75h5M5.5 11.25h3.5" />
+                    </g></svg
+                  ><span class="txt">CV</span></span
+                ><span class="val">yojun_CV.pdf</span><span class="arrow">↗</span></a
+              >
+            </li>
+            <li>
+              <a href="yojun_portfolio.pdf" download>
+                <span class="label"
+                  ><svg class="ico" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true">
+                    <g
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path
+                        d="M1.75 4.25a1.5 1.5 0 0 1 1.5-1.5h3l1.5 1.75h5a1.5 1.5 0 0 1 1.5 1.5v6.25a1.5 1.5 0 0 1-1.5 1.5h-9.5a1.5 1.5 0 0 1-1.5-1.5z"
+                      />
+                      <path d="M1.75 7h12.5" />
+                    </g></svg
+                  ><span class="txt">Portfolio</span></span
+                ><span class="val">yojun_portfolio.pdf</span><span class="arrow">↓</span></a
+              >
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- ══ work ═══════════════════════════════════════ -->
+      <section class="view" data-view="work" hidden>
+        <div class="wrap">
+          <p class="eyebrow">Work</p>
+          <h2 class="title">Experience</h2>
+
+          <div class="tl">
+            <article class="entry">
+              <div class="when">Jul 2026<br />— Aug 2026</div>
+              <div>
+                <h3>Samsung Fire &amp; Marine Insurance</h3>
+                <div class="role">AI Development Part · Internship</div>
+                <p>
+                  Built two computer vision modules for insurance claim data, each delivered as an
+                  end-to-end pipeline with a web service.
+                </p>
+              </div>
+            </article>
+
+            <article class="entry">
+              <div class="when">Jan 2026<br />— Feb 2026</div>
+              <div>
+                <h3>POSTECH HAiV Lab</h3>
+                <div class="role">Undergraduate Researcher</div>
+              </div>
+            </article>
+
+            <article class="entry">
+              <div class="when">Feb 2025<br />— Jul 2025</div>
+              <div>
+                <h3>Startup Team</h3>
+                <div class="role">Backend Intern</div>
+                <p>
+                  Developed the backend of a social networking service with NestJS, and built the
+                  crawlers and analysis that backed product decisions. Completed the 2025 I-Corps
+                  program, including three weeks of entrepreneurship training at UC Berkeley.
+                </p>
+              </div>
+            </article>
+
+            <article class="entry">
+              <div class="when">Nov 2023<br />— Present</div>
+              <div>
+                <h3>Korean National Police University — FPEI</h3>
+                <div class="role">Research System Developer</div>
+                <p>
+                  Building and operating the institute's research platform from scratch. Eight
+                  services now run at <code>*.knpu.re.kr</code>. In April 2024 the LLM-based legal
+                  complaint drafting service earned a Letter of Appreciation from the university.
+                </p>
+                <p style="margin-top: 14px">
+                  <a
+                    href="#/projects"
+                    style="
+                      font-family: var(--mono);
+                      font-size: 0.75rem;
+                      color: var(--accent);
+                      text-decoration: none;
+                    "
+                    >→ See the services</a
+                  >
+                </p>
+              </div>
+            </article>
+
+            <article class="entry">
+              <div class="when">Mar 2023<br />— Present</div>
+              <div>
+                <h3>POSTECH</h3>
+                <div class="role">B.S. Computer Science and Engineering</div>
+              </div>
+            </article>
           </div>
-        </article>
 
-        <article class="entry">
-          <div class="when">Feb 2025<br>— Jul 2025</div>
-          <div>
-            <h3>Startup Team</h3>
-            <div class="role">Backend Intern</div>
-            <p>Developed the backend of a social networking service with NestJS, and built the crawlers and analysis that backed product decisions. Completed the 2025 I-Corps program, including three weeks of entrepreneurship training at UC Berkeley.</p>
+          <dl class="stack">
+            <div>
+              <dt>Languages</dt>
+              <dd>Python · TypeScript · C · C++</dd>
+            </div>
+            <div>
+              <dt>Backend</dt>
+              <dd>FastAPI · NestJS · MongoDB · PyQt</dd>
+            </div>
+            <div>
+              <dt>AI / ML</dt>
+              <dd>PyTorch · Ultralytics YOLO · OpenCV · vLLM</dd>
+            </div>
+            <div>
+              <dt>Infra</dt>
+              <dd>Docker · PM2 · Nginx · Linux</dd>
+            </div>
+          </dl>
+        </div>
+      </section>
+
+      <!-- ══ projects ═══════════════════════════════════ -->
+      <section class="view" data-view="projects" hidden>
+        <div class="wrap">
+          <p class="eyebrow">Projects</p>
+          <h2 class="title">Services in production</h2>
+
+          <h3 class="grouphead">POSTECH CSE</h3>
+          <div class="grid">
+            <article class="card" data-project="pcss">
+              <button aria-label="View PCSS screenshots" class="frame" type="button">
+                <img
+                  alt="PCSS conference selection by research area"
+                  loading="lazy"
+                  src="assets/systems/pcss/1.webp"
+                /><span class="count">4</span>
+              </button>
+              <div class="body">
+                <div class="owner">POSTECH CSE</div>
+                <h3>PCSS</h3>
+                <div class="reach">
+                  <a class="host" href="https://pcss.postech.ac.kr/" rel="noopener" target="_blank"
+                    ><span class="pip"></span>pcss.postech.ac.kr<span class="ext">↗</span></a
+                  >
+                  <a
+                    aria-label="PCSS on GitHub"
+                    class="gh"
+                    href="https://github.com/yojun313/pcss"
+                    rel="noopener"
+                    target="_blank"
+                    title="GitHub"
+                    ><svg aria-hidden="true" height="16" viewbox="0 0 16 16" width="16">
+                      <path
+                        d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"
+                        fill="currentColor"
+                      ></path></svg
+                  ></a>
+                </div>
+                <p>
+                  Searches DBLP publication data for faculty candidates using Grok-based name
+                  scores. Includes researcher profiles, rankings, monthly updates, and email
+                  subscriptions.
+                </p>
+                <div class="note">Hours of manual search down to seconds</div>
+              </div>
+            </article>
+
+            <article class="card" data-project="commeet">
+              <button aria-label="View Commeet screenshots" class="frame" type="button">
+                <img
+                  alt="Commeet home page"
+                  loading="lazy"
+                  src="assets/systems/commeet/1.webp"
+                /><span class="count">4</span>
+              </button>
+              <div class="body">
+                <div class="owner">POSTECH CSE</div>
+                <h3>Commeet</h3>
+                <div class="reach">
+                  <a
+                    class="host"
+                    href="https://commeet.postech.ac.kr"
+                    rel="noopener"
+                    target="_blank"
+                    ><span class="pip"></span>commeet.postech.ac.kr<span class="ext">↗</span></a
+                  >
+                  <a
+                    aria-label="Commeet on GitHub"
+                    class="gh"
+                    href="https://github.com/yojun313/Commeet"
+                    rel="noopener"
+                    target="_blank"
+                    title="GitHub"
+                    ><svg aria-hidden="true" height="16" viewbox="0 0 16 16" width="16">
+                      <path
+                        d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"
+                        fill="currentColor"
+                      ></path></svg
+                  ></a>
+                </div>
+                <p>
+                  Automatically assigns consultation times from participants’ availability using
+                  min-cost max-flow. Supports guest responses, Google Calendar, and encrypted
+                  consultation records.
+                </p>
+                <div class="note">100+ cumulative users · min-cost max-flow</div>
+              </div>
+            </article>
           </div>
-        </article>
 
-        <article class="entry">
-          <div class="when">Nov 2023<br>— Present</div>
-          <div>
-            <h3>Korean National Police University — FPEI</h3>
-            <div class="role">Research System Developer</div>
-            <p>Building and operating the institute's research platform from scratch. Eight services now run at <code>*.knpu.re.kr</code>. In April 2024 the LLM-based legal complaint drafting service earned a Letter of Appreciation from the university.</p>
-            <p style="margin-top:14px"><a href="#/projects" style="font-family:var(--mono);font-size:.75rem;color:var(--accent);text-decoration:none">→ See the services</a></p>
+          <h3 class="grouphead">Samsung Fire &amp; Marine Insurance</h3>
+          <div class="grid">
+            <article class="card" data-project="masking">
+              <button aria-label="View Plate Masking screenshots" class="frame" type="button">
+                <img
+                  alt="License plate masking web service"
+                  loading="lazy"
+                  src="assets/systems/masking/1.webp"
+                />
+              </button>
+              <div class="body">
+                <div class="owner">Samsung Fire · Internship</div>
+                <h3>Plate Masking</h3>
+                <div class="reach">
+                  <a class="host" href="https://masking.yojun.dev" rel="noopener" target="_blank"
+                    ><span class="pip"></span>masking.yojun.dev<span class="ext">↗</span></a
+                  >
+                </div>
+                <p>
+                  Automatically masks every vehicle license plate in dashcam footage. YOLO vehicle
+                  detection feeds a degradation-tuned plate detector, sped up with optical-flow
+                  tracking and parallel segment processing.
+                </p>
+                <div class="note">99.0% recall · 0.98 F1 · 27+ fps</div>
+              </div>
+            </article>
+
+            <article class="card" data-project="forge">
+              <button aria-label="View Forgery Detection screenshots" class="frame" type="button">
+                <img
+                  alt="Generative-AI document forgery detection service"
+                  loading="lazy"
+                  src="assets/systems/forge/1.webp"
+                />
+              </button>
+              <div class="body">
+                <div class="owner">Samsung Fire · Internship</div>
+                <h3>Forgery Detection</h3>
+                <div class="reach">
+                  <a class="host" href="https://forge.yojun.dev" rel="noopener" target="_blank"
+                    ><span class="pip"></span>forge.yojun.dev<span class="ext">↗</span></a
+                  >
+                </div>
+                <p>
+                  Detects document regions edited with generative AI. Built FinForge, a 6,000-image
+                  forgery dataset of insurance claim forms, and fine-tuned TruFor on it to localize
+                  edits and score each document.
+                </p>
+                <div class="note">Localization F1 0.51 → 0.97 · accuracy 55% → 93%</div>
+              </div>
+            </article>
           </div>
-        </article>
 
-        <article class="entry">
-          <div class="when">Mar 2023<br>— Present</div>
-          <div>
-            <h3>POSTECH</h3>
-            <div class="role">B.S. Computer Science and Engineering</div>
+          <h3 class="grouphead">KNPU · FPEI</h3>
+          <div class="grid">
+            <article class="card" data-project="manager">
+              <button aria-label="View Manager screenshots" class="frame" type="button">
+                <img
+                  alt="MANAGER desktop database browser"
+                  loading="lazy"
+                  src="assets/systems/manager/1.webp"
+                /><span class="count">7</span>
+              </button>
+              <div class="body">
+                <div class="owner">KNPU · FPEI</div>
+                <h3>Manager</h3>
+                <div class="reach">
+                  <a class="host" href="https://manager.knpu.re.kr" rel="noopener" target="_blank"
+                    ><span class="pip"></span>manager.knpu.re.kr<span class="ext">↗</span></a
+                  >
+                  <a
+                    aria-label="Manager on GitHub"
+                    class="gh"
+                    href="https://github.com/yojun313/knpu/tree/main/manager"
+                    rel="noopener"
+                    target="_blank"
+                    title="GitHub"
+                    ><svg aria-hidden="true" height="16" viewbox="0 0 16 16" width="16">
+                      <path
+                        d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"
+                        fill="currentColor"
+                      ></path></svg
+                  ></a>
+                </div>
+                <p>
+                  Desktop research workspace for browsing datasets, running collection and analysis
+                  jobs, and managing users. Extended its workflows to web services with shared job
+                  logs and LLM settings.
+                </p>
+                <div class="note">Qt · MongoDB · research data management</div>
+              </div>
+            </article>
+
+            <article class="card" data-project="crawler">
+              <button aria-label="View Crawler screenshots" class="frame" type="button">
+                <img alt="Crawler web service" loading="lazy" src="assets/systems/crawler/1.webp" />
+              </button>
+              <div class="body">
+                <div class="owner">KNPU · FPEI</div>
+                <h3>Crawler</h3>
+                <div class="reach">
+                  <a class="host" href="https://crawler.knpu.re.kr" rel="noopener" target="_blank"
+                    ><span class="pip"></span>crawler.knpu.re.kr<span class="ext">↗</span></a
+                  >
+                  <a
+                    aria-label="Crawler on GitHub"
+                    class="gh"
+                    href="https://github.com/yojun313/knpu/tree/main/crawler"
+                    rel="noopener"
+                    target="_blank"
+                    title="GitHub"
+                    ><svg aria-hidden="true" height="16" viewbox="0 0 16 16" width="16">
+                      <path
+                        d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"
+                        fill="currentColor"
+                      ></path></svg
+                  ></a>
+                </div>
+                <p>
+                  Collects research data from news, blogs, cafes, and YouTube with asynchronous I/O,
+                  proxy rotation, and priority queues. Supports progress tracking, cancellation, and
+                  resume.
+                </p>
+                <div class="note">3–4× faster than the synchronous implementation</div>
+              </div>
+            </article>
+
+            <article class="card" data-project="network">
+              <button aria-label="View Network screenshots" class="frame" type="button">
+                <img
+                  alt="Network analysis and visualization"
+                  loading="lazy"
+                  src="assets/systems/network/1.webp"
+                />
+              </button>
+              <div class="body">
+                <div class="owner">KNPU · FPEI</div>
+                <h3>Network</h3>
+                <div class="reach">
+                  <a class="host" href="https://network.knpu.re.kr" rel="noopener" target="_blank"
+                    ><span class="pip"></span>network.knpu.re.kr<span class="ext">↗</span></a
+                  >
+                  <a
+                    aria-label="Network on GitHub"
+                    class="gh"
+                    href="https://github.com/yojun313/knpu/tree/main/network"
+                    rel="noopener"
+                    target="_blank"
+                    title="GitHub"
+                    ><svg aria-hidden="true" height="16" viewbox="0 0 16 16" width="16">
+                      <path
+                        d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"
+                        fill="currentColor"
+                      ></path></svg
+                  ></a>
+                </div>
+                <p>
+                  Builds and visualizes relationships between words and entities. AI explains graph
+                  metrics, keywords, and communities with links to supporting source text.
+                </p>
+                <div class="note">Graph analysis · evidence-based AI interpretation</div>
+              </div>
+            </article>
+
+            <article class="card" data-project="statistics">
+              <button aria-label="View Statistics screenshots" class="frame" type="button">
+                <img
+                  alt="Statistical analysis and visualization"
+                  loading="lazy"
+                  src="assets/systems/statistics/1.webp"
+                />
+              </button>
+              <div class="body">
+                <div class="owner">KNPU · FPEI</div>
+                <h3>Statistics</h3>
+                <div class="reach">
+                  <a
+                    class="host"
+                    href="https://statistics.knpu.re.kr"
+                    rel="noopener"
+                    target="_blank"
+                    ><span class="pip"></span>statistics.knpu.re.kr<span class="ext">↗</span></a
+                  >
+                  <a
+                    aria-label="Statistics on GitHub"
+                    class="gh"
+                    href="https://github.com/yojun313/knpu/tree/main/statistics"
+                    rel="noopener"
+                    target="_blank"
+                    title="GitHub"
+                    ><svg aria-hidden="true" height="16" viewbox="0 0 16 16" width="16">
+                      <path
+                        d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"
+                        fill="currentColor"
+                      ></path></svg
+                  ></a>
+                </div>
+                <p>
+                  Runs statistical analyses and visualizes tables and charts. Adds evidence-based AI
+                  reports and a Q&amp;A agent that searches tables, reads results, and calls
+                  calculation tools.
+                </p>
+                <div class="note">Statistical analysis · tool-using AI assistant</div>
+              </div>
+            </article>
+
+            <article class="card" data-project="kemkim">
+              <button aria-label="View KemKim screenshots" class="frame" type="button">
+                <img
+                  alt="KemKim keyword signal analysis"
+                  loading="lazy"
+                  src="assets/systems/kemkim/1.webp"
+                />
+              </button>
+              <div class="body">
+                <div class="owner">KNPU · FPEI</div>
+                <h3>KemKim</h3>
+                <div class="reach">
+                  <a class="host" href="https://kemkim.knpu.re.kr" rel="noopener" target="_blank"
+                    ><span class="pip"></span>kemkim.knpu.re.kr<span class="ext">↗</span></a
+                  >
+                  <a
+                    aria-label="KemKim on GitHub"
+                    class="gh"
+                    href="https://github.com/yojun313/knpu/tree/main/kemkim"
+                    rel="noopener"
+                    target="_blank"
+                    title="GitHub"
+                    ><svg aria-hidden="true" height="16" viewbox="0 0 16 16" width="16">
+                      <path
+                        d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"
+                        fill="currentColor"
+                      ></path></svg
+                  ></a>
+                </div>
+                <p>
+                  Implements KEM/KIM keyword signal analysis with adjustable periods and weights. AI
+                  interprets signal changes using related terms and representative source articles.
+                </p>
+                <div class="note">DoV / DoD · time-series signals · AI interpretation</div>
+              </div>
+            </article>
+
+            <article class="card" data-project="whisper">
+              <button aria-label="View Whisper screenshots" class="frame" type="button">
+                <img
+                  alt="WHISPER audio transcription service"
+                  loading="lazy"
+                  src="assets/systems/whisper/1.webp"
+                />
+              </button>
+              <div class="body">
+                <div class="owner">KNPU · FPEI</div>
+                <h3>Whisper</h3>
+                <div class="reach">
+                  <a class="host" href="https://whisper.knpu.re.kr" rel="noopener" target="_blank"
+                    ><span class="pip"></span>whisper.knpu.re.kr<span class="ext">↗</span></a
+                  ><a
+                    aria-label="Whisper on GitHub"
+                    class="gh"
+                    href="https://github.com/yojun313/knpu/tree/main/whisper"
+                    rel="noopener"
+                    target="_blank"
+                    title="GitHub"
+                    ><svg aria-hidden="true" height="16" viewbox="0 0 16 16" width="16">
+                      <path
+                        d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"
+                        fill="currentColor"
+                      ></path></svg
+                  ></a>
+                </div>
+                <p>
+                  Transcribes audio through a GPU server and manages results and job progress.
+                  Limits concurrent transcriptions and retries transient connection failures.
+                </p>
+                <div class="note">faster-whisper · GPU transcription</div>
+              </div>
+            </article>
+
+            <article class="card" data-project="complaint">
+              <button aria-label="View Legal AI screenshots" class="frame" type="button">
+                <img
+                  alt="AI legal complaint drafting service landing screen"
+                  loading="lazy"
+                  src="assets/systems/complaint/1.webp"
+                /><span class="count">2</span>
+              </button>
+              <div class="body">
+                <div class="owner">KNPU · FPEI</div>
+                <h3>Legal AI</h3>
+                <div class="reach">
+                  <a class="host" href="https://complaint.knpu.re.kr" rel="noopener" target="_blank"
+                    ><span class="pip"></span>complaint.knpu.re.kr<span class="ext">↗</span></a
+                  >
+                  <a
+                    aria-label="Legal AI on GitHub"
+                    class="gh"
+                    href="https://github.com/yojun313/knpu/tree/main/complaint"
+                    rel="noopener"
+                    target="_blank"
+                    title="GitHub"
+                    ><svg aria-hidden="true" height="16" viewbox="0 0 16 16" width="16">
+                      <path
+                        d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"
+                        fill="currentColor"
+                      ></path></svg
+                  ></a>
+                </div>
+                <p>
+                  Turns an incident description into a structured criminal complaint draft. Supports
+                  guided input, Word/PDF generation, previews, and downloads.
+                </p>
+                <div class="note">Letter of Appreciation, Apr 2024</div>
+              </div>
+            </article>
+
+            <article class="card" data-project="agents">
+              <button aria-label="View Agent Chatbot screenshots" class="frame" type="button">
+                <img
+                  alt="KNPU agent chatbot for research information and workflow guidance"
+                  loading="lazy"
+                  src="assets/systems/agents/1.webp"
+                /><span class="count">2</span>
+              </button>
+              <div class="body">
+                <div class="owner">KNPU · FPEI</div>
+                <h3>Agent Chatbot</h3>
+                <div class="reach">
+                  <a class="host" href="https://knpu.re.kr/" rel="noopener" target="_blank"
+                    ><span class="pip"></span>knpu.re.kr<span class="ext">↗</span></a
+                  ><a
+                    aria-label="Agent Chatbot on GitHub"
+                    class="gh"
+                    href="https://github.com/yojun313/knpu/tree/main/system/chatbot"
+                    rel="noopener"
+                    target="_blank"
+                    title="GitHub"
+                    ><svg aria-hidden="true" height="16" viewbox="0 0 16 16" width="16">
+                      <path
+                        d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"
+                        fill="currentColor"
+                      ></path></svg
+                  ></a>
+                </div>
+                <p>
+                  Answers public questions about the lab and guides researchers through its
+                  services. A tool-using agent searches documents and code, reads sources, and
+                  explains workflows with evidence.
+                </p>
+                <div class="note">Tool calling · BM25 · local LLMs</div>
+              </div>
+            </article>
           </div>
-        </article>
+
+          <h3 class="grouphead">Personal</h3>
+          <div class="grid">
+            <article class="card" data-project="lecai">
+              <button aria-label="View LecAI screenshots" class="frame" type="button">
+                <img
+                  alt="LecAI lecture material management screen"
+                  loading="lazy"
+                  src="assets/systems/lecai/1.webp"
+                /><span class="count">4</span>
+              </button>
+              <div class="body">
+                <div class="owner">Personal</div>
+                <h3>LecAI</h3>
+                <div class="reach">
+                  <a class="host" href="https://lec.yojun.dev" rel="noopener" target="_blank"
+                    ><span class="pip"></span>lec.yojun.dev<span class="ext">↗</span></a
+                  >
+                  <a
+                    aria-label="LecAI on GitHub"
+                    class="gh"
+                    href="https://github.com/yojun313/LecAI"
+                    rel="noopener"
+                    target="_blank"
+                    title="GitHub"
+                    ><svg aria-hidden="true" height="16" viewbox="0 0 16 16" width="16">
+                      <path
+                        d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"
+                        fill="currentColor"
+                      ></path></svg
+                  ></a>
+                </div>
+                <p>
+                  Connects lecture slides, recordings, and board notes with AI explanations. A
+                  chatbot for each slide uses its image, explanation, and lecture outline to answer
+                  follow-up questions.
+                </p>
+                <div class="note">Slide-level chat · Whisper · LLM / VLM</div>
+              </div>
+            </article>
+
+            <article class="card" data-project="univdash">
+              <button aria-label="View UnivDash screenshots" class="frame" type="button">
+                <img
+                  alt="UnivDash coding agent workspace and conversation view"
+                  loading="lazy"
+                  src="assets/systems/univdash/1.webp"
+                /><span class="count">4</span>
+              </button>
+              <div class="body">
+                <div class="owner">Personal</div>
+                <h3>UnivDash</h3>
+                <div class="reach">
+                  <a
+                    class="gh gh--wide"
+                    href="https://github.com/yojun313/UnivDash"
+                    rel="noopener"
+                    target="_blank"
+                    title="GitHub"
+                    ><svg aria-hidden="true" height="16" viewbox="0 0 16 16" width="16">
+                      <path
+                        d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"
+                        fill="currentColor"
+                      ></path></svg
+                    ><span>yojun313/UnivDash</span><span class="ext">↗</span></a
+                  >
+                </div>
+                <p>
+                  Monitor and control Claude Code, Codex, and development tools from a PC or phone.
+                  I use UnivDash for all my development work, including agent conversations, files,
+                  Git, and server monitoring.
+                </p>
+                <div class="note">FastAPI · WebSocket · tmux · PM2 · Git</div>
+              </div>
+            </article>
+
+            <article class="card" data-project="vllm-manager">
+              <button aria-label="View vllm-manager screenshots" class="frame" type="button">
+                <img
+                  alt="vllm-manager GPU dashboard and model deployment controls"
+                  loading="lazy"
+                  src="assets/systems/vllm-manager/1.webp"
+                /><span class="count">2</span>
+              </button>
+              <div class="body">
+                <div class="owner">Personal</div>
+                <h3>vllm-manager</h3>
+                <div class="reach">
+                  <a
+                    aria-label="vllm-manager on GitHub"
+                    class="gh gh--wide"
+                    href="https://github.com/yojun313/vllm-manager"
+                    rel="noopener"
+                    target="_blank"
+                    title="GitHub"
+                    ><svg aria-hidden="true" height="16" viewbox="0 0 16 16" width="16">
+                      <path
+                        d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"
+                        fill="currentColor"
+                      ></path></svg
+                    ><span>yojun313/vllm-manager</span><span class="ext">↗</span></a
+                  >
+                </div>
+                <p>
+                  Deploy local LLMs through a CLI and web console. Automates model downloads and
+                  Docker/vLLM startup, estimates GPU memory including KV cache, and monitors jobs
+                  and reservations.
+                </p>
+                <div class="note">Docker · vLLM · GPU resource planning</div>
+              </div>
+            </article>
+
+            <article class="card" data-project="eng2mouth">
+              <button aria-label="View Eng2Mouth screenshots" class="frame" type="button">
+                <img
+                  alt="Eng2Mouth landing page with a phone call to an AI friend"
+                  loading="lazy"
+                  src="assets/systems/eng2mouth/1.webp"
+                /><span class="count">4</span>
+              </button>
+              <div class="body">
+                <div class="owner">Personal</div>
+                <h3>Eng2Mouth</h3>
+                <div class="reach">
+                  <a class="host" href="https://eng.yojun.dev" rel="noopener" target="_blank"
+                    ><span class="pip"></span>eng.yojun.dev<span class="ext">↗</span></a
+                  >
+                  <a
+                    aria-label="Eng2Mouth on GitHub"
+                    class="gh"
+                    href="https://github.com/yojun313/Eng2Mouth"
+                    rel="noopener"
+                    target="_blank"
+                    title="GitHub"
+                    ><svg aria-hidden="true" height="16" viewbox="0 0 16 16" width="16">
+                      <path
+                        d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"
+                        fill="currentColor"
+                      ></path></svg
+                  ></a>
+                </div>
+                <p>
+                  AI phone-call English practice. Call an AI conversation partner and talk in real
+                  time — interrupt, pause, hang up — then get a speaking evaluation report after
+                  every call.
+                </p>
+                <div class="note">Real-time voice · bring-your-own OpenAI / Gemini key</div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <div class="wrap">
+        <footer>
+          <span>© 2026 Yojun Moon</span>
+          <a href="https://github.com/yojun313">GitHub</a>
+          <a href="https://www.linkedin.com/in/yojun-moon/">LinkedIn</a>
+          <a href="mailto:yojun313@postech.ac.kr">Email</a>
+        </footer>
       </div>
+    </main>
 
-      <dl class="stack">
-        <div><dt>Languages</dt><dd>Python · TypeScript · C · C++</dd></div>
-        <div><dt>Backend</dt><dd>FastAPI · NestJS · MongoDB · PyQt</dd></div>
-        <div><dt>AI / ML</dt><dd>PyTorch · Ultralytics YOLO · OpenCV · vLLM</dd></div>
-        <div><dt>Infra</dt><dd>Docker · PM2 · Nginx · Linux</dd></div>
-      </dl>
-    </div>
-  </section>
-
-  <!-- ══ projects ═══════════════════════════════════ -->
-  <section class="view" data-view="projects" hidden>
-    <div class="wrap">
-      <p class="eyebrow">Projects</p>
-      <h2 class="title">Services in production</h2>
-
-      <h3 class="grouphead">POSTECH CSE</h3>
-      <div class="grid">
-
-        <article class="card" data-project="pcss">
-<button aria-label="View PCSS screenshots" class="frame" type="button"><img alt="PCSS conference selection by research area" loading="lazy" src="assets/systems/pcss/1.webp"/><span class="count">4</span></button>
-<div class="body">
-<div class="owner">POSTECH CSE</div>
-<h3>PCSS</h3>
-<div class="reach">
-<a class="host" href="https://pcss.postech.ac.kr/" rel="noopener" target="_blank"><span class="pip"></span>pcss.postech.ac.kr<span class="ext">↗</span></a>
-<a aria-label="PCSS on GitHub" class="gh" href="https://github.com/yojun313/pcss" rel="noopener" target="_blank" title="GitHub"><svg aria-hidden="true" height="16" viewbox="0 0 16 16" width="16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z" fill="currentColor"></path></svg></a></div>
-<p>Searches DBLP publication data for faculty candidates using Grok-based name scores. Includes researcher profiles, rankings, monthly updates, and email subscriptions.</p>
-<div class="note">Hours of manual search down to seconds</div>
-</div>
-</article>
-
-        <article class="card" data-project="commeet">
-<button aria-label="View Commeet screenshots" class="frame" type="button"><img alt="Commeet home page" loading="lazy" src="assets/systems/commeet/1.webp"/><span class="count">4</span></button>
-<div class="body">
-<div class="owner">POSTECH CSE</div>
-<h3>Commeet</h3>
-<div class="reach">
-<a class="host" href="https://commeet.postech.ac.kr" rel="noopener" target="_blank"><span class="pip"></span>commeet.postech.ac.kr<span class="ext">↗</span></a>
-<a aria-label="Commeet on GitHub" class="gh" href="https://github.com/yojun313/Commeet" rel="noopener" target="_blank" title="GitHub"><svg aria-hidden="true" height="16" viewbox="0 0 16 16" width="16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z" fill="currentColor"></path></svg></a></div>
-<p>Automatically assigns consultation times from participants’ availability using min-cost max-flow. Supports guest responses, Google Calendar, and encrypted consultation records.</p>
-<div class="note">100+ cumulative users · min-cost max-flow</div>
-</div>
-</article>
-
+    <dialog class="gallery" id="gallery" aria-labelledby="galleryTitle">
+      <div class="g-head">
+        <div>
+          <div class="owner" id="galleryOwner"></div>
+          <h3 id="galleryTitle"></h3>
+        </div>
+        <button class="g-close" type="button" id="galleryClose" aria-label="Close">×</button>
       </div>
-
-      <h3 class="grouphead">Samsung Fire &amp; Marine Insurance</h3>
-      <div class="grid">
-
-        <article class="card" data-project="masking">
-<button aria-label="View Plate Masking screenshots" class="frame" type="button"><img alt="License plate masking web service" loading="lazy" src="assets/systems/masking/1.webp"/></button>
-<div class="body">
-<div class="owner">Samsung Fire · Internship</div>
-<h3>Plate Masking</h3>
-<div class="reach">
-<a class="host" href="https://masking.yojun.dev" rel="noopener" target="_blank"><span class="pip"></span>masking.yojun.dev<span class="ext">↗</span></a>
-</div>
-<p>Automatically masks every vehicle license plate in dashcam footage. YOLO vehicle detection feeds a degradation-tuned plate detector, sped up with optical-flow tracking and parallel segment processing.</p>
-<div class="note">99.0% recall · 0.98 F1 · 27+ fps</div>
-</div>
-</article>
-
-        <article class="card" data-project="forge">
-<button aria-label="View Forgery Detection screenshots" class="frame" type="button"><img alt="Generative-AI document forgery detection service" loading="lazy" src="assets/systems/forge/1.webp"/></button>
-<div class="body">
-<div class="owner">Samsung Fire · Internship</div>
-<h3>Forgery Detection</h3>
-<div class="reach">
-<a class="host" href="https://forge.yojun.dev" rel="noopener" target="_blank"><span class="pip"></span>forge.yojun.dev<span class="ext">↗</span></a>
-</div>
-<p>Detects document regions edited with generative AI. Built FinForge, a 6,000-image forgery dataset of insurance claim forms, and fine-tuned TruFor on it to localize edits and score each document.</p>
-<div class="note">Localization F1 0.51 → 0.97 · accuracy 55% → 93%</div>
-</div>
-</article>
-
+      <div class="g-stage">
+        <img id="galleryImg" alt="" />
+        <button class="g-nav g-prev" type="button" id="galleryPrev" aria-label="Previous image">
+          ‹
+        </button>
+        <button class="g-nav g-next" type="button" id="galleryNext" aria-label="Next image">
+          ›
+        </button>
+        <span class="g-counter" id="galleryCounter"></span>
       </div>
-
-      <h3 class="grouphead">KNPU · FPEI</h3>
-      <div class="grid">
-
-        <article class="card" data-project="manager">
-<button aria-label="View Manager screenshots" class="frame" type="button"><img alt="MANAGER desktop database browser" loading="lazy" src="assets/systems/manager/1.webp"/><span class="count">7</span></button>
-<div class="body">
-<div class="owner">KNPU · FPEI</div>
-<h3>Manager</h3>
-<div class="reach">
-<a class="host" href="https://manager.knpu.re.kr" rel="noopener" target="_blank"><span class="pip"></span>manager.knpu.re.kr<span class="ext">↗</span></a>
-<a aria-label="Manager on GitHub" class="gh" href="https://github.com/yojun313/knpu/tree/main/manager" rel="noopener" target="_blank" title="GitHub"><svg aria-hidden="true" height="16" viewbox="0 0 16 16" width="16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z" fill="currentColor"></path></svg></a>
-</div>
-<p>Desktop research workspace for browsing datasets, running collection and analysis jobs, and managing users. Extended its workflows to web services with shared job logs and LLM settings.</p>
-<div class="note">Qt · MongoDB · research data management</div>
-</div>
-</article>
-
-        <article class="card" data-project="crawler">
-<button aria-label="View Crawler screenshots" class="frame" type="button"><img alt="Crawler web service" loading="lazy" src="assets/systems/crawler/1.webp"/></button>
-<div class="body">
-<div class="owner">KNPU · FPEI</div>
-<h3>Crawler</h3>
-<div class="reach">
-<a class="host" href="https://crawler.knpu.re.kr" rel="noopener" target="_blank"><span class="pip"></span>crawler.knpu.re.kr<span class="ext">↗</span></a>
-<a aria-label="Crawler on GitHub" class="gh" href="https://github.com/yojun313/knpu/tree/main/crawler" rel="noopener" target="_blank" title="GitHub"><svg aria-hidden="true" height="16" viewbox="0 0 16 16" width="16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z" fill="currentColor"></path></svg></a>
-</div>
-<p>Collects research data from news, blogs, cafes, and YouTube with asynchronous I/O, proxy rotation, and priority queues. Supports progress tracking, cancellation, and resume.</p>
-<div class="note">3–4× faster than the synchronous implementation</div>
-</div>
-</article>
-
-        <article class="card" data-project="network">
-<button aria-label="View Network screenshots" class="frame" type="button"><img alt="Network analysis and visualization" loading="lazy" src="assets/systems/network/1.webp"/></button>
-<div class="body">
-<div class="owner">KNPU · FPEI</div>
-<h3>Network</h3>
-<div class="reach">
-<a class="host" href="https://network.knpu.re.kr" rel="noopener" target="_blank"><span class="pip"></span>network.knpu.re.kr<span class="ext">↗</span></a>
-<a aria-label="Network on GitHub" class="gh" href="https://github.com/yojun313/knpu/tree/main/network" rel="noopener" target="_blank" title="GitHub"><svg aria-hidden="true" height="16" viewbox="0 0 16 16" width="16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z" fill="currentColor"></path></svg></a>
-</div>
-<p>Builds and visualizes relationships between words and entities. AI explains graph metrics, keywords, and communities with links to supporting source text.</p>
-<div class="note">Graph analysis · evidence-based AI interpretation</div></div>
-</article>
-
-        <article class="card" data-project="statistics">
-<button aria-label="View Statistics screenshots" class="frame" type="button"><img alt="Statistical analysis and visualization" loading="lazy" src="assets/systems/statistics/1.webp"/></button>
-<div class="body">
-<div class="owner">KNPU · FPEI</div>
-<h3>Statistics</h3>
-<div class="reach">
-<a class="host" href="https://statistics.knpu.re.kr" rel="noopener" target="_blank"><span class="pip"></span>statistics.knpu.re.kr<span class="ext">↗</span></a>
-<a aria-label="Statistics on GitHub" class="gh" href="https://github.com/yojun313/knpu/tree/main/statistics" rel="noopener" target="_blank" title="GitHub"><svg aria-hidden="true" height="16" viewbox="0 0 16 16" width="16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z" fill="currentColor"></path></svg></a>
-</div>
-<p>Runs statistical analyses and visualizes tables and charts. Adds evidence-based AI reports and a Q&amp;A agent that searches tables, reads results, and calls calculation tools.</p>
-<div class="note">Statistical analysis · tool-using AI assistant</div></div>
-</article>
-
-        <article class="card" data-project="kemkim">
-<button aria-label="View KemKim screenshots" class="frame" type="button"><img alt="KemKim keyword signal analysis" loading="lazy" src="assets/systems/kemkim/1.webp"/></button>
-<div class="body">
-<div class="owner">KNPU · FPEI</div>
-<h3>KemKim</h3>
-<div class="reach">
-<a class="host" href="https://kemkim.knpu.re.kr" rel="noopener" target="_blank"><span class="pip"></span>kemkim.knpu.re.kr<span class="ext">↗</span></a>
-<a aria-label="KemKim on GitHub" class="gh" href="https://github.com/yojun313/knpu/tree/main/kemkim" rel="noopener" target="_blank" title="GitHub"><svg aria-hidden="true" height="16" viewbox="0 0 16 16" width="16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z" fill="currentColor"></path></svg></a>
-</div>
-<p>Implements KEM/KIM keyword signal analysis with adjustable periods and weights. AI interprets signal changes using related terms and representative source articles.</p>
-<div class="note">DoV / DoD · time-series signals · AI interpretation</div></div>
-</article>
-
-        <article class="card" data-project="whisper">
-<button aria-label="View Whisper screenshots" class="frame" type="button"><img alt="WHISPER audio transcription service" loading="lazy" src="assets/systems/whisper/1.webp"/></button>
-<div class="body">
-<div class="owner">KNPU · FPEI</div>
-<h3>Whisper</h3>
-<div class="reach"><a class="host" href="https://whisper.knpu.re.kr" rel="noopener" target="_blank"><span class="pip"></span>whisper.knpu.re.kr<span class="ext">↗</span></a><a aria-label="Whisper on GitHub" class="gh" href="https://github.com/yojun313/knpu/tree/main/whisper" rel="noopener" target="_blank" title="GitHub"><svg aria-hidden="true" height="16" viewbox="0 0 16 16" width="16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z" fill="currentColor"></path></svg></a></div>
-<p>Transcribes audio through a GPU server and manages results and job progress. Limits concurrent transcriptions and retries transient connection failures.</p>
-<div class="note">faster-whisper · GPU transcription</div>
-</div>
-</article>
-
-        <article class="card" data-project="complaint">
-<button aria-label="View Legal AI screenshots" class="frame" type="button"><img alt="AI legal complaint drafting service landing screen" loading="lazy" src="assets/systems/complaint/1.webp"/><span class="count">2</span></button>
-<div class="body">
-<div class="owner">KNPU · FPEI</div>
-<h3>Legal AI</h3>
-<div class="reach">
-<a class="host" href="https://complaint.knpu.re.kr" rel="noopener" target="_blank"><span class="pip"></span>complaint.knpu.re.kr<span class="ext">↗</span></a>
-<a aria-label="Legal AI on GitHub" class="gh" href="https://github.com/yojun313/knpu/tree/main/complaint" rel="noopener" target="_blank" title="GitHub"><svg aria-hidden="true" height="16" viewbox="0 0 16 16" width="16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z" fill="currentColor"></path></svg></a>
-</div>
-<p>Turns an incident description into a structured criminal complaint draft. Supports guided input, Word/PDF generation, previews, and downloads.</p>
-<div class="note">Letter of Appreciation, Apr 2024</div>
-</div>
-</article>
-
-        <article class="card" data-project="agents">
-<button aria-label="View Agent Chatbot screenshots" class="frame" type="button"><img alt="KNPU agent chatbot for research information and workflow guidance" loading="lazy" src="assets/systems/agents/1.webp"/><span class="count">2</span></button>
-<div class="body">
-<div class="owner">KNPU · FPEI</div>
-<h3>Agent Chatbot</h3>
-<div class="reach"><a class="host" href="https://knpu.re.kr/" rel="noopener" target="_blank"><span class="pip"></span>knpu.re.kr<span class="ext">↗</span></a><a aria-label="Agent Chatbot on GitHub" class="gh" href="https://github.com/yojun313/knpu/tree/main/system/chatbot" rel="noopener" target="_blank" title="GitHub"><svg aria-hidden="true" height="16" viewbox="0 0 16 16" width="16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z" fill="currentColor"></path></svg></a></div>
-<p>Answers public questions about the lab and guides researchers through its services. A tool-using agent searches documents and code, reads sources, and explains workflows with evidence.</p>
-<div class="note">Tool calling · BM25 · local LLMs</div>
-</div>
-</article>
-
+      <div class="g-thumbs" id="galleryThumbs"></div>
+      <div class="g-foot">
+        <p id="galleryDesc"></p>
+        <div class="g-links" id="galleryLinks"></div>
       </div>
+    </dialog>
 
-      <h3 class="grouphead">Personal</h3>
-      <div class="grid">
+    <script>
+      (function () {
+        var views = Array.prototype.slice.call(document.querySelectorAll("[data-view]"));
+        var links = Array.prototype.slice.call(document.querySelectorAll("[data-nav]"));
+        var names = views.map(function (v) {
+          return v.getAttribute("data-view");
+        });
+        var first = true;
 
-        <article class="card" data-project="lecai">
-<button aria-label="View LecAI screenshots" class="frame" type="button"><img alt="LecAI lecture material management screen" loading="lazy" src="assets/systems/lecai/1.webp"/><span class="count">4</span></button>
-<div class="body">
-<div class="owner">Personal</div>
-<h3>LecAI</h3>
-<div class="reach">
-<a class="host" href="https://lec.yojun.dev" rel="noopener" target="_blank"><span class="pip"></span>lec.yojun.dev<span class="ext">↗</span></a>
-<a aria-label="LecAI on GitHub" class="gh" href="https://github.com/yojun313/LecAI" rel="noopener" target="_blank" title="GitHub"><svg aria-hidden="true" height="16" viewbox="0 0 16 16" width="16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z" fill="currentColor"></path></svg></a>
-</div>
-<p>Connects lecture slides, recordings, and board notes with AI explanations. A chatbot for each slide uses its image, explanation, and lecture outline to answer follow-up questions.</p>
-<div class="note">Slide-level chat · Whisper · LLM / VLM</div>
-</div>
-</article>
+        function route() {
+          var id = (location.hash || "").replace(/^#\/?/, "") || "index";
+          if (names.indexOf(id) === -1) id = "index";
 
-        <article class="card" data-project="univdash">
-<button aria-label="View UnivDash screenshots" class="frame" type="button"><img alt="UnivDash coding agent workspace and conversation view" loading="lazy" src="assets/systems/univdash/1.webp"/><span class="count">4</span></button>
-<div class="body">
-<div class="owner">Personal</div>
-<h3>UnivDash</h3>
-<div class="reach">
-<a class="gh gh--wide" href="https://github.com/yojun313/UnivDash" rel="noopener" target="_blank" title="GitHub"><svg aria-hidden="true" height="16" viewbox="0 0 16 16" width="16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z" fill="currentColor"></path></svg><span>yojun313/UnivDash</span><span class="ext">↗</span></a>
-</div>
-<p>Monitor and control Claude Code, Codex, and development tools from a PC or phone. I use UnivDash for all my development work, including agent conversations, files, Git, and server monitoring.</p>
-<div class="note">FastAPI · WebSocket · tmux · PM2 · Git</div>
-</div>
-</article>
+          views.forEach(function (v) {
+            v.hidden = v.getAttribute("data-view") !== id;
+          });
+          links.forEach(function (a) {
+            if (a.getAttribute("data-nav") === id) a.setAttribute("aria-current", "page");
+            else a.removeAttribute("aria-current");
+          });
 
-        <article class="card" data-project="vllm-manager">
-<button aria-label="View vllm-manager screenshots" class="frame" type="button"><img alt="vllm-manager GPU dashboard and model deployment controls" loading="lazy" src="assets/systems/vllm-manager/1.webp"/><span class="count">2</span></button>
-<div class="body">
-<div class="owner">Personal</div>
-<h3>vllm-manager</h3>
-<div class="reach"><a aria-label="vllm-manager on GitHub" class="gh gh--wide" href="https://github.com/yojun313/vllm-manager" rel="noopener" target="_blank" title="GitHub"><svg aria-hidden="true" height="16" viewbox="0 0 16 16" width="16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z" fill="currentColor"></path></svg><span>yojun313/vllm-manager</span><span class="ext">↗</span></a></div>
-<p>Deploy local LLMs through a CLI and web console. Automates model downloads and Docker/vLLM startup, estimates GPU memory including KV cache, and monitors jobs and reservations.</p>
-<div class="note">Docker · vLLM · GPU resource planning</div>
-</div>
-</article>
+          if (!first) {
+            window.scrollTo(0, 0);
+            var main = document.getElementById("main");
+            if (main) main.focus({ preventScroll: true });
+          }
+          first = false;
+        }
 
-        <article class="card" data-project="eng2mouth">
-<button aria-label="View Eng2Mouth screenshots" class="frame" type="button"><img alt="Eng2Mouth landing page with a phone call to an AI friend" loading="lazy" src="assets/systems/eng2mouth/1.webp"/><span class="count">4</span></button>
-<div class="body">
-<div class="owner">Personal</div>
-<h3>Eng2Mouth</h3>
-<div class="reach">
-<a class="host" href="https://eng.yojun.dev" rel="noopener" target="_blank"><span class="pip"></span>eng.yojun.dev<span class="ext">↗</span></a>
-<a aria-label="Eng2Mouth on GitHub" class="gh" href="https://github.com/yojun313/Eng2Mouth" rel="noopener" target="_blank" title="GitHub"><svg aria-hidden="true" height="16" viewbox="0 0 16 16" width="16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z" fill="currentColor"></path></svg></a>
-</div>
-<p>AI phone-call English practice. Call an AI conversation partner and talk in real time — interrupt, pause, hang up — then get a speaking evaluation report after every call.</p>
-<div class="note">Real-time voice · bring-your-own OpenAI / Gemini key</div>
-</div>
-</article>
+        window.addEventListener("hashchange", route);
+        route();
+      })();
 
+      (function () {
+        var dlg = document.getElementById("gallery");
+        if (!dlg || typeof dlg.showModal !== "function") return; // no <dialog> support: cards keep their direct links
 
-      </div>
-    </div>
-  </section>
+        var $ = function (id) {
+          return document.getElementById(id);
+        };
+        var imgEl = $("galleryImg"),
+          thumbs = $("galleryThumbs"),
+          counter = $("galleryCounter");
+        var prev = $("galleryPrev"),
+          next = $("galleryNext");
 
-  <div class="wrap">
-    <footer>
-      <span>© 2026 Yojun Moon</span>
-      <a href="https://github.com/yojun313">GitHub</a>
-      <a href="https://www.linkedin.com/in/yojun-moon/">LinkedIn</a>
-      <a href="mailto:yojun313@postech.ac.kr">Email</a>
-    </footer>
-  </div>
+        function seq(dir, n) {
+          var out = [];
+          for (var i = 1; i <= n; i++) out.push("assets/systems/" + dir + "/" + i + ".webp");
+          return out;
+        }
+        /* Extra links beyond the card's own href, keyed by data-project. */
+        var IMAGES = {
+          lecai: seq("lecai", 4),
+          eng2mouth: seq("eng2mouth", 4),
+          univdash: seq("univdash", 4),
+          pcss: seq("pcss", 4),
+          commeet: seq("commeet", 4),
+          masking: seq("masking", 1),
+          forge: seq("forge", 1),
+          manager: seq("manager", 7),
+          crawler: seq("crawler", 1),
+          network: seq("network", 1),
+          statistics: seq("statistics", 1),
+          kemkim: seq("kemkim", 1),
+          complaint: seq("complaint", 2),
+          whisper: seq("whisper", 1),
+          agents: seq("agents", 2),
+          "vllm-manager": seq("vllm-manager", 2),
+        };
 
-</main>
+        var images = [],
+          idx = 0,
+          title = "";
 
-<dialog class="gallery" id="gallery" aria-labelledby="galleryTitle">
-  <div class="g-head">
-    <div>
-      <div class="owner" id="galleryOwner"></div>
-      <h3 id="galleryTitle"></h3>
-    </div>
-    <button class="g-close" type="button" id="galleryClose" aria-label="Close">×</button>
-  </div>
-  <div class="g-stage">
-    <img id="galleryImg" alt="">
-    <button class="g-nav g-prev" type="button" id="galleryPrev" aria-label="Previous image">‹</button>
-    <button class="g-nav g-next" type="button" id="galleryNext" aria-label="Next image">›</button>
-    <span class="g-counter" id="galleryCounter"></span>
-  </div>
-  <div class="g-thumbs" id="galleryThumbs"></div>
-  <div class="g-foot">
-    <p id="galleryDesc"></p>
-    <div class="g-links" id="galleryLinks"></div>
-  </div>
-</dialog>
+        function show(i) {
+          idx = (i + images.length) % images.length;
+          imgEl.src = images[idx];
+          imgEl.alt = title + " screenshot " + (idx + 1) + " of " + images.length;
+          counter.textContent = idx + 1 + " / " + images.length;
+          Array.prototype.forEach.call(thumbs.children, function (b, j) {
+            b.setAttribute("aria-current", j === idx ? "true" : "false");
+          });
+          var active = thumbs.children[idx];
+          if (active) active.scrollIntoView({ block: "nearest", inline: "nearest" });
+        }
 
-<script>
-(function () {
-  var views = Array.prototype.slice.call(document.querySelectorAll('[data-view]'));
-  var links = Array.prototype.slice.call(document.querySelectorAll('[data-nav]'));
-  var names = views.map(function (v) { return v.getAttribute('data-view'); });
-  var first = true;
+        function open(card) {
+          var key = card.getAttribute("data-project");
+          title = card.querySelector("h3").textContent;
+          images = IMAGES[key] || [card.querySelector(".frame img").getAttribute("src")];
 
-  function route() {
-    var id = (location.hash || '').replace(/^#\/?/, '') || 'index';
-    if (names.indexOf(id) === -1) id = 'index';
+          $("galleryOwner").textContent = card.querySelector(".owner").textContent;
+          $("galleryTitle").textContent = title;
+          $("galleryDesc").textContent = card.querySelector(".body p").textContent;
 
-    views.forEach(function (v) { v.hidden = v.getAttribute('data-view') !== id; });
-    links.forEach(function (a) {
-      if (a.getAttribute('data-nav') === id) a.setAttribute('aria-current', 'page');
-      else a.removeAttribute('aria-current');
-    });
+          var links = $("galleryLinks");
+          links.innerHTML = "";
+          var site = card.querySelector(".host"),
+            repo = card.querySelector(".gh");
+          var list = site
+            ? [
+                {
+                  label: "Visit " + site.textContent.replace("↗", "").trim() + " ↗",
+                  href: site.href,
+                },
+              ]
+            : [];
+          if (repo)
+            list.push({ label: "GitHub ↗", href: repo.href, icon: repo.querySelector("svg") });
+          list.forEach(function (l, i) {
+            var a = document.createElement("a");
+            a.href = l.href;
+            a.textContent = l.label;
+            if (l.icon) a.insertBefore(l.icon.cloneNode(true), a.firstChild);
+            a.target = "_blank";
+            a.rel = "noopener";
+            if (i > 0) a.className = "alt";
+            links.appendChild(a);
+          });
 
-    if (!first) {
-      window.scrollTo(0, 0);
-      var main = document.getElementById('main');
-      if (main) main.focus({ preventScroll: true });
-    }
-    first = false;
-  }
+          thumbs.innerHTML = "";
+          images.forEach(function (src, j) {
+            var b = document.createElement("button");
+            b.type = "button";
+            b.setAttribute("aria-label", "Show image " + (j + 1));
+            var t = document.createElement("img");
+            t.src = src;
+            t.alt = "";
+            b.appendChild(t);
+            b.addEventListener("click", function () {
+              show(j);
+            });
+            thumbs.appendChild(b);
+          });
 
-  window.addEventListener('hashchange', route);
-  route();
-})();
+          var multi = images.length > 1;
+          thumbs.hidden = prev.hidden = next.hidden = counter.hidden = !multi;
 
-(function () {
-  var dlg = document.getElementById('gallery');
-  if (!dlg || typeof dlg.showModal !== 'function') return; // no <dialog> support: cards keep their direct links
+          dlg.showModal();
+          show(0);
+          dlg.scrollTop = 0;
+        }
 
-  var $ = function (id) { return document.getElementById(id); };
-  var imgEl = $('galleryImg'), thumbs = $('galleryThumbs'), counter = $('galleryCounter');
-  var prev = $('galleryPrev'), next = $('galleryNext');
+        document.querySelectorAll(".card[data-project]").forEach(function (card) {
+          card.addEventListener("click", function (e) {
+            if (e.target.closest("a")) return; // direct service / GitHub links navigate as usual
+            open(card);
+          });
+        });
 
-  function seq(dir, n) {
-    var out = [];
-    for (var i = 1; i <= n; i++) out.push('assets/systems/' + dir + '/' + i + '.webp');
-    return out;
-  }
-  /* Extra links beyond the card's own href, keyed by data-project. */
-  var IMAGES = {
-    lecai: seq('lecai', 4),
-    eng2mouth: seq('eng2mouth', 4),
-    univdash: seq('univdash', 4),
-    pcss: seq('pcss', 4),
-    commeet: seq('commeet', 4),
-    masking: seq('masking', 1),
-    forge: seq('forge', 1),
-    manager: seq('manager', 7),
-    crawler: seq('crawler', 1),
-    network: seq('network', 1),
-    statistics: seq('statistics', 1),
-    kemkim: seq('kemkim', 1),
-    complaint: seq('complaint', 2),
-    whisper: seq('whisper', 1),
-    agents: seq('agents', 2),
-    'vllm-manager': seq('vllm-manager', 2)
-  };
+        prev.addEventListener("click", function () {
+          show(idx - 1);
+        });
+        next.addEventListener("click", function () {
+          show(idx + 1);
+        });
+        $("galleryClose").addEventListener("click", function () {
+          dlg.close();
+        });
+        dlg.addEventListener("click", function (e) {
+          if (e.target === dlg) dlg.close();
+        }); // backdrop click
+        dlg.addEventListener("keydown", function (e) {
+          if (images.length < 2) return;
+          if (e.key === "ArrowLeft") {
+            e.preventDefault();
+            show(idx - 1);
+          }
+          if (e.key === "ArrowRight") {
+            e.preventDefault();
+            show(idx + 1);
+          }
+        });
+      })();
 
-  var images = [], idx = 0, title = '';
+      (function () {
+        var drawer = document.getElementById("drawer");
+        var scrim = document.getElementById("scrim");
+        var openBtn = document.getElementById("menuOpen");
+        var closeBtn = document.getElementById("menuClose");
+        var hideTimer;
 
-  function show(i) {
-    idx = (i + images.length) % images.length;
-    imgEl.src = images[idx];
-    imgEl.alt = title + ' screenshot ' + (idx + 1) + ' of ' + images.length;
-    counter.textContent = (idx + 1) + ' / ' + images.length;
-    Array.prototype.forEach.call(thumbs.children, function (b, j) {
-      b.setAttribute('aria-current', j === idx ? 'true' : 'false');
-    });
-    var active = thumbs.children[idx];
-    if (active) active.scrollIntoView({ block: 'nearest', inline: 'nearest' });
-  }
+        function setOpen(open) {
+          clearTimeout(hideTimer);
+          drawer.classList.toggle("open", open);
+          openBtn.setAttribute("aria-expanded", open ? "true" : "false");
+          document.body.style.overflow = open ? "hidden" : "";
+          if (open) {
+            scrim.hidden = false;
+            requestAnimationFrame(function () {
+              scrim.classList.add("show");
+            });
+            closeBtn.focus();
+          } else {
+            scrim.classList.remove("show");
+            hideTimer = setTimeout(function () {
+              scrim.hidden = true;
+            }, 220);
+          }
+        }
+        function isOpen() {
+          return drawer.classList.contains("open");
+        }
 
-  function open(card) {
-    var key = card.getAttribute('data-project');
-    title = card.querySelector('h3').textContent;
-    images = IMAGES[key] || [card.querySelector('.frame img').getAttribute('src')];
+        openBtn.addEventListener("click", function () {
+          setOpen(true);
+        });
+        closeBtn.addEventListener("click", function () {
+          setOpen(false);
+          openBtn.focus();
+        });
+        scrim.addEventListener("click", function () {
+          setOpen(false);
+        });
+        drawer.addEventListener("click", function (e) {
+          if (e.target.closest("a")) setOpen(false);
+        });
+        document.addEventListener("keydown", function (e) {
+          if (e.key === "Escape" && isOpen()) {
+            setOpen(false);
+            openBtn.focus();
+          }
+        });
+        window.matchMedia("(max-width:640px)").addEventListener("change", function (m) {
+          if (!m.matches && isOpen()) setOpen(false);
+        });
+      })();
 
-    $('galleryOwner').textContent = card.querySelector('.owner').textContent;
-    $('galleryTitle').textContent = title;
-    $('galleryDesc').textContent = card.querySelector('.body p').textContent;
+      (function () {
+        var btn = document.getElementById("themeToggle");
+        var root = document.documentElement;
 
-    var links = $('galleryLinks');
-    links.innerHTML = '';
-    var site = card.querySelector('.host'), repo = card.querySelector('.gh');
-    var list = site ? [{ label: 'Visit ' + site.textContent.replace('↗', '').trim() + ' ↗', href: site.href }] : [];
-    if (repo) list.push({ label: 'GitHub ↗', href: repo.href, icon: repo.querySelector('svg') });
-    list.forEach(function (l, i) {
-      var a = document.createElement('a');
-      a.href = l.href; a.textContent = l.label;
-      if (l.icon) a.insertBefore(l.icon.cloneNode(true), a.firstChild);
-      a.target = '_blank'; a.rel = 'noopener';
-      if (i > 0) a.className = 'alt';
-      links.appendChild(a);
-    });
+        function current() {
+          var set = root.getAttribute("data-theme");
+          if (set === "light" || set === "dark") return set;
+          return window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+        }
+        function render() {
+          var t = current();
+          btn.textContent = t === "dark" ? "◐" : "◑";
+          btn.setAttribute(
+            "aria-label",
+            t === "dark" ? "Switch to light theme" : "Switch to dark theme",
+          );
+        }
 
-    thumbs.innerHTML = '';
-    images.forEach(function (src, j) {
-      var b = document.createElement('button');
-      b.type = 'button';
-      b.setAttribute('aria-label', 'Show image ' + (j + 1));
-      var t = document.createElement('img');
-      t.src = src; t.alt = '';
-      b.appendChild(t);
-      b.addEventListener('click', function () { show(j); });
-      thumbs.appendChild(b);
-    });
-
-    var multi = images.length > 1;
-    thumbs.hidden = prev.hidden = next.hidden = counter.hidden = !multi;
-
-    dlg.showModal();
-    show(0);
-    dlg.scrollTop = 0;
-  }
-
-  document.querySelectorAll('.card[data-project]').forEach(function (card) {
-    card.addEventListener('click', function (e) {
-      if (e.target.closest('a')) return; // direct service / GitHub links navigate as usual
-      open(card);
-    });
-  });
-
-  prev.addEventListener('click', function () { show(idx - 1); });
-  next.addEventListener('click', function () { show(idx + 1); });
-  $('galleryClose').addEventListener('click', function () { dlg.close(); });
-  dlg.addEventListener('click', function (e) { if (e.target === dlg) dlg.close(); }); // backdrop click
-  dlg.addEventListener('keydown', function (e) {
-    if (images.length < 2) return;
-    if (e.key === 'ArrowLeft') { e.preventDefault(); show(idx - 1); }
-    if (e.key === 'ArrowRight') { e.preventDefault(); show(idx + 1); }
-  });
-})();
-
-(function () {
-  var drawer = document.getElementById('drawer');
-  var scrim = document.getElementById('scrim');
-  var openBtn = document.getElementById('menuOpen');
-  var closeBtn = document.getElementById('menuClose');
-  var hideTimer;
-
-  function setOpen(open) {
-    clearTimeout(hideTimer);
-    drawer.classList.toggle('open', open);
-    openBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
-    document.body.style.overflow = open ? 'hidden' : '';
-    if (open) {
-      scrim.hidden = false;
-      requestAnimationFrame(function () { scrim.classList.add('show'); });
-      closeBtn.focus();
-    } else {
-      scrim.classList.remove('show');
-      hideTimer = setTimeout(function () { scrim.hidden = true; }, 220);
-    }
-  }
-  function isOpen() { return drawer.classList.contains('open'); }
-
-  openBtn.addEventListener('click', function () { setOpen(true); });
-  closeBtn.addEventListener('click', function () { setOpen(false); openBtn.focus(); });
-  scrim.addEventListener('click', function () { setOpen(false); });
-  drawer.addEventListener('click', function (e) { if (e.target.closest('a')) setOpen(false); });
-  document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape' && isOpen()) { setOpen(false); openBtn.focus(); }
-  });
-  window.matchMedia('(max-width:640px)').addEventListener('change', function (m) {
-    if (!m.matches && isOpen()) setOpen(false);
-  });
-})();
-
-(function () {
-  var btn = document.getElementById('themeToggle');
-  var root = document.documentElement;
-
-  function current() {
-    var set = root.getAttribute('data-theme');
-    if (set === 'light' || set === 'dark') return set;
-    return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
-  }
-  function render() {
-    var t = current();
-    btn.textContent = t === 'dark' ? '◐' : '◑';
-    btn.setAttribute('aria-label', t === 'dark' ? 'Switch to light theme' : 'Switch to dark theme');
-  }
-
-  btn.addEventListener('click', function () {
-    var next = current() === 'dark' ? 'light' : 'dark';
-    root.setAttribute('data-theme', next);
-    try { localStorage.setItem('theme', next); } catch (e) {}
-    render();
-  });
-  render();
-})();
-</script>
-
-</body>
+        btn.addEventListener("click", function () {
+          var next = current() === "dark" ? "light" : "dark";
+          root.setAttribute("data-theme", next);
+          try {
+            localStorage.setItem("theme", next);
+          } catch (e) {}
+          render();
+        });
+        render();
+      })();
+    </script>
+  </body>
 </html>
