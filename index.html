@@ -38,6 +38,7 @@
         --serif: "Newsreader", Georgia, "Times New Roman", serif;
 
         --wrap: 1080px;
+        --screenshot-padding: 14px;
         --step-0: 1rem;
         --step-1: 1.1875rem;
         --step-2: 1.5rem;
@@ -581,10 +582,11 @@
         cursor: pointer;
       }
 
-      /* The frame owns the ratio; the image is contained inside it, never cropped. */
+      /* Assets have no outer canvas margins; spacing belongs to these frames. */
       .frame {
         aspect-ratio: 16/10;
         width: 100%;
+        padding: var(--screenshot-padding);
         flex: none;
         background: var(--surface-2);
         border-bottom: 1px solid var(--line);
@@ -597,9 +599,11 @@
         width: 100%;
         height: 100%;
         object-fit: contain;
+        min-width: 0;
+        min-height: 0;
       }
       button.frame {
-        padding: 0;
+        padding: var(--screenshot-padding);
         border: 0;
         border-bottom: 1px solid var(--line);
         font: inherit;
@@ -792,6 +796,8 @@
         background: var(--surface-2);
         border-block: 1px solid var(--line);
         aspect-ratio: 16/10;
+        padding: var(--screenshot-padding);
+        overflow: hidden;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -800,6 +806,8 @@
         width: 100%;
         height: 100%;
         object-fit: contain;
+        min-width: 0;
+        min-height: 0;
       }
       .g-nav {
         position: absolute;
@@ -847,7 +855,7 @@
         flex: none;
         width: 96px;
         aspect-ratio: 16/10;
-        padding: 0;
+        padding: 4px;
         cursor: pointer;
         background: var(--surface-2);
         border: 1px solid var(--line);
@@ -868,7 +876,7 @@
       .g-thumbs img {
         width: 100%;
         height: 100%;
-        object-fit: cover;
+        object-fit: contain;
       }
       .g-foot {
         padding: 14px 20px 20px;
