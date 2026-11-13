@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
     <title>Yojun Moon</title>
     <script>
       /* Restore saved theme before first paint to avoid a flash of the wrong theme. */
@@ -12,11 +12,11 @@
           document.documentElement.setAttribute("data-theme", t);
       } catch (e) {}
     </script>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
     <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&amp;family=Newsreader:opsz,wght@6..72,300;6..72,400;6..72,500&amp;display=swap"
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Newsreader:opsz,wght@6..72,300;6..72,400;6..72,500&display=swap"
     />
     <style>
       /* ── tokens ─────────────────────────────────────────────
@@ -1018,216 +1018,245 @@
   <body>
     <header class="topbar">
       <div class="wrap">
-        <a class="brand" href="#/index">yojun<span class="dot">.</span>moon</a>
-        <nav class="nav" aria-label="Sections">
-          <a href="#/index" data-nav="index">index</a>
-          <a href="#/work" data-nav="work">work</a>
-          <a href="#/projects" data-nav="projects">projects</a>
+        <a class="brand" href="#/index">
+          yojun
+          <span class="dot"> . </span>
+          moon
+        </a>
+        <nav aria-label="Sections" class="nav">
+          <a data-nav="index" href="#/index"> index </a>
+          <a data-nav="work" href="#/work"> work </a>
+          <a data-nav="projects" href="#/projects"> projects </a>
         </nav>
         <button
+          aria-label="Toggle color theme"
           class="theme-toggle"
           id="themeToggle"
           type="button"
-          aria-label="Toggle color theme"
         >
           ◐
         </button>
         <button
+          aria-controls="drawer"
+          aria-expanded="false"
+          aria-label="Open menu"
           class="menu-btn"
           id="menuOpen"
           type="button"
-          aria-label="Open menu"
-          aria-controls="drawer"
-          aria-expanded="false"
         >
-          <svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true">
+          <svg aria-hidden="true" height="16" viewbox="0 0 16 16" width="16">
             <path
               d="M2 4h12M2 8h12M2 12h12"
               stroke="currentColor"
-              stroke-width="1.4"
               stroke-linecap="round"
-            />
+              stroke-width="1.4"
+            ></path>
           </svg>
         </button>
       </div>
     </header>
-
     <!-- Mobile sidebar. Lives outside .topbar: its backdrop-filter would trap position:fixed children. -->
-    <div class="scrim" id="scrim" hidden></div>
-    <nav class="drawer" id="drawer" aria-label="Sections">
+    <div class="scrim" hidden="" id="scrim"></div>
+    <nav aria-label="Sections" class="drawer" id="drawer">
       <div class="drawer-head">
-        <span class="brand">yojun<span class="dot">.</span>moon</span>
+        <span class="brand">
+          yojun
+          <span class="dot"> . </span>
+          moon
+        </span>
         <button
+          aria-label="Close menu"
           class="menu-btn"
           id="menuClose"
           type="button"
-          aria-label="Close menu"
         >
-          <svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true">
+          <svg aria-hidden="true" height="16" viewbox="0 0 16 16" width="16">
             <path
               d="M3.5 3.5l9 9M12.5 3.5l-9 9"
               stroke="currentColor"
-              stroke-width="1.4"
               stroke-linecap="round"
-            />
+              stroke-width="1.4"
+            ></path>
           </svg>
         </button>
       </div>
-      <a href="#/index" data-nav="index"><span class="num">01</span>index</a>
-      <a href="#/work" data-nav="work"><span class="num">02</span>work</a>
-      <a href="#/projects" data-nav="projects"
-        ><span class="num">03</span>projects</a
-      >
+      <a data-nav="index" href="#/index">
+        <span class="num"> 01 </span>
+        index
+      </a>
+      <a data-nav="work" href="#/work">
+        <span class="num"> 02 </span>
+        work
+      </a>
+      <a data-nav="projects" href="#/projects">
+        <span class="num"> 03 </span>
+        projects
+      </a>
     </nav>
-
     <main id="main" tabindex="-1">
       <!-- ══ index ══════════════════════════════════════ -->
       <section class="view hero" data-view="index">
         <div class="wrap">
-          <h1>Yojun Moon<span class="ko">문요준</span></h1>
+          <h1>
+            Yojun Moon
+            <span class="ko"> 문요준 </span>
+          </h1>
           <div class="meta">
-            <span>POSTECH CSE</span><span class="sep">/</span>
-            <span>Backend &amp; AI Systems</span><span class="sep">/</span>
-            <span>Pohang, KR</span>
+            <span> POSTECH CSE </span>
+            <span class="sep"> / </span>
+            <span> Backend &amp; AI Systems </span>
+            <span class="sep"> / </span>
+            <span> Pohang, KR </span>
           </div>
-
           <ul class="links">
             <li>
               <a href="https://github.com/yojun313">
-                <span class="label"
-                  ><svg
-                    class="ico"
-                    viewBox="0 0 16 16"
-                    width="16"
-                    height="16"
+                <span class="label">
+                  <svg
                     aria-hidden="true"
+                    class="ico"
+                    height="16"
+                    viewbox="0 0 16 16"
+                    width="16"
                   >
                     <path
-                      fill="currentColor"
                       d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"
-                    /></svg
-                  ><span class="txt">GitHub</span></span
-                ><span class="val">github.com/yojun313</span
-                ><span class="arrow">↗</span></a
-              >
+                      fill="currentColor"
+                    ></path>
+                  </svg>
+                  <span class="txt"> GitHub </span>
+                </span>
+                <span class="val"> github.com/yojun313 </span>
+                <span class="arrow"> ↗ </span>
+              </a>
             </li>
             <li>
               <a href="https://www.linkedin.com/in/yojun-moon/">
-                <span class="label"
-                  ><svg
-                    class="ico"
-                    viewBox="0 0 24 24"
-                    width="16"
-                    height="16"
+                <span class="label">
+                  <svg
                     aria-hidden="true"
+                    class="ico"
+                    height="16"
+                    viewbox="0 0 24 24"
+                    width="16"
                   >
                     <path
-                      fill="currentColor"
                       d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 1 1 0-4.125 2.062 2.062 0 0 1 0 4.125zM7.119 20.452H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"
-                    /></svg
-                  ><span class="txt">LinkedIn</span></span
-                ><span class="val">linkedin.com/in/yojun-moon</span
-                ><span class="arrow">↗</span></a
-              >
+                      fill="currentColor"
+                    ></path>
+                  </svg>
+                  <span class="txt"> LinkedIn </span>
+                </span>
+                <span class="val"> linkedin.com/in/yojun-moon </span>
+                <span class="arrow"> ↗ </span>
+              </a>
             </li>
             <li>
               <a href="mailto:yojun313@postech.ac.kr">
-                <span class="label"
-                  ><svg
-                    class="ico"
-                    viewBox="0 0 16 16"
-                    width="16"
-                    height="16"
+                <span class="label">
+                  <svg
                     aria-hidden="true"
+                    class="ico"
+                    height="16"
+                    viewbox="0 0 16 16"
+                    width="16"
                   >
                     <g
                       fill="none"
                       stroke="currentColor"
-                      stroke-width="1.5"
                       stroke-linecap="round"
                       stroke-linejoin="round"
+                      stroke-width="1.5"
                     >
                       <rect
-                        x="1.75"
-                        y="3.25"
-                        width="12.5"
                         height="9.5"
                         rx="1.5"
-                      />
-                      <path d="M2.25 4.25 8 8.75l5.75-4.5" />
-                    </g></svg
-                  ><span class="txt">Email</span></span
-                ><span class="val">yojun313@postech.ac.kr</span
-                ><span class="arrow">↗</span></a
-              >
+                        width="12.5"
+                        x="1.75"
+                        y="3.25"
+                      ></rect>
+                      <path d="M2.25 4.25 8 8.75l5.75-4.5"></path>
+                    </g>
+                  </svg>
+                  <span class="txt"> Email </span>
+                </span>
+                <span class="val"> yojun313@postech.ac.kr </span>
+                <span class="arrow"> ↗ </span>
+              </a>
             </li>
             <li>
               <a href="yojun_CV.pdf">
-                <span class="label"
-                  ><svg
-                    class="ico"
-                    viewBox="0 0 16 16"
-                    width="16"
-                    height="16"
+                <span class="label">
+                  <svg
                     aria-hidden="true"
+                    class="ico"
+                    height="16"
+                    viewbox="0 0 16 16"
+                    width="16"
                   >
                     <g
                       fill="none"
                       stroke="currentColor"
-                      stroke-width="1.5"
                       stroke-linecap="round"
                       stroke-linejoin="round"
+                      stroke-width="1.5"
                     >
                       <path
                         d="M9.25 1.75H4.25a1.5 1.5 0 0 0-1.5 1.5v9.5a1.5 1.5 0 0 0 1.5 1.5h7.5a1.5 1.5 0 0 0 1.5-1.5V5.75z"
-                      />
-                      <path d="M9.25 1.75v4h4M5.5 8.75h5M5.5 11.25h3.5" />
-                    </g></svg
-                  ><span class="txt">CV</span></span
-                ><span class="val">yojun_CV.pdf</span
-                ><span class="arrow">↗</span></a
-              >
+                      ></path>
+                      <path d="M9.25 1.75v4h4M5.5 8.75h5M5.5 11.25h3.5"></path>
+                    </g>
+                  </svg>
+                  <span class="txt"> CV </span>
+                </span>
+                <span class="val"> yojun_CV.pdf </span>
+                <span class="arrow"> ↗ </span>
+              </a>
             </li>
             <li>
-              <a href="yojun_portfolio.pdf" download>
-                <span class="label"
-                  ><svg
-                    class="ico"
-                    viewBox="0 0 16 16"
-                    width="16"
-                    height="16"
+              <a download="" href="yojun_portfolio.pdf">
+                <span class="label">
+                  <svg
                     aria-hidden="true"
+                    class="ico"
+                    height="16"
+                    viewbox="0 0 16 16"
+                    width="16"
                   >
                     <g
                       fill="none"
                       stroke="currentColor"
-                      stroke-width="1.5"
                       stroke-linecap="round"
                       stroke-linejoin="round"
+                      stroke-width="1.5"
                     >
                       <path
                         d="M1.75 4.25a1.5 1.5 0 0 1 1.5-1.5h3l1.5 1.75h5a1.5 1.5 0 0 1 1.5 1.5v6.25a1.5 1.5 0 0 1-1.5 1.5h-9.5a1.5 1.5 0 0 1-1.5-1.5z"
-                      />
-                      <path d="M1.75 7h12.5" />
-                    </g></svg
-                  ><span class="txt">Portfolio</span></span
-                ><span class="val">yojun_portfolio.pdf</span
-                ><span class="arrow">↓</span></a
-              >
+                      ></path>
+                      <path d="M1.75 7h12.5"></path>
+                    </g>
+                  </svg>
+                  <span class="txt"> Portfolio </span>
+                </span>
+                <span class="val"> yojun_portfolio.pdf </span>
+                <span class="arrow"> ↓ </span>
+              </a>
             </li>
           </ul>
         </div>
       </section>
-
       <!-- ══ work ═══════════════════════════════════════ -->
-      <section class="view" data-view="work" hidden>
+      <section class="view" data-view="work" hidden="">
         <div class="wrap">
           <p class="eyebrow">Work</p>
           <h2 class="title">Experience</h2>
-
           <div class="tl">
             <article class="entry">
-              <div class="when">Jul 2026<br />— Aug 2026</div>
+              <div class="when">
+                Jul 2026
+                <br />
+                — Aug 2026
+              </div>
               <div>
                 <h3>Samsung Fire &amp; Marine Insurance</h3>
                 <div class="role">AI Development Part · Internship</div>
@@ -1237,17 +1266,23 @@
                 </p>
               </div>
             </article>
-
             <article class="entry">
-              <div class="when">Jan 2026<br />— Feb 2026</div>
+              <div class="when">
+                Jan 2026
+                <br />
+                — Feb 2026
+              </div>
               <div>
                 <h3>POSTECH HAiV Lab</h3>
                 <div class="role">Undergraduate Researcher</div>
               </div>
             </article>
-
             <article class="entry">
-              <div class="when">Feb 2025<br />— Jul 2025</div>
+              <div class="when">
+                Feb 2025
+                <br />
+                — Jul 2025
+              </div>
               <div>
                 <h3>Startup Team</h3>
                 <div class="role">Backend Intern</div>
@@ -1260,16 +1295,20 @@
                 </p>
               </div>
             </article>
-
             <article class="entry">
-              <div class="when">Nov 2023<br />— Present</div>
+              <div class="when">
+                Nov 2023
+                <br />
+                — Present
+              </div>
               <div>
                 <h3>Korean National Police University — FPEI</h3>
                 <div class="role">Research System Developer</div>
                 <p>
                   Building and operating the institute's research platform from
-                  scratch. Eight services now run at <code>*.knpu.re.kr</code>.
-                  In April 2024 the LLM-based legal complaint drafting service
+                  scratch. Eight services now run at
+                  <code> *.knpu.re.kr </code>
+                  . In April 2024 the LLM-based legal complaint drafting service
                   earned a Letter of Appreciation from the university.
                 </p>
                 <p style="margin-top: 14px">
@@ -1281,21 +1320,24 @@
                       color: var(--accent);
                       text-decoration: none;
                     "
-                    >→ See the services</a
                   >
+                    → See the services
+                  </a>
                 </p>
               </div>
             </article>
-
             <article class="entry">
-              <div class="when">Mar 2023<br />— Present</div>
+              <div class="when">
+                Mar 2023
+                <br />
+                — Present
+              </div>
               <div>
                 <h3>POSTECH</h3>
                 <div class="role">B.S. Computer Science and Engineering</div>
               </div>
             </article>
           </div>
-
           <dl class="stack">
             <div>
               <dt>Languages</dt>
@@ -1316,13 +1358,11 @@
           </dl>
         </div>
       </section>
-
       <!-- ══ projects ═══════════════════════════════════ -->
-      <section class="view" data-view="projects" hidden>
+      <section class="view" data-view="projects" hidden="">
         <div class="wrap">
           <p class="eyebrow">Projects</p>
           <h2 class="title">Services in production</h2>
-
           <h3 class="grouphead">POSTECH CSE</h3>
           <div class="grid">
             <article class="card" data-project="pcss">
@@ -1335,7 +1375,8 @@
                   alt="PCSS conference selection by research area"
                   loading="lazy"
                   src="assets/systems/pcss/1.webp"
-                /><span class="count">4</span>
+                />
+                <span class="count"> 4 </span>
               </button>
               <div class="body">
                 <div class="owner">POSTECH CSE</div>
@@ -1346,11 +1387,11 @@
                     href="https://pcss.postech.ac.kr/"
                     rel="noopener"
                     target="_blank"
-                    ><span class="pip"></span>pcss.postech.ac.kr<span
-                      class="ext"
-                      >↗</span
-                    ></a
                   >
+                    <span class="pip"> </span>
+                    pcss.postech.ac.kr
+                    <span class="ext"> ↗ </span>
+                  </a>
                   <a
                     aria-label="PCSS on GitHub"
                     class="gh"
@@ -1358,7 +1399,8 @@
                     rel="noopener"
                     target="_blank"
                     title="GitHub"
-                    ><svg
+                  >
+                    <svg
                       aria-hidden="true"
                       height="16"
                       viewbox="0 0 16 16"
@@ -1367,8 +1409,9 @@
                       <path
                         d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"
                         fill="currentColor"
-                      ></path></svg
-                  ></a>
+                      ></path>
+                    </svg>
+                  </a>
                 </div>
                 <p>
                   Searches DBLP publication data for faculty candidates using
@@ -1378,7 +1421,6 @@
                 <div class="note">Hours of manual search down to seconds</div>
               </div>
             </article>
-
             <article class="card" data-project="commeet">
               <button
                 aria-label="View Commeet screenshots"
@@ -1389,7 +1431,8 @@
                   alt="Commeet home page"
                   loading="lazy"
                   src="assets/systems/commeet/1.webp"
-                /><span class="count">4</span>
+                />
+                <span class="count"> 4 </span>
               </button>
               <div class="body">
                 <div class="owner">POSTECH CSE</div>
@@ -1400,11 +1443,11 @@
                     href="https://commeet.postech.ac.kr"
                     rel="noopener"
                     target="_blank"
-                    ><span class="pip"></span>commeet.postech.ac.kr<span
-                      class="ext"
-                      >↗</span
-                    ></a
                   >
+                    <span class="pip"> </span>
+                    commeet.postech.ac.kr
+                    <span class="ext"> ↗ </span>
+                  </a>
                   <a
                     aria-label="Commeet on GitHub"
                     class="gh"
@@ -1412,7 +1455,8 @@
                     rel="noopener"
                     target="_blank"
                     title="GitHub"
-                    ><svg
+                  >
+                    <svg
                       aria-hidden="true"
                       height="16"
                       viewbox="0 0 16 16"
@@ -1421,8 +1465,9 @@
                       <path
                         d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"
                         fill="currentColor"
-                      ></path></svg
-                  ></a>
+                      ></path>
+                    </svg>
+                  </a>
                 </div>
                 <p>
                   Automatically assigns consultation times from participants’
@@ -1436,7 +1481,6 @@
               </div>
             </article>
           </div>
-
           <h3 class="grouphead">Samsung Fire &amp; Marine Insurance</h3>
           <div class="grid">
             <article class="card" data-project="masking">
@@ -1460,21 +1504,33 @@
                     href="https://masking.yojun.dev"
                     rel="noopener"
                     target="_blank"
-                    ><span class="pip"></span>masking.yojun.dev<span class="ext"
-                      >↗</span
-                    ></a
                   >
+                    <span class="pip"> </span>
+                    masking.yojun.dev
+                    <span class="ext"> ↗ </span>
+                  </a>
+                  <a
+                    class="host"
+                    href="https://huggingface.co/yojun313/yolo11x-car-plate-detection"
+                    rel="noopener"
+                    target="_blank"
+                  >
+                    Hugging Face · YOLO11x ↗
+                  </a>
                 </div>
                 <p>
-                  Automatically masks every vehicle license plate in dashcam
-                  footage. YOLO vehicle detection feeds a degradation-tuned
-                  plate detector, sped up with optical-flow tracking and
-                  parallel segment processing.
+                  Developed a vehicle-to-plate masking pipeline and further
+                  fine-tuned a pretrained YOLO11x plate detector with
+                  downscaling, blur, noise, and compression. Combined
+                  optical-flow tracking and parallel video processing; published
+                  project checkpoints and training details on Hugging Face.
                 </p>
-                <div class="note">99.0% recall · 0.98 F1 · 27+ fps</div>
+                <div class="note">
+                  Recorded image evaluation: 99.0% recall / 0.98 F1; 27+ fps on
+                  development GPU
+                </div>
               </div>
             </article>
-
             <article class="card" data-project="forge">
               <button
                 aria-label="View Forgery Detection screenshots"
@@ -1496,10 +1552,11 @@
                     href="https://forge.yojun.dev"
                     rel="noopener"
                     target="_blank"
-                    ><span class="pip"></span>forge.yojun.dev<span class="ext"
-                      >↗</span
-                    ></a
                   >
+                    <span class="pip"> </span>
+                    forge.yojun.dev
+                    <span class="ext"> ↗ </span>
+                  </a>
                 </div>
                 <p>
                   Detects document regions edited with generative AI. Built
@@ -1523,7 +1580,7 @@
                   loading="lazy"
                   src="assets/systems/docforgery/1.webp"
                 />
-                <span class="count">3</span>
+                <span class="count"> 3 </span>
               </button>
               <div class="body">
                 <div class="owner">Samsung Fire · Internship</div>
@@ -1534,11 +1591,11 @@
                     href="https://docforgery.yojun.dev"
                     rel="noopener"
                     target="_blank"
-                    ><span class="pip"></span>docforgery.yojun.dev<span
-                      class="ext"
-                      >↗</span
-                    ></a
                   >
+                    <span class="pip"> </span>
+                    docforgery.yojun.dev
+                    <span class="ext"> ↗ </span>
+                  </a>
                 </div>
                 <p>
                   A dataset browser for original and AI-forged insurance claim
@@ -1552,7 +1609,6 @@
               </div>
             </article>
           </div>
-
           <h3 class="grouphead">KNPU · FPEI</h3>
           <div class="grid">
             <article class="card" data-project="manager">
@@ -1565,7 +1621,8 @@
                   alt="MANAGER desktop database browser"
                   loading="lazy"
                   src="assets/systems/manager/1.webp"
-                /><span class="count">7</span>
+                />
+                <span class="count"> 7 </span>
               </button>
               <div class="body">
                 <div class="owner">KNPU · FPEI</div>
@@ -1576,11 +1633,11 @@
                     href="https://manager.knpu.re.kr"
                     rel="noopener"
                     target="_blank"
-                    ><span class="pip"></span>manager.knpu.re.kr<span
-                      class="ext"
-                      >↗</span
-                    ></a
                   >
+                    <span class="pip"> </span>
+                    manager.knpu.re.kr
+                    <span class="ext"> ↗ </span>
+                  </a>
                   <a
                     aria-label="Manager on GitHub"
                     class="gh"
@@ -1588,7 +1645,8 @@
                     rel="noopener"
                     target="_blank"
                     title="GitHub"
-                    ><svg
+                  >
+                    <svg
                       aria-hidden="true"
                       height="16"
                       viewbox="0 0 16 16"
@@ -1597,8 +1655,9 @@
                       <path
                         d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"
                         fill="currentColor"
-                      ></path></svg
-                  ></a>
+                      ></path>
+                    </svg>
+                  </a>
                 </div>
                 <p>
                   Desktop research workspace for browsing datasets, running
@@ -1609,7 +1668,6 @@
                 <div class="note">Qt · MongoDB · research data management</div>
               </div>
             </article>
-
             <article class="card" data-project="crawler">
               <button
                 aria-label="View Crawler screenshots"
@@ -1631,11 +1689,11 @@
                     href="https://crawler.knpu.re.kr"
                     rel="noopener"
                     target="_blank"
-                    ><span class="pip"></span>crawler.knpu.re.kr<span
-                      class="ext"
-                      >↗</span
-                    ></a
                   >
+                    <span class="pip"> </span>
+                    crawler.knpu.re.kr
+                    <span class="ext"> ↗ </span>
+                  </a>
                   <a
                     aria-label="Crawler on GitHub"
                     class="gh"
@@ -1643,7 +1701,8 @@
                     rel="noopener"
                     target="_blank"
                     title="GitHub"
-                    ><svg
+                  >
+                    <svg
                       aria-hidden="true"
                       height="16"
                       viewbox="0 0 16 16"
@@ -1652,8 +1711,9 @@
                       <path
                         d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"
                         fill="currentColor"
-                      ></path></svg
-                  ></a>
+                      ></path>
+                    </svg>
+                  </a>
                 </div>
                 <p>
                   Collects research data from news, blogs, cafes, and YouTube
@@ -1665,7 +1725,6 @@
                 </div>
               </div>
             </article>
-
             <article class="card" data-project="network">
               <button
                 aria-label="View Network screenshots"
@@ -1687,11 +1746,11 @@
                     href="https://network.knpu.re.kr"
                     rel="noopener"
                     target="_blank"
-                    ><span class="pip"></span>network.knpu.re.kr<span
-                      class="ext"
-                      >↗</span
-                    ></a
                   >
+                    <span class="pip"> </span>
+                    network.knpu.re.kr
+                    <span class="ext"> ↗ </span>
+                  </a>
                   <a
                     aria-label="Network on GitHub"
                     class="gh"
@@ -1699,7 +1758,8 @@
                     rel="noopener"
                     target="_blank"
                     title="GitHub"
-                    ><svg
+                  >
+                    <svg
                       aria-hidden="true"
                       height="16"
                       viewbox="0 0 16 16"
@@ -1708,8 +1768,9 @@
                       <path
                         d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"
                         fill="currentColor"
-                      ></path></svg
-                  ></a>
+                      ></path>
+                    </svg>
+                  </a>
                 </div>
                 <p>
                   Builds and visualizes relationships between words and
@@ -1721,7 +1782,6 @@
                 </div>
               </div>
             </article>
-
             <article class="card" data-project="statistics">
               <button
                 aria-label="View Statistics screenshots"
@@ -1743,11 +1803,11 @@
                     href="https://statistics.knpu.re.kr"
                     rel="noopener"
                     target="_blank"
-                    ><span class="pip"></span>statistics.knpu.re.kr<span
-                      class="ext"
-                      >↗</span
-                    ></a
                   >
+                    <span class="pip"> </span>
+                    statistics.knpu.re.kr
+                    <span class="ext"> ↗ </span>
+                  </a>
                   <a
                     aria-label="Statistics on GitHub"
                     class="gh"
@@ -1755,7 +1815,8 @@
                     rel="noopener"
                     target="_blank"
                     title="GitHub"
-                    ><svg
+                  >
+                    <svg
                       aria-hidden="true"
                       height="16"
                       viewbox="0 0 16 16"
@@ -1764,8 +1825,9 @@
                       <path
                         d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"
                         fill="currentColor"
-                      ></path></svg
-                  ></a>
+                      ></path>
+                    </svg>
+                  </a>
                 </div>
                 <p>
                   Runs statistical analyses and visualizes tables and charts.
@@ -1777,7 +1839,6 @@
                 </div>
               </div>
             </article>
-
             <article class="card" data-project="kemkim">
               <button
                 aria-label="View KemKim screenshots"
@@ -1799,10 +1860,11 @@
                     href="https://kemkim.knpu.re.kr"
                     rel="noopener"
                     target="_blank"
-                    ><span class="pip"></span>kemkim.knpu.re.kr<span class="ext"
-                      >↗</span
-                    ></a
                   >
+                    <span class="pip"> </span>
+                    kemkim.knpu.re.kr
+                    <span class="ext"> ↗ </span>
+                  </a>
                   <a
                     aria-label="KemKim on GitHub"
                     class="gh"
@@ -1810,7 +1872,8 @@
                     rel="noopener"
                     target="_blank"
                     title="GitHub"
-                    ><svg
+                  >
+                    <svg
                       aria-hidden="true"
                       height="16"
                       viewbox="0 0 16 16"
@@ -1819,8 +1882,9 @@
                       <path
                         d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"
                         fill="currentColor"
-                      ></path></svg
-                  ></a>
+                      ></path>
+                    </svg>
+                  </a>
                 </div>
                 <p>
                   Implements KEM/KIM keyword signal analysis with adjustable
@@ -1832,7 +1896,6 @@
                 </div>
               </div>
             </article>
-
             <article class="card" data-project="whisper">
               <button
                 aria-label="View Whisper screenshots"
@@ -1854,18 +1917,20 @@
                     href="https://whisper.knpu.re.kr"
                     rel="noopener"
                     target="_blank"
-                    ><span class="pip"></span>whisper.knpu.re.kr<span
-                      class="ext"
-                      >↗</span
-                    ></a
-                  ><a
+                  >
+                    <span class="pip"> </span>
+                    whisper.knpu.re.kr
+                    <span class="ext"> ↗ </span>
+                  </a>
+                  <a
                     aria-label="Whisper on GitHub"
                     class="gh"
                     href="https://github.com/yojun313/knpu/tree/main/whisper"
                     rel="noopener"
                     target="_blank"
                     title="GitHub"
-                    ><svg
+                  >
+                    <svg
                       aria-hidden="true"
                       height="16"
                       viewbox="0 0 16 16"
@@ -1874,8 +1939,9 @@
                       <path
                         d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"
                         fill="currentColor"
-                      ></path></svg
-                  ></a>
+                      ></path>
+                    </svg>
+                  </a>
                 </div>
                 <p>
                   Transcribes audio through a GPU server and manages results and
@@ -1885,7 +1951,6 @@
                 <div class="note">faster-whisper · GPU transcription</div>
               </div>
             </article>
-
             <article class="card" data-project="complaint">
               <button
                 aria-label="View Legal AI screenshots"
@@ -1896,7 +1961,8 @@
                   alt="AI legal complaint drafting service landing screen"
                   loading="lazy"
                   src="assets/systems/complaint/1.webp"
-                /><span class="count">2</span>
+                />
+                <span class="count"> 2 </span>
               </button>
               <div class="body">
                 <div class="owner">KNPU · FPEI</div>
@@ -1907,11 +1973,11 @@
                     href="https://complaint.knpu.re.kr"
                     rel="noopener"
                     target="_blank"
-                    ><span class="pip"></span>complaint.knpu.re.kr<span
-                      class="ext"
-                      >↗</span
-                    ></a
                   >
+                    <span class="pip"> </span>
+                    complaint.knpu.re.kr
+                    <span class="ext"> ↗ </span>
+                  </a>
                   <a
                     aria-label="Legal AI on GitHub"
                     class="gh"
@@ -1919,7 +1985,8 @@
                     rel="noopener"
                     target="_blank"
                     title="GitHub"
-                    ><svg
+                  >
+                    <svg
                       aria-hidden="true"
                       height="16"
                       viewbox="0 0 16 16"
@@ -1928,8 +1995,9 @@
                       <path
                         d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"
                         fill="currentColor"
-                      ></path></svg
-                  ></a>
+                      ></path>
+                    </svg>
+                  </a>
                 </div>
                 <p>
                   Turns an incident description into a structured criminal
@@ -1939,7 +2007,6 @@
                 <div class="note">Letter of Appreciation, Apr 2024</div>
               </div>
             </article>
-
             <article class="card" data-project="agents">
               <button
                 aria-label="View Agent Chatbot screenshots"
@@ -1950,7 +2017,8 @@
                   alt="KNPU agent chatbot for research information and workflow guidance"
                   loading="lazy"
                   src="assets/systems/agents/1.webp"
-                /><span class="count">2</span>
+                />
+                <span class="count"> 2 </span>
               </button>
               <div class="body">
                 <div class="owner">KNPU · FPEI</div>
@@ -1961,17 +2029,20 @@
                     href="https://knpu.re.kr/"
                     rel="noopener"
                     target="_blank"
-                    ><span class="pip"></span>knpu.re.kr<span class="ext"
-                      >↗</span
-                    ></a
-                  ><a
+                  >
+                    <span class="pip"> </span>
+                    knpu.re.kr
+                    <span class="ext"> ↗ </span>
+                  </a>
+                  <a
                     aria-label="Agent Chatbot on GitHub"
                     class="gh"
                     href="https://github.com/yojun313/knpu/tree/main/system/chatbot"
                     rel="noopener"
                     target="_blank"
                     title="GitHub"
-                    ><svg
+                  >
+                    <svg
                       aria-hidden="true"
                       height="16"
                       viewbox="0 0 16 16"
@@ -1980,8 +2051,9 @@
                       <path
                         d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"
                         fill="currentColor"
-                      ></path></svg
-                  ></a>
+                      ></path>
+                    </svg>
+                  </a>
                 </div>
                 <p>
                   Answers public questions about the lab and guides researchers
@@ -1992,7 +2064,6 @@
               </div>
             </article>
           </div>
-
           <h3 class="grouphead">Competition</h3>
           <div class="grid">
             <article class="card" data-project="sportsbridge">
@@ -2005,7 +2076,8 @@
                   alt="SportsBridge portal for sports voucher recipients and program administrators"
                   loading="lazy"
                   src="assets/systems/sportsbridge/1.webp"
-                /><span class="count">8</span>
+                />
+                <span class="count"> 8 </span>
               </button>
               <div class="body">
                 <div class="owner">Competition</div>
@@ -2016,11 +2088,11 @@
                     href="https://sportsbridge.o-r.kr"
                     rel="noopener"
                     target="_blank"
-                    ><span class="pip"></span>sportsbridge.o-r.kr<span
-                      class="ext"
-                      >↗</span
-                    ></a
                   >
+                    <span class="pip"> </span>
+                    sportsbridge.o-r.kr
+                    <span class="ext"> ↗ </span>
+                  </a>
                 </div>
                 <p>
                   Connects 10 public datasets to help sports voucher recipients
@@ -2035,7 +2107,6 @@
               </div>
             </article>
           </div>
-
           <h3 class="grouphead">Personal</h3>
           <div class="grid">
             <article class="card" data-project="lecai">
@@ -2048,7 +2119,8 @@
                   alt="LecAI lecture material management screen"
                   loading="lazy"
                   src="assets/systems/lecai/1.webp"
-                /><span class="count">4</span>
+                />
+                <span class="count"> 4 </span>
               </button>
               <div class="body">
                 <div class="owner">Personal</div>
@@ -2059,10 +2131,11 @@
                     href="https://lec.yojun.dev"
                     rel="noopener"
                     target="_blank"
-                    ><span class="pip"></span>lec.yojun.dev<span class="ext"
-                      >↗</span
-                    ></a
                   >
+                    <span class="pip"> </span>
+                    lec.yojun.dev
+                    <span class="ext"> ↗ </span>
+                  </a>
                   <a
                     aria-label="LecAI on GitHub"
                     class="gh"
@@ -2070,7 +2143,8 @@
                     rel="noopener"
                     target="_blank"
                     title="GitHub"
-                    ><svg
+                  >
+                    <svg
                       aria-hidden="true"
                       height="16"
                       viewbox="0 0 16 16"
@@ -2079,8 +2153,9 @@
                       <path
                         d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"
                         fill="currentColor"
-                      ></path></svg
-                  ></a>
+                      ></path>
+                    </svg>
+                  </a>
                 </div>
                 <p>
                   Connects lecture slides, recordings, and board notes with AI
@@ -2091,7 +2166,6 @@
                 <div class="note">Slide-level chat · Whisper · LLM / VLM</div>
               </div>
             </article>
-
             <article class="card" data-project="univdash">
               <button
                 aria-label="View UnivDash screenshots"
@@ -2102,7 +2176,8 @@
                   alt="UnivDash coding agent workspace and conversation view"
                   loading="lazy"
                   src="assets/systems/univdash/1.webp"
-                /><span class="count">4</span>
+                />
+                <span class="count"> 4 </span>
               </button>
               <div class="body">
                 <div class="owner">Personal</div>
@@ -2114,7 +2189,8 @@
                     rel="noopener"
                     target="_blank"
                     title="GitHub"
-                    ><svg
+                  >
+                    <svg
                       aria-hidden="true"
                       height="16"
                       viewbox="0 0 16 16"
@@ -2123,10 +2199,11 @@
                       <path
                         d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"
                         fill="currentColor"
-                      ></path></svg
-                    ><span>yojun313/UnivDash</span
-                    ><span class="ext">↗</span></a
-                  >
+                      ></path>
+                    </svg>
+                    <span> yojun313/UnivDash </span>
+                    <span class="ext"> ↗ </span>
+                  </a>
                 </div>
                 <p>
                   Monitor and control Claude Code, Codex, and development tools
@@ -2137,7 +2214,6 @@
                 <div class="note">FastAPI · WebSocket · tmux · PM2 · Git</div>
               </div>
             </article>
-
             <article class="card" data-project="vllm-manager">
               <button
                 aria-label="View vllm-manager screenshots"
@@ -2148,7 +2224,8 @@
                   alt="vllm-manager GPU dashboard and model deployment controls"
                   loading="lazy"
                   src="assets/systems/vllm-manager/1.webp"
-                /><span class="count">2</span>
+                />
+                <span class="count"> 2 </span>
               </button>
               <div class="body">
                 <div class="owner">Personal</div>
@@ -2161,7 +2238,8 @@
                     rel="noopener"
                     target="_blank"
                     title="GitHub"
-                    ><svg
+                  >
+                    <svg
                       aria-hidden="true"
                       height="16"
                       viewbox="0 0 16 16"
@@ -2170,10 +2248,11 @@
                       <path
                         d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"
                         fill="currentColor"
-                      ></path></svg
-                    ><span>yojun313/vllm-manager</span
-                    ><span class="ext">↗</span></a
-                  >
+                      ></path>
+                    </svg>
+                    <span> yojun313/vllm-manager </span>
+                    <span class="ext"> ↗ </span>
+                  </a>
                 </div>
                 <p>
                   Deploy local LLMs through a CLI and web console. Automates
@@ -2183,7 +2262,6 @@
                 <div class="note">Docker · vLLM · GPU resource planning</div>
               </div>
             </article>
-
             <article class="card" data-project="eng2mouth">
               <button
                 aria-label="View Eng2Mouth screenshots"
@@ -2194,7 +2272,8 @@
                   alt="Eng2Mouth landing page with a phone call to an AI friend"
                   loading="lazy"
                   src="assets/systems/eng2mouth/1.webp"
-                /><span class="count">4</span>
+                />
+                <span class="count"> 4 </span>
               </button>
               <div class="body">
                 <div class="owner">Personal</div>
@@ -2205,10 +2284,11 @@
                     href="https://eng.yojun.dev"
                     rel="noopener"
                     target="_blank"
-                    ><span class="pip"></span>eng.yojun.dev<span class="ext"
-                      >↗</span
-                    ></a
                   >
+                    <span class="pip"> </span>
+                    eng.yojun.dev
+                    <span class="ext"> ↗ </span>
+                  </a>
                   <a
                     aria-label="Eng2Mouth on GitHub"
                     class="gh"
@@ -2216,7 +2296,8 @@
                     rel="noopener"
                     target="_blank"
                     title="GitHub"
-                    ><svg
+                  >
+                    <svg
                       aria-hidden="true"
                       height="16"
                       viewbox="0 0 16 16"
@@ -2225,8 +2306,9 @@
                       <path
                         d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"
                         fill="currentColor"
-                      ></path></svg
-                  ></a>
+                      ></path>
+                    </svg>
+                  </a>
                 </div>
                 <p>
                   AI phone-call English practice. Call an AI conversation
@@ -2249,7 +2331,7 @@
                   loading="lazy"
                   src="assets/systems/pocareers/1.webp"
                 />
-                <span class="count">4</span>
+                <span class="count"> 4 </span>
               </button>
               <div class="body">
                 <div class="owner">Personal</div>
@@ -2260,10 +2342,11 @@
                     href="https://careers.yojun.dev"
                     rel="noopener"
                     target="_blank"
-                    ><span class="pip"></span>careers.yojun.dev<span class="ext"
-                      >↗</span
-                    ></a
                   >
+                    <span class="pip"> </span>
+                    careers.yojun.dev
+                    <span class="ext"> ↗ </span>
+                  </a>
                   <a
                     aria-label="PoCareers on GitHub"
                     class="gh"
@@ -2271,17 +2354,19 @@
                     rel="noopener"
                     target="_blank"
                     title="GitHub"
-                    ><svg
+                  >
+                    <svg
                       aria-hidden="true"
                       height="16"
-                      viewBox="0 0 16 16"
+                      viewbox="0 0 16 16"
                       width="16"
                     >
                       <path
                         d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"
                         fill="currentColor"
-                      ></path></svg
-                  ></a>
+                      ></path>
+                    </svg>
+                  </a>
                 </div>
                 <p>
                   Aggregates POSTECH internship and recruitment postings with
@@ -2298,51 +2383,49 @@
           </div>
         </div>
       </section>
-
       <div class="wrap">
         <footer>
-          <span>© 2026 Yojun Moon</span>
-          <a href="https://github.com/yojun313">GitHub</a>
-          <a href="https://www.linkedin.com/in/yojun-moon/">LinkedIn</a>
-          <a href="mailto:yojun313@postech.ac.kr">Email</a>
+          <span> © 2026 Yojun Moon </span>
+          <a href="https://github.com/yojun313"> GitHub </a>
+          <a href="https://www.linkedin.com/in/yojun-moon/"> LinkedIn </a>
+          <a href="mailto:yojun313@postech.ac.kr"> Email </a>
         </footer>
       </div>
     </main>
-
-    <dialog class="gallery" id="gallery" aria-labelledby="galleryTitle">
+    <dialog aria-labelledby="galleryTitle" class="gallery" id="gallery">
       <div class="g-head">
         <div>
           <div class="owner" id="galleryOwner"></div>
           <h3 id="galleryTitle"></h3>
         </div>
         <button
-          class="g-close"
-          type="button"
-          id="galleryClose"
           aria-label="Close"
+          class="g-close"
+          id="galleryClose"
+          type="button"
         >
           ×
         </button>
       </div>
       <div class="g-stage">
-        <img id="galleryImg" alt="" />
+        <img alt="" id="galleryImg" />
         <button
-          class="g-nav g-prev"
-          type="button"
-          id="galleryPrev"
           aria-label="Previous image"
+          class="g-nav g-prev"
+          id="galleryPrev"
+          type="button"
         >
           ‹
         </button>
         <button
-          class="g-nav g-next"
-          type="button"
-          id="galleryNext"
           aria-label="Next image"
+          class="g-nav g-next"
+          id="galleryNext"
+          type="button"
         >
           ›
         </button>
-        <span class="g-counter" id="galleryCounter"></span>
+        <span class="g-counter" id="galleryCounter"> </span>
       </div>
       <div class="g-thumbs" id="galleryThumbs"></div>
       <div class="g-foot">
@@ -2350,7 +2433,6 @@
         <div class="g-links" id="galleryLinks"></div>
       </div>
     </dialog>
-
     <script>
       (function () {
         var views = Array.prototype.slice.call(
@@ -2470,9 +2552,7 @@
             ? [
                 {
                   label:
-                    "Visit " +
-                    site.textContent.replace("↗", "").trim() +
-                    " ↗",
+                    "Visit " + site.textContent.replace("↗", "").trim() + " ↗",
                   href: site.href,
                 },
               ]
