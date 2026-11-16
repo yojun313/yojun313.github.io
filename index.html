@@ -2092,6 +2092,77 @@
           </div>
           <h3 class="grouphead">Competition</h3>
           <div class="grid">
+            <article class="card" data-project="seatcom">
+              <button
+                aria-label="View SeatCom screenshots"
+                class="frame"
+                type="button"
+              >
+                <img
+                  alt="SeatCom personalized library seat recommendation service"
+                  loading="lazy"
+                  src="assets/systems/seatcom/1.webp"
+                />
+                <span class="count"> 4 </span>
+              </button>
+              <div class="body">
+                <div class="owner">2026 IT Arena Hackathon · Team Project</div>
+                <h3>SeatCom</h3>
+                <div class="reach">
+                  <a
+                    class="host"
+                    href="https://seatcom.o-r.kr"
+                    rel="noopener"
+                    target="_blank"
+                  >
+                    <span class="pip"> </span>
+                    seatcom.o-r.kr
+                    <span class="ext"> ↗ </span>
+                  </a>
+                  <a
+                    class="host"
+                    href="https://seatcom-data.o-r.kr"
+                    rel="noopener"
+                    target="_blank"
+                  >
+                    Dataset Viewer
+                    <span class="ext"> ↗ </span>
+                  </a>
+                  <a
+                    aria-label="SeatCom backend and recommendation models on GitHub"
+                    class="gh"
+                    href="https://github.com/yojun313/2026-IST-TECH-SeatCom-Model"
+                    rel="noopener"
+                    target="_blank"
+                    title="GitHub"
+                  >
+                    <svg
+                      aria-hidden="true"
+                      height="16"
+                      viewbox="0 0 16 16"
+                      width="16"
+                    >
+                      <path
+                        d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"
+                        fill="currentColor"
+                      ></path>
+                    </svg>
+                  </a>
+                </div>
+                <p>
+                  Built the backend and recommendation pipeline for a team
+                  project that ranks available library seats from user
+                  preferences, seat conditions, and choice feedback. Prepared
+                  real floor-plan data and synthetic training sessions, compared
+                  ranking models, and built a dataset viewer. An optional LLM
+                  workflow extracts preference signals from KakaoTalk exports
+                  without storing the original text.
+                </p>
+                <div class="note">
+                  Python · FastAPI · SQLite · scikit-learn · LightGBM · LLM APIs
+                </div>
+              </div>
+            </article>
             <article class="card" data-project="sportsbridge">
               <button
                 aria-label="View SportsBridge screenshots"
@@ -2518,6 +2589,7 @@
         }
         /* Extra links beyond the card's own href, keyed by data-project. */
         var IMAGES = {
+          seatcom: seq("seatcom", 4),
           sportsbridge: seq("sportsbridge", 8),
           lecai: seq("lecai", 4),
           eng2mouth: seq("eng2mouth", 4),
@@ -2572,17 +2644,15 @@
 
           var links = $("galleryLinks");
           links.innerHTML = "";
-          var site = card.querySelector(".host"),
+          var sites = card.querySelectorAll(".host"),
             repo = card.querySelector(".gh");
-          var list = site
-            ? [
-                {
-                  label:
-                    "Visit " + site.textContent.replace("↗", "").trim() + " ↗",
-                  href: site.href,
-                },
-              ]
-            : [];
+          var list = Array.prototype.map.call(sites, function (site) {
+            return {
+              label:
+                "Visit " + site.textContent.replace(/↗/g, "").trim() + " ↗",
+              href: site.href,
+            };
+          });
           if (repo)
             list.push({
               label: "GitHub ↗",
