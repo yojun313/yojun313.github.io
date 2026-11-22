@@ -15,7 +15,7 @@
     <link href="https://fonts.googleapis.com" rel="preconnect" />
     <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;700&amp;display=swap"
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&amp;family=Newsreader:opsz,wght@6..72,300;6..72,400;6..72,500&amp;display=swap"
       rel="stylesheet"
     />
     <style>
@@ -1013,180 +1013,6 @@
           white-space: nowrap;
         }
       }
-
-      /* ══ v2 design layer ══════════════════════════════════════════
-         A developer-tool look on top of the base rules above: sans + mono type,
-         a terminal-style hero, a faint grid, glow accents and rounder surfaces.
-         Everything here overrides tokens or components defined earlier. */
-      :root {
-        --ink: #07090d;
-        --surface: #0d1117;
-        --surface-2: #121823;
-        --line: #1f2733;
-        --line-soft: #161c26;
-        --fg: #e6edf3;
-        --fg-dim: #aab4c2;
-        --muted: #6f7b8c;
-        --accent: #5eead4;
-        --accent-dim: #2f8f82;
-        --accent-2: #a78bfa;
-        --live: #4ade80;
-        --glow: rgba(94, 234, 212, 0.14);
-        --grid: rgba(148, 163, 184, 0.055);
-        --shadow: 0 24px 60px -30px rgba(0, 0, 0, 0.9);
-        --sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
-        --serif: var(--sans);
-        --radius: 14px;
-        --wrap: 1120px;
-        --screenshot-padding: 10px;
-      }
-      @media (prefers-color-scheme: light) {
-        :root:not([data-theme="dark"]) {
-          --ink: #f6f8fa; --surface: #ffffff; --surface-2: #eef2f6; --line: #d5dce5; --line-soft: #e4e9ef;
-          --fg: #0d1117; --fg-dim: #3b4654; --muted: #66727f; --accent: #0f766e; --accent-dim: #5eb8ae; --accent-2: #6d4fd6;
-          --live: #15803d; --glow: rgba(15, 118, 110, 0.10); --grid: rgba(15, 23, 42, 0.05);
-          --shadow: 0 24px 50px -32px rgba(15, 23, 42, 0.35);
-        }
-      }
-      :root[data-theme="light"] {
-        --ink: #f6f8fa; --surface: #ffffff; --surface-2: #eef2f6; --line: #d5dce5; --line-soft: #e4e9ef;
-        --fg: #0d1117; --fg-dim: #3b4654; --muted: #66727f; --accent: #0f766e; --accent-dim: #5eb8ae; --accent-2: #6d4fd6;
-        --live: #15803d; --glow: rgba(15, 118, 110, 0.10); --grid: rgba(15, 23, 42, 0.05);
-        --shadow: 0 24px 50px -32px rgba(15, 23, 42, 0.35);
-      }
-
-      html { scroll-behavior: smooth; }
-      body {
-        font-family: var(--sans);
-        line-height: 1.6;
-        letter-spacing: -0.003em;
-        word-break: keep-all;
-        overflow-wrap: break-word;
-        background:
-          radial-gradient(900px 480px at 78% -8%, var(--glow), transparent 70%),
-          linear-gradient(var(--grid) 1px, transparent 1px) 0 0 / 32px 32px,
-          linear-gradient(90deg, var(--grid) 1px, transparent 1px) 0 0 / 32px 32px,
-          var(--ink);
-        background-attachment: fixed;
-      }
-      ::selection { background: color-mix(in srgb, var(--accent) 35%, transparent); }
-
-      /* top bar: a path-like brand and tab-style navigation */
-      .topbar { background: color-mix(in srgb, var(--ink) 78%, transparent); backdrop-filter: blur(14px) saturate(140%); }
-      .brand { font-size: 0.84rem; font-weight: 500; }
-      .brand::before { content: "~/"; color: var(--muted); }
-      .brand .dot { color: var(--accent); }
-      .nav { gap: 2px; padding: 3px; border: 1px solid var(--line); border-radius: 10px; background: color-mix(in srgb, var(--surface) 70%, transparent); }
-      .nav a { border-radius: 7px; padding: 6px 12px; }
-      .nav a::before { content: "./"; color: var(--muted); opacity: 0.7; }
-      .nav a:hover { background: var(--surface-2); }
-      .nav a[aria-current="page"] { color: var(--ink); background: var(--accent); font-weight: 500; }
-      .nav a[aria-current="page"]::before { color: inherit; opacity: 0.55; }
-      .theme-toggle, .menu-btn { border-radius: 9px; }
-
-      /* hero: a terminal window */
-      .hero { padding-top: clamp(40px, 9vh, 96px); }
-      .hero > .wrap { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr); gap: 48px; align-items: start; }
-      .hero > .wrap > footer { grid-column: 1 / -1; }
-      .term { border: 1px solid var(--line); border-radius: var(--radius); background: color-mix(in srgb, var(--surface) 92%, transparent); box-shadow: var(--shadow); overflow: hidden; }
-      .term-bar { display: flex; align-items: center; gap: 7px; padding: 11px 14px; border-bottom: 1px solid var(--line); background: var(--surface-2); font-family: var(--mono); font-size: 0.6875rem; color: var(--muted); }
-      .term-bar i { width: 10px; height: 10px; border-radius: 50%; background: var(--line); }
-      .term-bar i:nth-child(1) { background: #ff5f57; } .term-bar i:nth-child(2) { background: #febc2e; } .term-bar i:nth-child(3) { background: #28c840; }
-      .term-bar span { margin-left: 8px; }
-      .term-body { padding: 26px 26px 10px; }
-      .hero .prompt { font-family: var(--mono); font-size: 0.78rem; font-weight: 400; line-height: 1.5; color: var(--muted); margin: 0 0 10px; max-width: none; }
-      .hero .prompt b { color: var(--accent); font-weight: 500; }
-      .hero h1 + .prompt, .hero .meta + .prompt { margin-top: 26px; }
-      .hero h1 { font-family: var(--sans); font-weight: 700; font-size: clamp(2.4rem, 5.4vw, 3.6rem); letter-spacing: -0.04em; line-height: 1.04;
-        background: linear-gradient(92deg, var(--fg) 30%, var(--accent) 120%); -webkit-background-clip: text; background-clip: text; color: transparent; }
-      .hero h1 .name::after { content: ""; display: inline-block; width: 0.5ch; height: 0.86em; margin-left: 0.14em; vertical-align: -0.08em; background: var(--accent); animation: blink 1.1s steps(1) infinite; }
-      .hero .ko { display: block; -webkit-text-fill-color: var(--muted); font-family: var(--mono); font-size: 0.26em; font-weight: 400; letter-spacing: 0.12em; margin-top: 1em; }
-      .hero .ko::before { content: "# "; opacity: 0.6; }
-      @keyframes blink { 50% { opacity: 0; } }
-      @media (prefers-reduced-motion: reduce) { .hero h1 .name::after { animation: none; } }
-      .meta { margin-top: 0; gap: 8px; }
-      .meta span:not(.sep) { padding: 4px 10px; border: 1px solid var(--line); border-radius: 999px; background: var(--surface-2); color: var(--fg-dim); letter-spacing: 0.02em; }
-      .meta .sep { display: none; }
-      .links { margin: 0 -26px; max-width: none; background: none; border: 0; border-top: 1px solid var(--line); gap: 0; }
-      .links li { background: none; }
-      .links li + li { border-top: 1px solid var(--line-soft); }
-      .links a { padding: 13px 26px; gap: 14px; }
-      .links a:hover { background: var(--surface-2); padding-left: 32px; }
-      .links .label { min-width: 132px; letter-spacing: 0.06em; }
-      .links .val { font-family: var(--mono); font-size: 0.84rem; font-weight: 400; color: var(--fg-dim); }
-      .links .arrow { color: var(--muted); }
-
-      /* featured project next to the terminal */
-      .feature { position: relative; display: block; text-decoration: none; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); overflow: hidden; box-shadow: var(--shadow); transition: transform 0.2s ease, border-color 0.2s ease; }
-      .feature:hover { transform: translateY(-3px); border-color: var(--accent-dim); }
-      .feature-shot { padding: 12px 12px 0; background: linear-gradient(160deg, color-mix(in srgb, var(--accent) 16%, var(--surface-2)), var(--surface-2) 55%); }
-      .feature-shot img { width: 100%; border-radius: 10px 10px 0 0; box-shadow: 0 -8px 40px -18px rgba(0, 0, 0, 0.7); }
-      .feature-body { padding: 18px 20px 20px; border-top: 1px solid var(--line); }
-      .feature-tag { display: inline-flex; align-items: center; gap: 8px; font-family: var(--mono); font-size: 0.6875rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); }
-      .feature-tag::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--live); box-shadow: 0 0 0 4px color-mix(in srgb, var(--live) 22%, transparent); }
-      .feature h2 { margin: 10px 0 6px; font-size: 1.35rem; font-weight: 700; letter-spacing: -0.02em; }
-      .hero .feature p { margin: 0; max-width: none; font-size: 0.9375rem; font-weight: 400; line-height: 1.55; color: var(--fg-dim); text-wrap: pretty; }
-      .feature-links { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; font-family: var(--mono); font-size: 0.72rem; }
-      .feature-links span { padding: 5px 10px; border: 1px solid var(--line); border-radius: 8px; color: var(--fg-dim); background: var(--surface-2); }
-      .feature-links span:first-child { color: var(--ink); background: var(--accent); border-color: transparent; font-weight: 500; }
-      @media (max-width: 900px) { .hero > .wrap { grid-template-columns: 1fr; gap: 28px; } }
-      @media (max-width: 640px) {
-        .term-body { padding: 20px 18px 8px; } .links { margin: 0 -18px; } .links a { padding: 13px 18px; } .links a:hover { padding-left: 22px; }
-        .links .label { min-width: 0; } .links .label .txt { display: none; } .links .val { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-      }
-
-      /* section furniture: code-comment headings */
-      .eyebrow { letter-spacing: 0.08em; text-transform: none; font-size: 0.75rem; }
-      .eyebrow::before { content: "// "; opacity: 0.6; white-space: pre; }
-      h2.title { font-family: var(--sans); font-weight: 700; font-size: clamp(1.8rem, 4vw, 2.5rem); letter-spacing: -0.035em; margin-bottom: 44px; }
-      .grouphead { font-size: 0.78rem; letter-spacing: 0.06em; text-transform: none; color: var(--fg); }
-      .grouphead::before { content: "##"; color: var(--accent); }
-      .grouphead::after { background: linear-gradient(90deg, var(--line), transparent); }
-      .grid + .grouphead { margin-top: 64px; }
-
-      /* timeline: a rail with nodes */
-      .tl { gap: 0; background: none; border: 0; position: relative; }
-      .tl::before { content: ""; position: absolute; left: 150px; top: 8px; bottom: 8px; width: 1px; background: linear-gradient(var(--line), var(--line) 85%, transparent); }
-      .entry { background: none; grid-template-columns: 132px 1fr; gap: 40px; padding: 0 0 40px; position: relative; }
-      .entry::before { content: ""; position: absolute; left: 146px; top: 9px; width: 9px; height: 9px; border-radius: 50%; background: var(--ink); border: 2px solid var(--accent); box-shadow: 0 0 0 4px var(--glow); }
-      .entry .when { padding-top: 0.25em; text-align: right; line-height: 1.5; }
-      .entry h3 { font-size: 1.3rem; font-weight: 650; letter-spacing: -0.02em; }
-      .entry .role { margin-top: 5px; }
-      .entry p { font-weight: 400; }
-      .sub li { border-left: 2px solid var(--line); padding-left: 16px; transition: border-color 0.15s ease; }
-      .sub li:hover { border-left-color: var(--accent-dim); }
-      .sub b { font-weight: 600; }
-      .figs span { border-radius: 7px; background: var(--surface); padding: 4px 9px; }
-      @media (max-width: 640px) { .tl::before { left: 4px; } .entry { grid-template-columns: 1fr; gap: 8px; padding-left: 26px; } .entry::before { left: 0; } .entry .when { text-align: left; } .entry .when br { display: none; } }
-
-      /* cards */
-      .grid { gap: 22px; grid-template-columns: repeat(auto-fill, minmax(310px, 1fr)); }
-      .card { border-radius: var(--radius); background: color-mix(in srgb, var(--surface) 94%, transparent); position: relative; }
-      .card::after { content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; opacity: 0; transition: opacity 0.2s ease;
-        background: radial-gradient(420px 180px at 50% 0%, var(--glow), transparent 70%); }
-      .card:hover { border-color: var(--accent-dim); transform: translateY(-4px); }
-      .card:hover::after { opacity: 1; }
-      .frame, button.frame { background: linear-gradient(180deg, var(--surface-2), color-mix(in srgb, var(--surface-2) 60%, var(--ink))); border-bottom: 1px solid var(--line); }
-      /* Screenshots come with their own rounded, transparent corners: let them show, and round opaque ones to match. */
-      .frame img { border-radius: 7px; transition: transform 0.35s cubic-bezier(0.2, 0.7, 0.3, 1); filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.28)); }
-      .card:hover .frame img { transform: scale(1.025); }
-      .count { border-radius: 6px; padding: 4px 8px; backdrop-filter: blur(6px); }
-      .card .body { padding: 18px 20px 20px; gap: 10px; }
-      .owner { letter-spacing: 0.08em; }
-      .card h3 { font-family: var(--sans); font-size: 1.08rem; font-weight: 650; letter-spacing: -0.015em; text-transform: none; }
-      .card p { font-weight: 400; font-size: 0.92rem; }
-      .host { padding: 4px 9px; border: 1px solid var(--line); border-radius: 7px; background: var(--surface-2); color: var(--fg-dim); }
-      .host:hover { border-color: var(--accent-dim); }
-      .pip { width: 6px; height: 6px; box-shadow: 0 0 0 3px color-mix(in srgb, var(--live) 22%, transparent); }
-      .gh { border-radius: 7px; }
-      .note { color: var(--muted); border-top: 1px dashed var(--line); padding-top: 12px; }
-      .note::before { content: "$ "; color: var(--accent); }
-
-      /* gallery, stack, footer */
-      .gallery { border-radius: 16px; }
-      .g-stage img { border-radius: 10px; }
-      .g-thumbs button { border-radius: 8px; overflow: hidden; }
-      footer { font-family: var(--mono); }
     </style>
   </head>
   <body>
@@ -1271,26 +1097,17 @@
       <!-- ══ index ══════════════════════════════════════ -->
       <section class="view hero" data-view="index">
         <div class="wrap">
-          <div class="term">
-            <div class="term-bar" aria-hidden="true">
-              <i></i><i></i><i></i>
-              <span>yojun@postech: ~</span>
-            </div>
-            <div class="term-body">
-              <p class="prompt"><b>$</b> whoami</p>
-              <h1>
-                <span class="name">Yojun Moon</span>
-                <span class="ko"> 문요준 </span>
-              </h1>
-              <p class="prompt"><b>$</b> cat about.txt</p>
-              <div class="meta">
-                <span> POSTECH CSE </span>
-                <span class="sep"> / </span>
-                <span> Backend &amp; AI Systems </span>
-                <span class="sep"> / </span>
-                <span> Pohang, KR </span>
-              </div>
-              <p class="prompt"><b>$</b> ls links/</p>
+          <h1>
+            Yojun Moon
+            <span class="ko"> 문요준 </span>
+          </h1>
+          <div class="meta">
+            <span> POSTECH CSE </span>
+            <span class="sep"> / </span>
+            <span> Backend &amp; AI Systems </span>
+            <span class="sep"> / </span>
+            <span> Pohang, KR </span>
+          </div>
           <ul class="links">
             <li>
               <a href="https://github.com/yojun313">
@@ -1452,35 +1269,6 @@
               </a>
             </li>
           </ul>
-            </div>
-          </div>
-          <div>
-            <a class="feature" href="https://www.yojun.dev/UnivDash/">
-              <div class="feature-shot">
-                <img
-                  alt="UnivDash workspace: coding agents, their states and the full conversation"
-                  src="assets/systems/univdash/1.webp"
-                />
-              </div>
-              <div class="feature-body">
-                <span class="feature-tag">Featured · open source</span>
-                <h2>UnivDash</h2>
-                <p>
-                  Run Claude Code, Codex and Gemini from any browser. A
-                  self-hosted dashboard for coding agents in tmux: live
-                  status, full chat history, usage limits, Git, and an
-                  OpenAI-compatible API.
-                </p>
-                <div class="feature-links">
-                  <span>yojun.dev/UnivDash ↗</span>
-                  <span>FastAPI</span>
-                  <span>tmux</span>
-                  <span>WebSocket</span>
-                  <span>Docker</span>
-                </div>
-              </div>
-            </a>
-          </div>
         </div>
       </section>
       <!-- ══ work ═══════════════════════════════════════ -->
@@ -2442,65 +2230,6 @@
           </div>
           <h3 class="grouphead">Personal</h3>
           <div class="grid">
-            <article class="card" data-project="univdash">
-              <button
-                aria-label="View UnivDash screenshots"
-                class="frame"
-                type="button"
-              >
-                <img
-                  alt="UnivDash coding agent workspace and conversation view"
-                  loading="lazy"
-                  src="assets/systems/univdash/1.webp"
-                />
-                <span class="count"> 6 </span>
-              </button>
-              <div class="body">
-                <div class="owner">Personal</div>
-                <h3>UnivDash</h3>
-                <div class="reach">
-                  <a
-                    class="host"
-                    href="https://www.yojun.dev/UnivDash/"
-                    rel="noopener"
-                    target="_blank"
-                  >
-                    <span class="pip"> </span>
-                    yojun.dev/UnivDash
-                    <span class="ext"> ↗ </span>
-                  </a>
-                  <a
-                    class="gh gh--wide"
-                    href="https://github.com/yojun313/UnivDash"
-                    rel="noopener"
-                    target="_blank"
-                    title="GitHub"
-                  >
-                    <svg
-                      aria-hidden="true"
-                      height="16"
-                      viewbox="0 0 16 16"
-                      width="16"
-                    >
-                      <path
-                        d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"
-                        fill="currentColor"
-                      ></path>
-                    </svg>
-                    <span> yojun313/UnivDash </span>
-                    <span class="ext"> ↗ </span>
-                  </a>
-                </div>
-                <p>
-                  Open-source dashboard that runs Claude Code, Codex, and
-                  Gemini agents in tmux from any browser: desktop, tablet, or
-                  phone. Full conversation history, one-tap answers, usage
-                  limits, Git, server monitoring, and an OpenAI-compatible
-                  API. I use it for all my development work.
-                </p>
-                <div class="note">FastAPI · WebSocket · tmux · Docker · PM2 · Git</div>
-              </div>
-            </article>
             <article class="card" data-project="lecai">
               <button
                 aria-label="View LecAI screenshots"
@@ -2556,6 +2285,67 @@
                   questions.
                 </p>
                 <div class="note">Slide-level chat · Whisper · LLM / VLM</div>
+              </div>
+            </article>
+            <article class="card" data-project="univdash">
+              <button
+                aria-label="View UnivDash screenshots"
+                class="frame"
+                type="button"
+              >
+                <img
+                  alt="UnivDash coding agent workspace and conversation view"
+                  loading="lazy"
+                  src="assets/systems/univdash/1.webp"
+                />
+                <span class="count"> 6 </span>
+              </button>
+              <div class="body">
+                <div class="owner">Personal</div>
+                <h3>UnivDash</h3>
+                <div class="reach">
+                  <a
+                    class="host"
+                    href="https://www.yojun.dev/UnivDash/"
+                    rel="noopener"
+                    target="_blank"
+                  >
+                    <span class="pip"> </span>
+                    yojun.dev/UnivDash
+                    <span class="ext"> ↗ </span>
+                  </a>
+                  <a
+                    class="gh gh--wide"
+                    href="https://github.com/yojun313/UnivDash"
+                    rel="noopener"
+                    target="_blank"
+                    title="GitHub"
+                  >
+                    <svg
+                      aria-hidden="true"
+                      height="16"
+                      viewbox="0 0 16 16"
+                      width="16"
+                    >
+                      <path
+                        d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"
+                        fill="currentColor"
+                      ></path>
+                    </svg>
+                    <span> yojun313/UnivDash </span>
+                    <span class="ext"> ↗ </span>
+                  </a>
+                </div>
+                <p>
+                  Open-source dashboard that runs Claude Code, Codex, and Gemini
+                  agents in tmux from any browser: desktop, tablet, or phone.
+                  Full conversation history, one-tap answers, usage limits, Git,
+                  server monitoring, and an OpenAI-compatible API. I use it for
+                  all my development work.
+                </p>
+                <div class="note">
+                  FastAPI · WebSocket · tmux · Docker · PM2 · Git
+                </div>
               </div>
             </article>
             <article class="card" data-project="vllm-manager">
