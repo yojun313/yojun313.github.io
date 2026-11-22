@@ -2298,16 +2298,26 @@
                 type="button"
               >
                 <img
-                  alt="vllm-manager GPU dashboard and model deployment controls"
+                  alt="vllm-manager dashboard with GPU memory per model and running models"
                   loading="lazy"
                   src="assets/systems/vllm-manager/1.webp"
                 />
-                <span class="count"> 2 </span>
+                <span class="count"> 4 </span>
               </button>
               <div class="body">
                 <div class="owner">Personal</div>
                 <h3>vllm-manager</h3>
                 <div class="reach">
+                  <a
+                    class="host"
+                    href="https://www.yojun.dev/vllm-manager/"
+                    rel="noopener"
+                    target="_blank"
+                  >
+                    <span class="pip"> </span>
+                    yojun.dev/vllm-manager
+                    <span class="ext"> ↗ </span>
+                  </a>
                   <a
                     aria-label="vllm-manager on GitHub"
                     class="gh gh--wide"
@@ -2332,11 +2342,15 @@
                   </a>
                 </div>
                 <p>
-                  Deploy local LLMs through a CLI and web console. Automates
-                  model downloads and Docker/vLLM startup, estimates GPU memory
-                  including KV cache, and monitors jobs and reservations.
+                  Run vLLM and vLLM-Omni model servers on your own GPUs from a
+                  web console or one CLI. Checks whether a model fits before
+                  download, shows GPU memory by model and process, live
+                  throughput and 24-hour history, and a playground to test
+                  answers.
                 </p>
-                <div class="note">Docker · vLLM · GPU resource planning</div>
+                <div class="note">
+                  Docker · vLLM · GPU memory planning · monitoring
+                </div>
               </div>
             </article>
             <article class="card" data-project="lecai">
@@ -2645,7 +2659,7 @@
           complaint: seq("complaint", 2),
           whisper: seq("whisper", 1),
           agents: seq("agents", 2),
-          "vllm-manager": seq("vllm-manager", 2),
+          "vllm-manager": seq("vllm-manager", 4),
         };
 
         var images = [],
